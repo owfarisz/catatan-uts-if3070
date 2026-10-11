@@ -82,6 +82,42 @@ svg g[data-tip]:focus{outline:none}
 .tip b:first-child{color:var(--navy)}
 .tip .tx{color:var(--mute);font-size:.8rem}
 [data-tip]{-webkit-tap-highlight-color:transparent}
+/* konteks soal yang ikut mengambang */
+.soal{--pad:18px}
+.ctx{position:sticky;top:var(--navh,52px);z-index:4;background:#fff;max-height:52vh;overflow-y:auto;margin:0 calc(-1*var(--pad)) 6px;padding:0 var(--pad) 6px;border-bottom:2px solid var(--pale);box-shadow:0 8px 10px -9px rgba(38,63,119,.45)}
+.cbar{position:sticky;top:0;z-index:1;background:#fff;display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--mute);padding:5px 0 4px}
+.cbar b{color:var(--navy);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cbar button{border:1px solid var(--line);background:var(--stint);color:var(--blue);border-radius:7px;padding:2px 9px;font:inherit;font-size:.76rem;cursor:pointer;flex:none}
+body.ctxmin .ctx>*:not(.cbar){display:none}
+body.ctxmin .ctx{padding-bottom:0}
+body.ctxoff .ctx{position:static;max-height:none;overflow:visible;box-shadow:none;border-bottom:none}
+body.ctxoff .cbar{display:none}
+label.hk{font-size:.85rem;display:inline-flex;gap:6px;align-items:center;cursor:pointer;color:#fff}
+/* kalkulator mengambang */
+#calcBtn{position:fixed;right:16px;bottom:16px;z-index:50;border:none;border-radius:999px;background:var(--navy);color:#fff;font:inherit;font-weight:700;font-size:.9rem;padding:11px 18px;cursor:pointer;box-shadow:0 6px 18px rgba(38,63,119,.35)}
+#calcBtn:hover{background:var(--blue)}
+#calc{position:fixed;right:16px;bottom:16px;z-index:50;width:256px;max-width:calc(100vw - 24px);background:#fff;border:1.5px solid var(--navy);border-radius:14px;box-shadow:0 10px 30px rgba(38,63,119,.3);padding:10px;display:none}
+#calc.on{display:block}
+#calc.on~#calcBtn,#calcBtn.off{display:none}
+#calc .ch{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-weight:700;color:var(--navy);font-size:.9rem;cursor:move;user-select:none;touch-action:none}
+#calc .ch span{flex:1}
+#calc .ch button{border:1px solid var(--line);background:#fff;border-radius:7px;color:var(--blue);font:inherit;font-size:.78rem;padding:1px 8px;cursor:pointer}
+#calcIn{width:100%;font:inherit;font-size:1rem;padding:7px 9px;border:1.5px solid var(--pale);border-radius:8px;color:var(--ink);font-variant-numeric:tabular-nums}
+#calcIn:focus{outline:2px solid var(--sky);outline-offset:1px}
+#calcOut{min-height:26px;text-align:right;font-size:1.25rem;font-weight:700;color:var(--navy);padding:4px 4px 2px;font-variant-numeric:tabular-nums;word-break:break-all}
+#calcOut.err{color:var(--bad);font-size:.85rem;font-weight:600}
+#calc .kg{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:4px}
+#calc .kg button{border:1px solid var(--line);background:var(--stint);border-radius:8px;font:inherit;font-size:.9rem;padding:4px 0;cursor:pointer;color:var(--ink)}
+#calc .kg button:hover{background:#D9ECF9}
+#calc .kg button.op{background:#fff;color:var(--blue);font-weight:700}
+#calc .kg button.eq{background:var(--yel);border-color:#B9B63A;color:var(--navy);font-weight:700}
+#calc .kg button.fn{font-size:.82rem;background:#F5F0FB;border-color:#D9CCEE;color:#5B3E91}
+#calcHist{margin:6px 0 0;padding:0;list-style:none;max-height:64px;overflow-y:auto;font-size:.8rem}
+#calcHist li{display:flex;gap:6px;justify-content:space-between;padding:2px 4px;border-radius:5px;cursor:pointer;color:var(--mute)}
+#calcHist li:hover{background:var(--ytint)}
+#calcHist li b{color:var(--navy);font-variant-numeric:tabular-nums}
+#calc .hint{font-size:.72rem;color:var(--mute);margin:5px 0 0;line-height:1.35}
+@media(max-width:560px){.soal{--pad:12px}.ctx{max-height:42vh}#calc{right:8px;bottom:8px}#calcBtn{right:10px;bottom:10px}}
 footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 @media(max-width:560px){body{font-size:15px}.soal{padding:14px 12px 8px}.prog{margin-left:0}}
 </style>
@@ -93,6 +129,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
   <div class="bar">
     <button class="btn" id="openAll">Buka semua jawaban di tab ini</button>
     <button class="btn" id="closeAll">Tutup semua</button>
+    <label class="hk"><input type="checkbox" id="ctxOn" checked> Soal ikut turun saat scroll</label>
     <span class="prog" id="prog">0 soal selesai</span>
   </div>
 </div></header>
@@ -106,7 +143,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 </div></nav>
 
 <main><div class="wrap">
-<div class="how"><b>Cara pakai:</b> jawaban tiap subsoal disamarkan. Arahkan kursor ke kotaknya untuk mengintip, klik (atau ketuk di HP) supaya tetap terbuka, klik "tutup" untuk menyamarkan lagi. Centang "selesai" kalau satu soal sudah beres, progresnya tersimpan di browser ini.<br><b>Detail tambahan:</b> kata <span style="border-bottom:1.5px dotted #4076B4">bergaris titik-titik</span> memunculkan arti istilahnya, <span class="key" style="border-bottom:1.5px dotted #A9A62A">jawaban berlatar kuning</span> memunculkan alasan kenapa hasilnya begitu, dan tiap node, sel, atau kotak di gambar memunculkan hitungannya. Hover untuk melihat, klik untuk menahan, klik di luar untuk menutup.</div>
+<div class="how"><b>Cara pakai:</b> jawaban tiap subsoal disamarkan. Arahkan kursor ke kotaknya untuk mengintip, klik (atau ketuk di HP) supaya tetap terbuka, klik "tutup" untuk menyamarkan lagi. Centang "selesai" kalau satu soal sudah beres, progresnya tersimpan di browser ini. Saat kamu scroll ke subsoal bawah, <b>teks dan gambar soalnya tetap menempel di atas</b> (bisa diciutkan atau dimatikan), dan tombol <b>Kalkulator</b> selalu ada di kanan bawah.<br><b>Detail tambahan:</b> kata <span style="border-bottom:1.5px dotted #4076B4">bergaris titik-titik</span> memunculkan arti istilahnya, <span class="key" style="border-bottom:1.5px dotted #A9A62A">jawaban berlatar kuning</span> memunculkan alasan kenapa hasilnya begitu, dan tiap node, sel, atau kotak di gambar memunculkan hitungannya. Hover untuk melihat, klik untuk menahan, klik di luar untuk menutup.</div>
 
 <!-- ============================ PAKET D ============================ -->
 <section class="panel on" id="pd">
@@ -676,7 +713,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 
 <article class="soal" id="g7" data-t="Forward chaining: fakta yang dihapus">
 <div class="ctx">
-<p>WM awal = {A, B, D}. Rule tidak boleh fire dua kali. Pilih rule dengan premis terbanyak, lalu nomor terkecil. Agenda dievaluasi ulang setelah tiap aksi.</p>
+<p>WM awal = {A, B, D}. Rule tidak boleh fire dua kali. Pilih rule dengan premis terbanyak, lalu nomor terkecil. Conflict set dievaluasi ulang setelah tiap aksi.</p>
 <div class="tw"><table><tr><th>Rule</th><th>IF</th><th>THEN</th></tr><tr><td>R1</td><td>A ∧ B</td><td>ADD C, DELETE B</td></tr><tr><td>R2</td><td>B</td><td>ADD E</td></tr><tr><td>R3</td><td>C ∧ D</td><td>ADD F</td></tr><tr><td>R4</td><td>E ∧ D</td><td>ADD G</td></tr><tr><td>R5</td><td>F</td><td>ADD H</td></tr></table></div>
 </div>
 <div class="q"><p class="qt"><b>a.</b> Buat conflict set awal dan tentukan rule yang terpilih.</p>
@@ -1452,6 +1489,102 @@ refresh();
       });
     });
   } catch (err) { /* browser lama tanpa lookbehind: glosarium dilewati */ }
+})();
+</script>
+<div id="calc" role="dialog" aria-label="Kalkulator">
+  <div class="ch"><span>Kalkulator</span><button type="button" id="calcClr">reset</button><button type="button" id="calcX">tutup</button></div>
+  <input id="calcIn" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="contoh: e^(-4/5)" aria-label="Ekspresi">
+  <div id="calcOut" aria-live="polite"></div>
+  <div class="kg">
+    <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="/">÷</button><button class="op" data-a="bs">⌫</button>
+    <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="*">×</button><button class="op" data-k="(">(</button>
+    <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="op" data-k="-">−</button><button class="op" data-k=")">)</button>
+    <button data-k="0">0</button><button data-k=",">,</button><button class="op" data-k="^">^</button><button class="op" data-k="+">+</button><button class="eq" data-a="eq">=</button>
+    <button class="fn" data-k="e^(">e^( )</button><button class="fn" data-k="ln(">ln</button><button class="fn" data-k="sqrt(">√</button><button class="fn" data-k="ans">Ans</button><button class="op" data-a="c">C</button>
+  </div>
+  <ul id="calcHist"></ul>
+  <p class="hint">Bisa diketik, Enter untuk hitung. Contoh SA: <code>e^(-4/5)</code>. Seret judulnya untuk memindah.</p>
+</div>
+<button id="calcBtn" type="button">Kalkulator</button>
+<script>
+(function(){
+'use strict';
+/* ---------- konteks soal menempel ---------- */
+var nav=document.querySelector('nav');
+function setNav(){document.documentElement.style.setProperty('--navh',nav.offsetHeight+'px');}
+setNav();window.addEventListener('resize',setNav);
+function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function put(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+document.querySelectorAll('.soal').forEach(function(s){
+  var c=s.querySelector('.ctx');if(!c)return;
+  var h2=s.querySelector('.sh h2'),bar=document.createElement('div');bar.className='cbar';
+  bar.innerHTML='<b></b><button type="button"></button>';bar.firstChild.textContent='Soal '+(h2?h2.textContent:'');
+  c.insertBefore(bar,c.firstChild);
+  bar.lastChild.addEventListener('click',function(){document.body.classList.toggle('ctxmin');sync();});
+});
+function sync(){var m=document.body.classList.contains('ctxmin');document.querySelectorAll('.cbar button').forEach(function(b){b.textContent=m?'tampilkan soal':'ciutkan';});}
+var on=document.getElementById('ctxOn');
+if(get('latsol-ctx')==='off'){on.checked=false;document.body.classList.add('ctxoff');}
+on.addEventListener('change',function(){document.body.classList.toggle('ctxoff',!on.checked);put('latsol-ctx',on.checked?'on':'off');});
+sync();
+
+/* ---------- kalkulator ---------- */
+var box=document.getElementById('calc'),btn=document.getElementById('calcBtn'),inp=document.getElementById('calcIn'),out=document.getElementById('calcOut'),hist=document.getElementById('calcHist'),ans=0;
+function calc(src){
+  var s=String(src).replace(/×/g,'*').replace(/÷/g,'/').replace(/[−–]/g,'-').replace(/√/g,'sqrt').replace(/²/g,'^2').replace(/\s+/g,'').toLowerCase(),i=0;
+  if(!s)throw new Error('kosong');
+  function peek(){return s[i];}
+  function num(){var m=/^(\d+([.,]\d+)?|[.,]\d+)/.exec(s.slice(i));if(!m)return null;i+=m[0].length;return parseFloat(m[0].replace(',','.'));}
+  function prim(){
+    var n=num();if(n!==null)return n;
+    if(peek()==='('){i++;var v=expr();if(peek()!==')')throw new Error('kurung belum ditutup');i++;return v;}
+    var m=/^[a-zπ]+/.exec(s.slice(i));
+    if(m){var id=m[0];i+=id.length;
+      var F={exp:Math.exp,ln:Math.log,log:function(x){return Math.log(x)/Math.LN10;},sqrt:Math.sqrt,abs:Math.abs};
+      if(F[id]){if(peek()!=='(')throw new Error(id+' butuh kurung');i++;var a=expr();if(peek()!==')')throw new Error('kurung belum ditutup');i++;return F[id](a);}
+      if(id==='e')return Math.E;if(id==='pi'||id==='π')return Math.PI;if(id==='ans')return ans;
+      throw new Error('tidak kenal: '+id);}
+    throw new Error(i>=s.length?'ekspresi belum selesai':'tidak kenal: '+peek());
+  }
+  function pow(){var b=prim();if(peek()==='^'){i++;return Math.pow(b,un());}return b;}
+  function un(){if(peek()==='-'){i++;return -un();}if(peek()==='+'){i++;return un();}return pow();}
+  function term(){var v=un();for(;;){var c=peek();if(c==='*'){i++;v*=un();}else if(c==='/'){i++;v/=un();}else return v;}}
+  function expr(){var v=term();for(;;){var c=peek();if(c==='+'){i++;v+=term();}else if(c==='-'){i++;v-=term();}else return v;}}
+  var r=expr();if(i<s.length)throw new Error('tidak kenal: '+s[i]);
+  if(!isFinite(r))throw new Error('hasil tidak terdefinisi');
+  return r;
+}
+function fmt(v){
+  if(Math.abs(v-Math.round(v))<1e-10)return String(Math.round(v));
+  var t=Math.abs(v)<0.001?v.toPrecision(4):v.toFixed(6);
+  if(t.indexOf('e')<0)t=t.replace(/0+$/,'').replace(/\.$/,'');
+  return t.replace('.',',');
+}
+function run(save){
+  var src=inp.value.trim();if(!src){out.textContent='';out.className='';return;}
+  try{var v=calc(src);out.className='';out.textContent='= '+fmt(v);
+    if(save){ans=v;var li=document.createElement('li');li.innerHTML='<span></span><b></b>';li.firstChild.textContent=src;li.lastChild.textContent=fmt(v);li.setAttribute('data-e',src);hist.insertBefore(li,hist.firstChild);while(hist.children.length>8)hist.removeChild(hist.lastChild);}
+  }catch(e){if(save){out.className='err';out.textContent=e.message;}else{out.className='';out.textContent='';}}
+}
+inp.addEventListener('input',function(){run(false);});
+inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();run(true);}e.stopPropagation();});
+box.querySelector('.kg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var a=b.getAttribute('data-a'),k=b.getAttribute('data-k');
+  if(a==='eq'){run(true);return;}
+  if(a==='c'){inp.value='';run(false);return;}
+  if(a==='bs'){inp.value=inp.value.slice(0,-1);run(false);return;}
+  inp.value+=k;run(false);});
+hist.addEventListener('click',function(e){var li=e.target.closest('li');if(li){inp.value=li.getAttribute('data-e');run(false);inp.focus();}});
+document.getElementById('calcClr').addEventListener('click',function(){hist.innerHTML='';});
+function open(v){box.classList.toggle('on',v);put('latsol-calc',v?'on':'off');if(v&&window.matchMedia('(hover:hover)').matches)inp.focus();}
+btn.addEventListener('click',function(){open(true);});
+document.getElementById('calcX').addEventListener('click',function(){open(false);});
+if(get('latsol-calc')==='on')box.classList.add('on');
+/* geser kalkulator dengan menyeret judulnya */
+var head=box.querySelector('.ch'),drag=null;
+head.addEventListener('pointerdown',function(e){if(e.target.closest('button'))return;var r=box.getBoundingClientRect();drag={x:e.clientX-r.left,y:e.clientY-r.top};head.setPointerCapture(e.pointerId);});
+head.addEventListener('pointermove',function(e){if(!drag)return;var x=Math.max(4,Math.min(e.clientX-drag.x,window.innerWidth-box.offsetWidth-4)),y=Math.max(4,Math.min(e.clientY-drag.y,window.innerHeight-box.offsetHeight-4));box.style.left=x+'px';box.style.top=y+'px';box.style.right='auto';box.style.bottom='auto';});
+head.addEventListener('pointerup',function(){drag=null;});
+window.__calc=calc;window.__fmt=fmt;
 })();
 </script>
 </body>
