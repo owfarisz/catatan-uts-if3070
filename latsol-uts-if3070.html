@@ -99,6 +99,9 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 <nav><div class="wrap">
   <button data-p="pd" class="on">Paket D (9 soal)</button>
   <button data-p="pe">Paket E (9 soal)</button>
+  <button data-p="pf">Paket F (9 soal)</button>
+  <button data-p="pg">Paket G (9 soal)</button>
+  <button data-p="ph">Paket H (9 soal)</button>
   <button data-p="pt">Tambahan (4 soal)</button>
 </div></nav>
 
@@ -237,7 +240,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 <p>Fakta awal {E, G, H}. F tidak tersedia dan tidak punya rule pendukung. Gunakan depth-first: kandidat rule dicoba menurut nomor terkecil, premis dari kiri ke kanan. Atom tanpa fakta dan tanpa rule dianggap gagal (tidak ada request ke user kecuali subsoal mengizinkan).</p>
 </div>
 <div class="q"><p class="qt"><b>a.</b> Buat AND-OR tree untuk query Z, termasuk jalur R1 dan R2.</p>
-<div class="ans"><div class="fig" data-f="d8f"></div></li></ul><p>Cabang R1 gagal, cabang R2 berhasil, jadi <span class="key">Z terbukti</span>.</p></div></div>
+<div class="ans"><div class="fig" data-f="d8f"></div><p>Cabang R1 gagal, cabang R2 berhasil, jadi <span class="key">Z terbukti</span>.</p></div></div>
 <div class="q"><p class="qt"><b>b.</b> Tuliskan urutan subgoal saat DFS dan di mana sistem melakukan backtracking.</p>
 <div class="ans"><p>Z → coba R1 → A → E <span class="ok">✓</span> → B → F <span class="no">✗</span>. R1 gagal karena satu premis AND gagal.</p><p><b>Backtrack ke Z</b>, coba R2 → C → G <span class="ok">✓</span> → D → H <span class="ok">✓</span>. Semua premis R2 benar, maka Z <span class="ok">✓</span>.</p></div></div>
 <div class="q"><p class="qt"><b>c.</b> Sebutkan rule yang masuk proof sukses dan rule yang dicoba tetapi gagal.</p>
@@ -412,6 +415,461 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 </article>
 </section>
 
+<!-- ============================ PAKET F ============================ -->
+<section class="panel" id="pf">
+<p class="note">Sumber: <b>Paket F (Hard+)</b>, tema "algoritma benar, kontra-contoh, dan pembuktian". Paket latihan, bukan soal UTS asli. Semua kunci sudah saya hitung ulang. Di soal 1 teks aslinya menyebut graf dua arah sedangkan gambarnya berpanah satu arah; saya ikuti gambarnya, dan hasil trace-nya sama untuk kedua tafsiran.</p>
+<div class="jump" data-for="pf"></div>
+
+<article class="soal" id="f1" data-t="A* dengan reopen dan heuristik inconsistent">
+<div class="ctx">
+<p>Graf berbobot di bawah. Nilai heuristik: h(S) = 4, h(A) = 0, h(B) = 3, h(G) = 0. Gunakan A* graph search dengan f = g + h. Goal diuji saat pop. Kalau ditemukan g yang lebih kecil, node diperbarui, dan node yang sudah CLOSED <b>dibuka lagi (reopen)</b>. Seri f dipecah menurut alfabet.</p>
+<div class="fig" data-f="f1g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Formulasikan state, operator, initial, goal, path cost, dan f(n).</p>
+<div class="ans"><ul><li><b>State:</b> posisi S, A, B, atau G. <b>Initial:</b> S. <b>Goal:</b> G.</li><li><b>Operator:</b> menempuh satu sisi.</li><li><b>g(n):</b> biaya yang sudah terkumpul. <b>h(n):</b> taksiran sisa biaya ke G. <b>f(n) = g(n) + h(n).</b></li></ul><p>Solusi search klasik berupa urutan sisi (path), bukan hanya posisi akhir.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Simulasikan urutan pop dan pembaruan OPEN, termasuk reopen.</p>
+<div class="ans"><div class="tw"><table><tr><th>Pop</th><th>g</th><th>f</th><th>Yang terjadi</th></tr><tr><td>S</td><td>0</td><td>4</td><td>Masuk A (g 3, f 3) dan B (g 1, f 4)</td></tr><tr><td>A</td><td>3</td><td>3</td><td>Masuk G (g 5, f 5). A jadi CLOSED</td></tr><tr><td>B</td><td>1</td><td>4</td><td>A lewat B: g 2, lebih baik dari 3. <b>Reopen A</b> (f 2). G lewat B: g 7, diabaikan</td></tr><tr><td>A</td><td>2</td><td>2</td><td>G diperbarui jadi g 4, f 4</td></tr><tr><td>G</td><td>4</td><td>4</td><td>goal</td></tr></table></div><div class="fig" data-f="f1f"></div><p>Solusi <span class="key" data-why="Jalur lewat B ke A (1 + 1 = 2) lebih murah daripada langsung S ke A (3). A* baru tahu itu setelah B di-pop, makanya A harus dibuka lagi.">S → B → A → G, biaya 1 + 1 + 2 = 4</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Uji admissibility dan consistency h secara formal.</p>
+<div class="ans"><p><b>Admissible</b> (h ≤ h*): biaya sisa sebenarnya h*(S) = 4, h*(A) = 2, h*(B) = 3, h*(G) = 0. Semua h tidak melebihi h*, jadi <span class="ok">admissible</span>.</p><p><b>Consistent</b> (h(u) ≤ c(u,v) + h(v) untuk tiap sisi):</p><ul><li>B → A: 3 ≤ 1 + 0? <span class="no">Salah</span>.</li><li>S → A: 4 ≤ 3 + 0? <span class="no">Salah</span>.</li></ul><p>Jadi h <span class="key" data-why="Admissible hanya menjamin h tidak melebih-lebihkan. Consistent lebih ketat: h tidak boleh turun lebih cepat daripada biaya sisinya. Di sini h turun 3 saat melewati sisi berbiaya 1.">admissible tetapi inconsistent</span>.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Apa hasilnya kalau node CLOSED tidak boleh di-reopen?</p>
+<div class="ans"><p>A sudah ditutup dengan g = 3 dan tidak diperbaiki saat B menemukan g = 2. G tetap bernilai g = 5 lewat S → A → G, lalu di-pop.</p><p>Hasilnya <span class="key" data-why="Graph search tanpa reopen hanya dijamin optimal kalau heuristiknya consistent. Dengan heuristik yang hanya admissible, node bisa ditutup dengan g yang belum terbaik.">biaya 5, padahal optimumnya 4</span>. Tanpa reopen, A* bisa suboptimal pada heuristik inconsistent.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Mengapa mengganti path dengan "state akhir G saja" membuat formulasi local search keliru?</p>
+<div class="ans"><p>Semua rute berakhir di G tetapi biayanya berbeda. Kalau state hanya berisi node akhir, informasi g hilang dan semua solusi tampak sama. Local search untuk optimasi rute harus memakai <b>rute lengkap</b> sebagai state, bukan hanya titik ujungnya.</p></div></div>
+</article>
+
+<article class="soal" id="f2" data-t="5-Queens: successor dan tie-breaking">
+<div class="ctx">
+<p>State X = (1,3,3,5,2) pada papan 5×5; q<sub>i</sub> adalah baris ratu di kolom i. Aksi mengubah satu q<sub>i</sub> ke baris lain. h(X) = −(jumlah pasangan yang saling menyerang, satu baris atau diagonal). Kalau successor terbaik seri: kolom terkecil, lalu baris baru terkecil.</p>
+<div class="fig" data-f="f2b"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Hitung pasangan konflik awal dan h(X).</p>
+<div class="ans"><ul><li>Q1 dan Q3: diagonal (selisih kolom 2, selisih baris 2).</li><li>Q2 dan Q3: satu baris (sama-sama baris 3).</li><li>Q2 dan Q4: diagonal (selisih kolom 2, selisih baris 2).</li></ul><p>Tiga pasangan dari C(5,2) = 10 yang diperiksa, jadi <span class="key">h(X) = −3</span>.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Berapa successor langsungnya, dan mengapa tidak semuanya pasti lebih baik?</p>
+<div class="ans"><p>5 kolom × 4 baris alternatif = <span class="key">20 successor</span>.</p><p>Successor adalah <i>semua</i> hasil legal dari satu aksi, termasuk yang sama baiknya atau lebih buruk. Operatornya tidak tahu apa-apa soal goal.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Identifikasi semua successor bernilai tertinggi dan terapkan tie-breaking.</p>
+<div class="ans"><div class="tw" data-f="f2tab"></div><p>Nilai terbaik h = −2, ada empat: Q2→1 (1,1,3,5,2), Q2→4 (1,4,3,5,2), Q3→1 (1,3,1,5,2), Q3→5 (1,3,5,5,2).</p><p>Yang dipilih <span class="key" data-why="Kolom terkecil dulu: Q2 menang atas Q3. Di antara dua pilihan Q2, baris baru terkecil: 1 menang atas 4.">Q2 → baris 1, yaitu (1,1,3,5,2)</span>.</p><div class="fig" data-f="f2n"></div></div></div>
+<div class="q"><p class="qt"><b>d.</b> Kalau operatornya diganti menjadi swap dua kolom, berapa successor uniknya?</p>
+<div class="ans"><p>Ada C(5,2) = 10 pasangan swap. Tetapi q2 = q3 = 3, jadi menukar Q2 dan Q3 menghasilkan state yang sama dengan awal.</p><p>Hanya <span class="key" data-why="Jumlah aksi belum tentu sama dengan jumlah state baru. Aksi yang tidak mengubah apa pun tidak menghasilkan tetangga.">9 state baru</span> yang unik.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Berikan satu goal global dan jelaskan beda h = −2 dengan h = 0.</p>
+<div class="ans"><p>Contoh goal: <span class="key">(1,3,5,2,4)</span>, tidak ada baris atau diagonal yang sama, h = 0.</p><div class="fig" data-f="f2s"></div><p>h = −2 berarti masih ada 2 pasangan yang menyerang. Naik dari −3 ke −2 itu membaik, tetapi belum optimal.</p></div></div>
+</article>
+
+<article class="soal" id="f3" data-t="Hill climbing: plateau, stochastic, restart">
+<div class="ctx">
+<p>Graf nilai di bawah (angka setelah titik dua adalah nilai yang dimaksimalkan). Mulai dari <b>S</b>. Steepest hanya menerima nilai yang <b>ketat</b> lebih tinggi. Sideways boleh satu langkah ke nilai sama, tanpa mengunjungi ulang. Peluang sukses tiap restart independen p = 0,40.</p>
+<div class="fig" data-f="f3g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Mengapa steepest-ascent berhenti di S padahal D bernilai 10?</p>
+<div class="ans"><p>Tetangga S hanya A (7) dan B (6). Yang terbaik bernilai 7, sama dengan S, bukan lebih tinggi. Jadi <span class="key">berhenti di S</span>.</p><p>Ini shoulder: ada jalan ke puncak, tetapi hill climbing standar tidak bisa mengambilnya karena ia hanya melihat tetangga langsung.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Jalankan sideways hill climbing dan catat kapan penghitungnya di-reset.</p>
+<div class="ans"><div class="fig" data-f="f3f"></div><p>S (7) → <i>sideways</i> → A (7) → <i>naik, reset</i> → C (9) → <i>naik</i> → <span class="key">D (10)</span>. D adalah nilai tertinggi di seluruh graf.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Simulasikan stochastic hill climbing dengan proposal B, A, B, A. Pindah hanya kalau ketat lebih tinggi.</p>
+<div class="ans"><p>Semua diuji dari current S = 7: B (6) ditolak, A (7) ditolak, B ditolak, A ditolak. Current <span class="key">tetap S</span>.</p><p>Proposal acak tidak berarti boleh menerima state yang nilainya sama.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Berapa peluang minimal satu sukses dalam 4 start, dan berapa expected starts?</p>
+<div class="ans"><p>P(minimal 1 sukses) = 1 − 0,6⁴ = 1 − 0,1296 = <span class="key">0,8704 (87,04%)</span>.</p><p>Nilai harapan (geometri) = 1/p = 1/0,4 = <span class="key">2,5 start</span>. Peluang gagal semua masih 12,96%, jadi tidak terjamin.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Kritik pernyataan "stochastic selalu kalah dari steepest".</p>
+<div class="ans"><p><b>Salah.</b> Steepest mengambil perbaikan terbesar saat itu, tetapi justru bisa masuk ke basin optimum lokal. Stochastic bisa memilih perbaikan lain yang ternyata mengarah ke global. Tidak ada yang selalu menang di semua landscape.</p></div></div>
+</article>
+
+<article class="soal" id="f4" data-t="Simulated annealing: current vs best-so-far">
+<div class="ctx">
+<p>Maksimalkan V, mulai dari V = 12. Untuk T &gt; 0: Δ = V<sub>baru</sub> − V<sub>current</sub>; perbaikan pasti diterima; penurunan diterima jika u &lt; exp(Δ/T). Pada <b>T = 0 proses berhenti</b> sebelum mengevaluasi proposal.</p>
+<div class="tw"><table><tr><th>Iterasi</th><th>Proposal V</th><th>T</th><th>u</th></tr><tr><td>1</td><td>16</td><td>6</td><td>0,95</td></tr><tr><td>2</td><td>11</td><td>4</td><td>0,20</td></tr><tr><td>3</td><td>14</td><td>2</td><td>0,90</td></tr><tr><td>4</td><td>9</td><td>1</td><td>0,005</td></tr><tr><td>5</td><td>18</td><td>0</td><td>0,00</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Hitung iterasi 1 dan definisikan dua jenis nilai yang disimpan.</p>
+<div class="ans"><p>Δ = 16 − 12 = +4, <span class="ok">terima</span>. Current = 16, best-so-far = 16.</p><p><b>Current</b> boleh turun di langkah berikutnya. <b>Best-so-far</b> mencatat nilai tertinggi yang pernah diterima dan tidak pernah turun.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Telusuri iterasi 2.</p>
+<div class="ans"><p>Δ = 11 − 16 = −5, T = 4, P = e<sup>−1,25</sup> = 0,2865. u = 0,20 &lt; P, <span class="ok">terima</span> langkah turun. Current = 11, best tetap 16.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Telusuri iterasi 3 dan 4.</p>
+<div class="ans"><ul><li>Iterasi 3: Δ = 14 − 11 = +3, <span class="ok">terima</span>. Current = 14, best 16.</li><li>Iterasi 4: Δ = 9 − 14 = −5, T = 1, P = e<sup>−5</sup> = 0,006738. u = 0,005 &lt; P, <span class="ok">terima</span>. Current = 9, best 16.</li></ul><div class="fig" data-f="f4c"></div><p class="cap">Garis putus-putus: best-so-far tetap 16</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Apa yang di-return saat iterasi 5?</p>
+<div class="ans"><p>T = 0 memicu berhenti sebelum V = 18 diperiksa.</p><p>Hasilnya <span class="key" data-why="Proposal 18 tidak pernah dievaluasi, jadi tidak masuk hitungan sama sekali, walaupun nilainya paling tinggi.">current = 9</span> kalau algoritmanya mengembalikan current, atau <span class="key">best-so-far = 16</span> kalau memang diminta mengembalikan rekor. Jawaban harus menyebutkan mana yang dikembalikan.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Kalau u pada iterasi 4 diganti 0,020, bagaimana akhirnya berubah?</p>
+<div class="ans"><p>0,020 &gt; 0,006738, jadi iterasi 4 <span class="no">ditolak</span> dan current tetap 14. Iterasi 5 berhenti. Return <span class="key">current = 14</span>, best = 16.</p><p>SA sensitif terhadap u, T, dan urutan proposal.</p></div></div>
+</article>
+
+<article class="soal" id="f5" data-t="Genetic algorithm: penalti dan elitism">
+<div class="ctx">
+<p>Kromosom 6 bit untuk item A sampai F dengan manfaat [6, 3, 5, 4, 2, 7]. F(x) = max(1, 2 + manfaat − 6 × max(0, k − 3)), k = jumlah bit 1. Roulette berurutan P1 sampai P4 dengan u1 = 0,30 dan u2 = 0,85. Crossover setelah bit 3, mutasi bit 4 pada offspring pertama, elitism 1.</p>
+<div class="tw"><table><tr><th>Parent</th><th>Kromosom</th></tr><tr><td>P1</td><td>110010</td></tr><tr><td>P2</td><td>101100</td></tr><tr><td>P3</td><td>010111</td></tr><tr><td>P4</td><td>001011</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Hitung manfaat, k, dan F keempat parent.</p>
+<div class="ans"><div class="tw"><table><tr><th>Parent</th><th>Item aktif</th><th>Manfaat</th><th>k</th><th>Penalti</th><th>F</th></tr><tr><td>P1 = 110010</td><td>A, B, E</td><td>11</td><td>3</td><td>0</td><td>13</td></tr><tr><td>P2 = 101100</td><td>A, C, D</td><td>15</td><td>3</td><td>0</td><td><b>17</b></td></tr><tr><td>P3 = 010111</td><td>B, D, E, F</td><td>16</td><td>4</td><td>6</td><td>12</td></tr><tr><td>P4 = 001011</td><td>C, E, F</td><td>14</td><td>3</td><td>0</td><td>16</td></tr></table></div></div></div>
+<div class="q"><p class="qt"><b>b.</b> Hitung roulette dan pilih dua parent.</p>
+<div class="ans"><p>Total = 13 + 17 + 12 + 16 = <span class="key">58</span>.</p><div class="fig" data-f="f5pm"></div><ul><li>P1 22,41% [0 ; 0,2241), P2 29,31% [0,2241 ; 0,5172), P3 20,69% [0,5172 ; 0,7241), P4 27,59% [0,7241 ; 1).</li><li>u1 = 0,30 memilih <span class="key">P2</span>, u2 = 0,85 memilih <span class="key">P4</span>.</li></ul></div></div>
+<div class="q"><p class="qt"><b>c.</b> Lakukan crossover dan hitung F kedua offspring.</p>
+<div class="ans"><p>P2 = 101 | 100, P4 = 001 | 011.</p><ul><li>O1 = 101 | 011 = <b>101011</b>: A, C, E, F aktif, manfaat 20, k = 4. F = 2 + 20 − 6 = <span class="key">16</span>.</li><li>O2 = 001 | 100 = <b>001100</b>: C, D aktif, manfaat 9, k = 2. F = <span class="key">11</span>.</li></ul></div></div>
+<div class="q"><p class="qt"><b>d.</b> Mutasi bit 4 pada O1: apakah fitness-nya naik?</p>
+<div class="ans"><p>101011 (bit 4 = 0) menjadi <b>101111</b>. k = 5, manfaat 24, penalti 6 × 2 = 12. F = 2 + 24 − 12 = <span class="key" data-why="Menambah item D menaikkan manfaat 4, tetapi menambah satu pelanggaran yang penaltinya 6. Rugi bersih 2.">14</span>.</p><p>Fitness justru <b>turun</b> dari 16 ke 14.</p><div class="fig" data-f="f5f"></div></div></div>
+<div class="q"><p class="qt"><b>e.</b> Dengan elitism 1, apa yang dipertahankan? Apa risikonya kalau penalti terlalu lemah?</p>
+<div class="ans"><p>Yang disalin apa adanya ke generasi berikut: <span class="key">P2 (F = 17)</span>.</p><p>Kalau penalti terlalu lemah, solusi yang melanggar k ≤ 3 tetap bisa ber-fitness tinggi dan mendominasi. Alternatifnya repair atau menolak solusi yang melanggar (hard constraint), dengan konsekuensi keragaman populasi berkurang.</p></div></div>
+</article>
+
+<article class="soal" id="f6" data-t="KBS: Wumpus, negasi, revisi fakta">
+<div class="ctx">
+<p>P(x,y) berarti ada pit di (x,y). Grid 3×3. Breeze(2,2) menyatakan ada pit di minimal satu tetangga ortogonalnya: (1,2), (3,2), (2,1), (2,3). NoBreeze(1,1) dan NoBreeze(3,1) benar.</p>
+<div class="fig" data-f="f6grid"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Ubah percept menjadi logika.</p>
+<div class="ans"><ul><li>Breeze(2,2) ⇒ P(1,2) ∨ P(3,2) ∨ P(2,1) ∨ P(2,3)</li><li>NoBreeze(1,1) ⇒ ¬P(1,2) ∧ ¬P(2,1)</li><li>NoBreeze(3,1) ⇒ ¬P(3,2) ∧ ¬P(2,1)</li></ul></div></div>
+<div class="q"><p class="qt"><b>b.</b> Dengan eliminasi, tentukan pit yang ter-entail.</p>
+<div class="ans"><div class="fig" data-f="f6f"></div><p>Dari empat kandidat, tiga sudah dicoret oleh ¬P(1,2), ¬P(3,2), ¬P(2,1). Tersisa satu, jadi <span class="key" data-why="Disjungsi dengan empat pilihan, tiga di antaranya salah, memaksa pilihan keempat benar. Ini unit resolution.">KB ⊨ P(2,3)</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Kalau NoBreeze(3,1) dianggap sensor rusak, apa status P(2,3)?</p>
+<div class="ans"><p>Konsekuensi ¬P(3,2) dicabut (¬P(2,1) masih ada dari NoBreeze(1,1)). Klausa yang tersisa: P(3,2) ∨ P(2,3). Salah satunya pit, tetapi tidak bisa dipastikan yang mana.</p><p>Status P(2,3): <span class="key">UNKNOWN</span>, bukan negasinya.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Susun arsitektur KBS dan explanation trace-nya.</p>
+<div class="ans"><div class="fig" data-f="f6arch"></div><p>Explanation mengutip disjungsi dari breeze dan literal negatif dari no breeze. Pakar mengisi knowledge base lewat knowledge acquisition. Koreksi sensor dilakukan pada <b>fakta sesi</b> (working memory), bukan pada aturan.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Apa arti soundness dan completeness pada inferensi ini?</p>
+<div class="ans"><p><b>Soundness:</b> dari premis yang benar, inferensi tidak pernah menurunkan klaim yang salah. <b>Completeness:</b> semua konsekuensi logis bisa ditemukan oleh prosedurnya.</p><p>Eliminasi unit cukup untuk contoh ini, tetapi prosedur terbatas seperti itu tidak otomatis lengkap untuk semua KB.</p></div></div>
+</article>
+
+<article class="soal" id="f7" data-t="Forward chaining: binding dan DELETE">
+<div class="ctx">
+<p>WM awal = {device(a), hot(a), auto(a), device(b), auto(b)}. Resolusi konflik: premis terbanyak, lalu nomor rule terkecil, lalu binding alfabetis. Refractoriness per pasangan (rule, binding).</p>
+<div class="tw"><table><tr><th>Rule</th><th>IF</th><th>THEN</th></tr><tr><td>R1</td><td>device(x) ∧ hot(x)</td><td>ADD risk(x)</td></tr><tr><td>R2</td><td>risk(x) ∧ auto(x)</td><td>ADD cooling(x), DELETE hot(x)</td></tr><tr><td>R3</td><td>hot(x)</td><td>ADD alarm(x)</td></tr><tr><td>R4</td><td>cooling(x)</td><td>ADD stabilized(x)</td></tr><tr><td>R5</td><td>alarm(x) ∧ stabilized(x)</td><td>ADD cleared(x)</td></tr><tr><td>R6</td><td>device(x)</td><td>ADD logged(x)</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Daftar conflict set awal lengkap dengan binding.</p>
+<div class="ans"><p>CS awal = <span class="key">{R1(a), R3(a), R6(a), R6(b)}</span>. R1(b) tidak eligible karena hot(b) tidak ada. R1(a) punya dua premis, jadi dipilih.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Telusuri semua firing.</p>
+<div class="ans"><div class="tw"><table><tr><th>t</th><th>Conflict set</th><th>Fire</th><th>Perubahan WM</th></tr><tr><td>1</td><td>R1(a), R3(a), R6(a), R6(b)</td><td>R1(a)</td><td>+risk(a)</td></tr><tr><td>2</td><td>R2(a), R3(a), R6(a), R6(b)</td><td>R2(a)</td><td>+cooling(a), −hot(a)</td></tr><tr><td>3</td><td>R4(a), R6(a), R6(b)</td><td>R4(a)</td><td>+stabilized(a)</td></tr><tr><td>4</td><td>R6(a), R6(b)</td><td>R6(a)</td><td>+logged(a)</td></tr><tr><td>5</td><td>R6(b)</td><td>R6(b)</td><td>+logged(b)</td></tr></table></div><p>Urutan: <span class="key">R1(a) → R2(a) → R4(a) → R6(a) → R6(b)</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Tuliskan WM akhir. Apakah cleared(a) terbukti?</p>
+<div class="ans"><p>WM akhir = {device(a), auto(a), risk(a), cooling(a), stabilized(a), logged(a), device(b), auto(b), logged(b)}.</p><div class="fig" data-f="f7f"></div><p>cleared(a) butuh alarm(a) ∧ stabilized(a). alarm(a) tidak pernah dibuat, jadi <span class="key" data-why="alarm(a) hanya bisa dibuat R3(a), yang butuh hot(a). R2(a) menghapus hot(a) sebelum R3(a) sempat fire.">cleared(a) tidak diturunkan</span>.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Kalau R3(a) dipaksa fire pertama, bagaimana hasilnya?</p>
+<div class="ans"><p>R3(a): +alarm(a). Lalu R1(a), R2(a), R4(a) membuat stabilized(a). Sekarang R5(a) eligible, jadi <span class="key">+cleared(a)</span>.</p><p>Adanya DELETE membuat urutan eksekusi menentukan hasil.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Apakah tidak ditemukannya cleared(a) membuktikan ¬cleared(a)?</p>
+<div class="ans"><p><b>Tidak.</b> Dalam logika open-world statusnya UNKNOWN. Closed-world boleh memperlakukan goal yang tak terbukti sebagai false untuk keperluan keputusan, tetapi itu tetap berbeda dari fakta negasi eksplisit.</p></div></div>
+</article>
+
+<article class="soal" id="f8" data-t="Backward chaining: siklus, OR, proof minimal">
+<div class="ctx">
+<div class="tw"><table><tr><th>R1</th><td>inspected(x) ∧ power(x) → ready(x)</td></tr><tr><th>R2</th><td>backup(x) ∧ authorized(x) → ready(x)</td></tr><tr><th>R3</th><td>ready(x) → inspected(x)</td></tr><tr><th>R4</th><td>sensor(x) ∧ calibrated(x) → inspected(x)</td></tr><tr><th>R5</th><td>technician(x) → calibrated(x)</td></tr></table></div>
+<p>Fakta = {sensor(a), technician(a), backup(a), authorized(a)}. power(a) tidak ada. DFS dengan nomor rule kecil dulu, premis kiri ke kanan, dan <b>loop checking</b> terhadap goal leluhur (goal yang sedang dibuktikan tidak boleh dipakai sebagai subgoal dirinya sendiri).</p>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Gambarkan AND-OR tree dengan siklus ditandai.</p>
+<div class="ans"><div class="fig" data-f="f8f"></div><p>ready(a) punya dua rule (OR). R1 gagal karena power(a), R2 sukses karena kedua premisnya fakta.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Tuliskan urutan DFS lengkap beserta backtracking.</p>
+<div class="ans"><p>ready → R1 → inspected → R3 → ready (<b>siklus, jangan masuk</b>) → R4 → sensor <span class="ok">✓</span> → calibrated → R5 → technician <span class="ok">✓</span> → inspected <span class="ok">✓</span> → power <span class="no">✗</span> → R1 <span class="no">✗</span>.</p><p><b>Backtrack ke R2</b> → backup <span class="ok">✓</span> → authorized <span class="ok">✓</span>, maka <span class="key">ready(a) terbukti</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Apa proof akhir yang minimal?</p>
+<div class="ans"><p>Cukup <span class="key" data-why="Bukti hanya memuat rule di cabang yang berhasil. Semua kerja di cabang R1 dibuang walaupun sebagian subgoalnya sempat terbukti.">R2 plus dua fakta backup(a) dan authorized(a)</span>. R1, R3, R4, R5 memang dicoba, tetapi bukan bagian dari proof final.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Kalau power(a) ditambahkan, apa yang berubah?</p>
+<div class="ans"><p>R1 sekarang berhasil: inspected(a) terbukti lewat R4, dan power(a) adalah fakta. DFS berhenti tanpa mencoba R2. Jawaban query sama-sama benar, tetapi <span class="key">proof-nya berbeda</span> (R1, R4, R5).</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Apakah siklus ready ↔ inspected bisa membuktikan dirinya sendiri?</p>
+<div class="ans"><p><b>Tidak.</b> Tanpa landasan fakta, menerima siklus sebagai bukti berarti penalaran melingkar ("ready karena inspected, inspected karena ready"). Loop checking mencegah inferensi tanpa dasar seperti itu.</p></div></div>
+</article>
+
+<article class="soal" id="f9" data-t="CSP: arc consistency (AC-3)">
+<div class="ctx">
+<p>X, Y, Z masing-masing berdomain {1, 2, 3}. Constraint: X &lt; Y, Y &lt; Z, X ≠ Z. Uji arc consistency sampai tidak ada lagi yang berubah.</p>
+<div class="fig" data-f="f9g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Lakukan revisi domain sampai fixed point.</p>
+<div class="ans"><ol><li>X &lt; Y: X = 3 tidak punya Y yang lebih besar, dibuang. Y = 1 tidak punya X yang lebih kecil, dibuang. D(X) = {1,2}, D(Y) = {2,3}.</li><li>Y &lt; Z: Y = 3 dibuang (tidak ada Z &gt; 3). D(Y) tinggal {2}, jadi Z = 1 dan Z = 2 dibuang (butuh Y yang lebih kecil). D(Y) = {2}, D(Z) = {3}.</li><li>X &lt; Y lagi: X = 2 dibuang. D(X) = {1}.</li></ol><p>Hasil: <span class="key" data-why="AC-3 membuang nilai yang tidak punya pasangan (support) di variabel tetangganya, lalu memeriksa ulang tetangga yang domainnya berubah.">X = {1}, Y = {2}, Z = {3}</span>. X ≠ Z juga terpenuhi.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Apa akibatnya kalau X = 2 dipilih lebih dulu tanpa propagasi?</p>
+<div class="ans"><p>X = 2 memaksa Y = 3, lalu Z harus &gt; 3 dan itu mustahil. Terjadi <span class="key">backtracking</span>. Arc consistency mendeteksi ketidakkonsistenan ini lebih awal, sebelum mencoba nilai.</p></div></div>
+</article>
+</section>
+<!-- ============================ PAKET G ============================ -->
+<section class="panel" id="pg">
+<p class="note">Sumber: <b>Paket G (Hard+)</b>, tema "perubahan asumsi, representasi, dan strategi". Paket latihan, bukan soal UTS asli. Semua kunci sudah saya hitung ulang dan tidak ada yang berbeda.</p>
+<div class="jump" data-for="pg"></div>
+
+<article class="soal" id="g1" data-t="UCS, Greedy, A* dan jebakan goal test">
+<div class="ctx">
+<p>Graf <b>berarah</b> di bawah. Heuristik: h(S) = 5, h(A) = 4, h(B) = 1, h(C) = 3, h(G) = 0. Goal diuji saat pop, seri dipecah alfabetis. UCS memakai g, greedy memakai h, A* memakai g + h. Kalau ditemukan jalur baru dengan g yang <b>sama</b>, parent tidak diganti.</p>
+<div class="fig" data-f="g1g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Temukan path optimal dengan memeriksa semua rute.</p>
+<div class="ans"><ul><li>S → A → C → G = 2 + 2 + 3 = <b>7</b></li><li>S → B → G = 5 + 2 = <b>7</b></li><li>S → A → G = 2 + 9 = 11</li></ul><div class="fig" data-f="g1p"></div><p>Ada <span class="key">dua path optimal, sama-sama berbiaya 7</span>.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Simulasikan UCS sampai goal di-pop.</p>
+<div class="ans"><div class="tw"><table><tr><th>Pop</th><th>g</th><th>Yang terjadi</th></tr><tr><td>S</td><td>0</td><td>Masuk A (2), B (5)</td></tr><tr><td>A</td><td>2</td><td>Masuk C (4), G (11)</td></tr><tr><td>C</td><td>4</td><td>G diperbarui jadi 7 (parent C)</td></tr><tr><td>B</td><td>5</td><td>G lewat B juga 7, seri, parent tetap C</td></tr><tr><td>G</td><td>7</td><td>goal</td></tr></table></div><p>Hasil UCS: <span class="key">S → A → C → G, biaya 7</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Simulasikan greedy best-first dan nilai optimalitasnya.</p>
+<div class="ans"><p>Pop S. Pilih B karena h(B) = 1 &lt; h(A) = 4. Pop B, masuk G (h = 0). Pop G.</p><p>Hasil: <span class="key" data-why="Greedy hanya melihat h. Di sini B yang tampak dekat memang punya sisi murah ke G, jadi hasilnya bagus. Ganti bobot B ke G menjadi 20 dan greedy tetap memilih jalur itu.">S → B → G, biaya 7</span>. <b>Kebetulan</b> optimal, tetapi tidak ada jaminan karena greedy mengabaikan g.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Simulasikan A* dan jelaskan peran tie-breaking.</p>
+<div class="ans"><div class="tw"><table><tr><th>Pop</th><th>g</th><th>h</th><th>f</th><th>Yang terjadi</th></tr><tr><td>S</td><td>0</td><td>5</td><td>5</td><td>A (f 6), B (f 6): seri</td></tr><tr><td>A</td><td>2</td><td>4</td><td>6</td><td>Alfabet: A dulu. Masuk C (g 4, f 7), G (g 11, f 11)</td></tr><tr><td>B</td><td>5</td><td>1</td><td>6</td><td>G diperbarui jadi g 7, f 7 (parent B)</td></tr><tr><td>C</td><td>4</td><td>3</td><td>7</td><td>C dan G seri f 7, alfabet: C dulu. G lewat C juga 7, parent tetap B</td></tr><tr><td>G</td><td>7</td><td>0</td><td>7</td><td>goal</td></tr></table></div><p>Hasil A*: <span class="key" data-why="UCS dan A* sama-sama optimal (biaya 7), tetapi aturan seri dan urutan pop membuat parent G berbeda: C pada UCS, B pada A*.">S → B → G, biaya 7</span>. Sama optimalnya dengan UCS, tetapi path yang dikembalikan berbeda.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Apakah menguji goal saat generate selalu aman?</p>
+<div class="ans"><p><b>Tidak.</b> Saat A diekspansi, G pertama kali ditemukan dengan g = 11, padahal masih ada jalur berbiaya 7. Untuk UCS dan A*, goal harus diuji saat pop supaya jaminan optimalnya berlaku.</p></div></div>
+</article>
+
+<article class="soal" id="g2" data-t="State space: encoding dan neighbor">
+<div class="ctx">
+<p>Tiga tugas {A, B, C} dijadwalkan pada dua slot {1, 2}, tiap tugas tepat satu slot. Konflik: A dan B tidak boleh di slot yang sama; B dan C juga tidak. State lengkap s = (s<sub>A</sub>, s<sub>B</sub>, s<sub>C</sub>). h(s) = −(jumlah constraint yang dilanggar). Operator: flip slot satu tugas.</p>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Berapa jumlah state lengkap, successor per state, dan apa goalnya?</p>
+<div class="ans"><p>2³ = <span class="key">8 state</span>. Tiap state punya <span class="key">3 successor</span> (tiap variabel hanya punya satu nilai alternatif). Goal: h = 0, tidak ada constraint yang dilanggar.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Untuk s = (1,1,1), hitung h dan semua successornya.</p>
+<div class="ans"><p>(1,1,1) melanggar A = B dan B = C, jadi h = −2.</p><div class="fig" data-f="g2f"></div></div></div>
+<div class="q"><p class="qt"><b>c.</b> Mengapa successor terbaiknya (1,2,1), dan apakah goalnya unik?</p>
+<div class="ans"><p>(1,2,1) punya h = 0: B dipisahkan dari A dan dari C sekaligus.</p><p>Goal <b>tidak unik</b>: <span class="key" data-why="Menukar label slot 1 dan 2 tidak mengubah siapa yang bersama siapa, jadi tiap solusi punya kembaran.">(2,1,2)</span> juga h = 0.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Kalau operatornya swap dua variabel, apa masalahnya dari state awal?</p>
+<div class="ans"><p>Di (1,1,1) semua nilainya sama, jadi menukar dua posisi mana pun tidak mengubah state. Tiga aksi swap menghasilkan <span class="key">0 state baru</span>. Operator yang kelihatannya bervariasi bisa saja gagal menjelajah.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Bandingkan heuristik konflik ini dengan heuristik admissible pada A*.</p>
+<div class="ans"><p>h = −(jumlah konflik) adalah <b>objective</b> local search: menilai seberapa bagus satu konfigurasi. Heuristik A* adalah <b>taksiran biaya sisa ke goal</b> dan harus admissible. Keduanya tidak setara hanya karena sama-sama disebut heuristik.</p></div></div>
+</article>
+
+<article class="soal" id="g3" data-t="Hill climbing: local optimum dan restart">
+<div class="ctx">
+<p>Landscape berbentuk garis bercabang di bawah. Mulai dari <b>B</b>. Steepest (maksimasi), seri alfabetis. Sideways dibatasi satu langkah.</p>
+<div class="fig" data-f="g3g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Pilih langkah steepest pertama dan telusuri sampai berhenti.</p>
+<div class="ans"><p>Di B (6), tetangganya A (4), C (7), E (10). Pilih <b>E (10)</b>. Dari E, tetangganya B (6) dan F (9), dua-duanya lebih rendah.</p><p><span class="key" data-why="E lebih tinggi dari semua tetangganya, tetapi G (11) lebih tinggi lagi. Untuk ke G harus turun dulu ke F (9).">Berhenti di E = 10</span>: optimum lokal, bukan global (G = 11).</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Adakah jalur yang selalu naik (tidak harus paling curam) dari B ke global?</p>
+<div class="ans"><p>B (6) → C (7) → D (8) selalu naik, tetapi berhenti di D = 8, bukan global.</p><p>Jalur ke G harus lewat E (10) → F (9), yaitu <b>turun</b>. Jadi <span class="key">tidak ada</span> hill climbing yang selalu naik bisa mencapai G dari B. Perlu strategi lain.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Bisakah sideways meloloskan dari E?</p>
+<div class="ans"><p><b>Tidak.</b> F (9) bukan nilai yang sama dan B (6) juga lebih rendah. Sideways hanya menerima nilai sama, bukan turun.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Bagaimana simulated annealing bisa mencapai G?</p>
+<div class="ans"><p>Di E (10), SA bisa mengusulkan F (9): Δ = −1, dengan T &gt; 0 diterima dengan peluang <span class="key">e<sup>−1/T</sup></span>. Dari F, G (11) adalah perbaikan dan pasti diterima. Itulah gunanya menerima langkah buruk secara probabilistik.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Apa peran random restart kalau titik awal dipilih merata dari ketujuh state?</p>
+<div class="ans"><div class="tw"><table><tr><th>Mulai dari</th><th>Steepest berakhir di</th></tr><tr><td>A, B, E</td><td>E (10)</td></tr><tr><td>C, D</td><td>D (8)</td></tr><tr><td>F, G</td><td><b>G (11)</b></td></tr></table></div><p>Hanya <span class="key" data-why="Peluang sukses satu restart = ukuran basin global dibagi jumlah titik awal, bukan otomatis 1/7.">2 dari 7</span> titik awal yang mencapai G. Peluang sukses bergantung pada distribusi titik awal dan ukuran basin.</p></div></div>
+</article>
+
+<article class="soal" id="g4" data-t="Simulated annealing (minimasi)">
+<div class="ctx">
+<p>Minimasi cost C, awal 20. Δ = C<sub>current</sub> − C<sub>baru</sub>. Kalau Δ ≥ 0 pasti diterima; kalau Δ &lt; 0, P = e<sup>Δ/T</sup> dan diterima bila u &lt; P.</p>
+<div class="tw"><table><tr><th>Langkah</th><th>Proposal</th><th>T</th><th>u</th></tr><tr><td>1</td><td>18</td><td>5</td><td>0,8</td></tr><tr><td>2</td><td>22</td><td>2</td><td>0,4</td></tr><tr><td>3</td><td>19</td><td>1</td><td>0,2</td></tr><tr><td>4</td><td>17</td><td>0,5</td><td>0,9</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Jalankan langkah 1 dan 2.</p>
+<div class="ans"><ol><li>20 → 18: Δ = +2, <span class="ok">terima</span>. Current = 18.</li><li>18 → 22: Δ = −4, T = 2, P = e<sup>−2</sup> = 0,1353. u = 0,4 ≥ P, <span class="no">tolak</span>. Current tetap 18.</li></ol></div></div>
+<div class="q"><p class="qt"><b>b.</b> Selesaikan langkah 3 dan 4.</p>
+<div class="ans"><ol start="3"><li>18 → 19: Δ = −1, T = 1, P = e<sup>−1</sup> = 0,3679. u = 0,2 &lt; P, <span class="ok">terima</span>. Current = 19.</li><li>19 → 17: Δ = +2, <span class="ok">terima pasti</span>. Final = <span class="key">17</span>.</li></ol><div class="fig" data-f="g4c"></div></div></div>
+<div class="q"><p class="qt"><b>c.</b> Berapa nilai terbaik yang pernah dikunjungi?</p>
+<div class="ans"><p>Best-so-far = <span class="key">17</span> setelah langkah 4, sama dengan current akhir. Sebelum itu best = 18, walaupun current sempat naik ke 19 di langkah 3.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Kalau u pada langkah 3 menjadi 0,8, apa akibatnya untuk langkah 4?</p>
+<div class="ans"><p>Langkah 3 ditolak (0,8 ≥ 0,3679), current tetap 18. Langkah 4 menawarkan 17: Δ = +1, diterima.</p><p>Final tetap <span class="key">17</span>, hanya trace-nya yang berbeda. Keputusan di tengah tidak selalu mengubah hasil akhir.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Apa yang terjadi kalau exp diberi Δ = C<sub>baru</sub> − C<sub>current</sub>?</p>
+<div class="ans"><p>Langkah yang memperburuk biaya akan punya Δ positif, dan e<sup>positif/T</sup> &gt; 1, tidak masuk akal sebagai peluang. Konvensi tanda harus selaras dengan arah optimasi (di sini minimasi).</p></div></div>
+</article>
+
+<article class="soal" id="g5" data-t="Genetic algorithm: kromosom permutasi">
+<div class="ctx">
+<p>Tugas A, B, C, D harus muncul tepat satu kali pada kromosom sepanjang 4. Fitness F = 20 − biaya perjalanan. Biaya simetris:</p>
+<div class="tw"><table><tr><th>Pasangan</th><td>AB</td><td>AC</td><td>AD</td><td>BC</td><td>BD</td><td>CD</td></tr><tr><th>Biaya</th><td>4</td><td>7</td><td>3</td><td>2</td><td>6</td><td>5</td></tr></table></div>
+<p>Parent P1 = [A,B,C,D], P2 = [D,C,A,B]. Titik potong setelah dua posisi.</p>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Hitung cost dan fitness kedua parent.</p>
+<div class="ans"><ul><li>P1: AB 4 + BC 2 + CD 5 = 11, F = <span class="key">9</span>.</li><li>P2: DC 5 + CA 7 + AB 4 = 16, F = <span class="key">4</span>.</li></ul></div></div>
+<div class="q"><p class="qt"><b>b.</b> Jelaskan mengapa one-point crossover naif bisa menghasilkan kromosom tidak valid.</p>
+<div class="ans"><div class="fig" data-f="g5f"></div><p>P1 = AB | CD, P2 = DC | AB. O1 = AB | AB: A dan B dobel, C dan D hilang. O2 = DC | CD: C dan D dobel, A dan B hilang. Dua-duanya <span class="key">bukan permutasi yang valid</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Terapkan perbaikan sederhana pada O1 dan hitung F-nya.</p>
+<div class="ans"><p>Pertahankan dua posisi awal (A, B). Gen yang hilang: C, D. Ganti duplikat di posisi 3 dan 4 dengan C, D, hasilnya <b>ABCD</b>: cost 11, F = <span class="key">9</span>.</p><p>Repair butuh aturan yang deterministik, dan hasilnya tidak selalu lebih baik dari parent.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Bisakah PMX atau OX dipakai? Mengapa?</p>
+<div class="ans"><p><b>Bisa.</b> PMX (partially mapped crossover) dan OX (order crossover) memang dirancang untuk permutasi: keduanya menjaga tiap gen muncul tepat sekali lewat pemetaan atau urutan relatif. Operator harus cocok dengan encoding-nya.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Kalau fitness bisa negatif, bolehkah roulette memakai F langsung?</p>
+<div class="ans"><p><b>Tidak aman.</b> Probabilitas proporsional butuh bobot nonnegatif dengan jumlah positif. Pilihan: geser nilainya supaya positif, pakai rank selection, atau tournament selection. Ingat bahwa menggeser nilai mengubah kuatnya tekanan seleksi.</p></div></div>
+</article>
+
+<article class="soal" id="g6" data-t="KBS: open world vs closed world">
+<div class="ctx">
+<p>Sistem triase klinik (hipotetis, bukan diagnosis) menyimpan fakta: fever(A), cough(A), fever(B). Tidak ada negasi eksplisit di fakta.</p>
+<div class="tw"><table><tr><th>R1</th><td>fever(x) ∧ cough(x) → suspect(x)</td></tr><tr><th>R2</th><td>suspect(x) → refer(x)</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Turunkan semua kesimpulan untuk A.</p>
+<div class="ans"><div class="fig" data-f="g6f"></div><p>A punya fever dan cough, jadi <span class="key">suspect(A)</span> lewat R1, lalu <span class="key">refer(A)</span> lewat R2. Explanation harus menampilkan rantai ini beserta input yang dipakai.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Apakah untuk B terbukti ¬suspect(B)?</p>
+<div class="ans"><p><b>Tidak.</b> cough(B) tidak tersedia, jadi suspect(B) tidak bisa diturunkan. Dalam open-world statusnya <span class="key">UNKNOWN</span>, bukan bukti ¬suspect(B).</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Apa yang berubah kalau closed-world ditetapkan?</p>
+<div class="ans"><p>Sistem boleh memperlakukan query yang gagal sebagai false, misalnya suspect(B) = false, sebagai <b>asumsi operasional</b>. Itu tetap tidak sama dengan fakta negasi eksplisit.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Gambarkan arsitektur dari data sampai keputusan, termasuk komponen penjelasan.</p>
+<div class="ans"><div class="fig" data-f="g6arch"></div><p>UI menampilkan rekomendasi, dengan manusia tetap terlibat dalam keputusan akhir.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Mengapa representasi rule ini berbeda dari model klasifikasi statistik?</p>
+<div class="ans"><p>Rule bersifat <b>eksplisit</b>: transparan dan bisa diperiksa satu per satu. Classifier statistik <b>mempelajari</b> pola berupa parameter dari data. Keduanya bisa digabung, tetapi ketidakpastian dan validasinya harus dikelola secara eksplisit.</p></div></div>
+</article>
+
+<article class="soal" id="g7" data-t="Forward chaining: fakta yang dihapus">
+<div class="ctx">
+<p>WM awal = {A, B, D}. Rule tidak boleh fire dua kali. Pilih rule dengan premis terbanyak, lalu nomor terkecil. Agenda dievaluasi ulang setelah tiap aksi.</p>
+<div class="tw"><table><tr><th>Rule</th><th>IF</th><th>THEN</th></tr><tr><td>R1</td><td>A ∧ B</td><td>ADD C, DELETE B</td></tr><tr><td>R2</td><td>B</td><td>ADD E</td></tr><tr><td>R3</td><td>C ∧ D</td><td>ADD F</td></tr><tr><td>R4</td><td>E ∧ D</td><td>ADD G</td></tr><tr><td>R5</td><td>F</td><td>ADD H</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Buat conflict set awal dan tentukan rule yang terpilih.</p>
+<div class="ans"><p>Eligible: R1 (2 premis) dan R2 (1 premis). Yang fire <span class="key">R1</span>: +C, −B.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Simulasikan seluruh urutan sampai fixed point.</p>
+<div class="ans"><div class="tw"><table><tr><th>t</th><th>WM sebelum</th><th>Conflict set</th><th>Fire</th><th>Perubahan</th></tr><tr><td>1</td><td>{A, B, D}</td><td>R1, R2</td><td>R1</td><td>+C, −B</td></tr><tr><td>2</td><td>{A, C, D}</td><td>R3</td><td>R3</td><td>+F</td></tr><tr><td>3</td><td>{A, C, D, F}</td><td>R5</td><td>R5</td><td>+H</td></tr></table></div><p>Urutan: <span class="key">R1 → R3 → R5</span>. Setelah R1, R2 tidak lagi eligible karena B sudah dihapus.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Tuliskan WM akhir dan status G serta H.</p>
+<div class="ans"><p>WM akhir = {A, C, D, F, H}.</p><div class="fig" data-f="g7f"></div><p><span class="ok">H terbukti</span> lewat R5. <span class="key" data-why="G butuh E, dan E hanya dibuat R2. R2 butuh B, yang sudah dihapus R1 di putaran pertama.">G tidak diturunkan</span> karena E tidak pernah dibuat.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Kalau resolusi konflik memilih R2 sebelum R1, apa yang berubah?</p>
+<div class="ans"><p>R2: +E → R1: +C, −B → R3: +F → R4: +G → R5: +H.</p><p>WM akhir = <span class="key">{A, C, D, E, F, G, H}</span>, sekarang memuat E dan G. Pada sistem dengan DELETE, hasil dipengaruhi urutan.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Kalau B muncul lagi, bisakah R1 fire ulang?</p>
+<div class="ans"><p><b>Tidak</b> menurut aturan soal ini: refractoriness berlaku per rule, jadi R1 tidak fire ulang walaupun B kembali ada. Sistem produksi lain bisa memakai refractoriness per aktivasi (kombinasi rule dan fakta), yang hasilnya berbeda. Ikuti definisi di soal.</p></div></div>
+</article>
+
+<article class="soal" id="g8" data-t="Backward chaining: proof DAG dan memoization">
+<div class="ctx">
+<div class="tw"><table><tr><th>R1</th><td>P ∧ Q → Z</td><th>R3</th><td>A → P</td></tr><tr><th>R2</th><td>R ∧ Q → Z</td><th>R4</th><td>B → Q</td></tr><tr><th></th><td></td><th>R5</th><td>C → R</td></tr></table></div>
+<p>Fakta = {A, B, C}. Query Z. Rule bernomor kecil dicoba dulu, dan hasil subgoal yang sudah terbukti <b>disimpan</b> (memoization).</p>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Gambarkan proof tree OR/AND dari query.</p>
+<div class="ans"><div class="fig" data-f="g8f"></div><p>OR ada pada dua rule untuk Z. AND ada pada premis tiap rule. Q dipakai oleh R1 dan R2 sekaligus.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Tuliskan DFS untuk rule pertama dan hasilnya.</p>
+<div class="ans"><p>Z → R1 → P → R3 → A <span class="ok">✓</span> → Q → R4 → B <span class="ok">✓</span>. P ∧ Q terbukti, jadi <span class="key">Z terbukti</span>. Pencarian berhenti tanpa memeriksa R2 dan R5.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Kalau A dihapus, bagaimana bukti alternatifnya?</p>
+<div class="ans"><p>R1 gagal di P karena A tidak ada. Backtrack ke R2: R lewat R5 dari C <span class="ok">✓</span>, Q lewat R4 dari B <span class="ok">✓</span>. Jadi <span class="key">Z tetap terbukti lewat R2</span>.</p><p>Kalau Q sudah sempat diperiksa, hasilnya bisa langsung diambil dari memo.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Apa keuntungan DAG dibanding tree yang menduplikasi node?</p>
+<div class="ans"><p>Q dipakai R1 dan R2. Pada DAG, node subgoal Q <b>dibagi</b> sehingga cukup dibuktikan sekali. Pada tree, Q digambar dan dibuktikan dua kali. Penghematan ini terasa pada basis aturan yang besar.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Bedakan "query tidak terbukti" dengan negasi eksplisit ¬Z.</p>
+<div class="ans"><p>Kalau semua cabang gagal, kesimpulan paling aman: Z <b>tidak terderivasi</b>. Menyatakan ¬Z butuh fakta atau rule negasi, atau kebijakan closed-world.</p><p>Dan satu cabang OR yang gagal belum berarti query gagal: cabang lain harus dicoba dulu.</p></div></div>
+</article>
+
+<article class="soal" id="g9" data-t="Minimax dan alpha-beta cutoff">
+<div class="ctx">
+<p>Root MAX punya dua anak MIN, A dan B. A punya dua anak MAX dengan daun (8, 4) dan (6, 1). B punya dua anak MAX dengan daun (5, 2) dan (9, 3). DFS dari kiri ke kanan.</p>
+<div class="fig" data-f="g9t"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Hitung nilai minimax semua node.</p>
+<div class="ans"><ul><li>A = min(max(8,4), max(6,1)) = min(8, 6) = <b>6</b></li><li>B = min(max(5,2), max(9,3)) = min(5, 9) = <b>5</b></li><li>Root = max(6, 5) = <span class="key">6</span>, memilih A.</li></ul></div></div>
+<div class="q"><p class="qt"><b>b.</b> Di mana terjadi pemangkasan alpha-beta?</p>
+<div class="ans"><div class="fig" data-f="g9a"></div><p>Setelah A selesai, α di root = 6. Di B (MIN), anak MAX pertama menghasilkan 5, jadi β(B) = 5 ≤ α = 6.</p><p>Anak MAX kedua di B dipangkas seluruhnya: daun <span class="key" data-why="B pasti bernilai ≤ 5, sudah kalah dari A = 6. Apa pun isi cabang sisanya, root tidak akan memilih B.">9 dan 3</span> tidak dievaluasi. Nilai root tetap 6.</p></div></div>
+</article>
+</section>
+<!-- ============================ PAKET H ============================ -->
+<section class="panel" id="ph">
+<p class="note">Sumber: <b>Paket H (Hard+)</b>. Paket latihan, bukan soal UTS asli. Semua kunci sudah saya hitung ulang dan tidak ada yang berbeda.</p>
+<div class="jump" data-for="ph"></div>
+
+<article class="soal" id="h1" data-t="A* dengan heuristik yang overestimate">
+<div class="ctx">
+<p>Graf <b>berarah</b> di bawah. h(S) = 2, h(A) = 0, h(B) = 8, h(C) = 1, h(G) = 0. A* dengan f = g + h, goal diuji saat pop, seri alfabetis. Heuristiknya <b>belum dijamin admissible</b>.</p>
+<div class="fig" data-f="h1g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Hitung semua path sederhana dari S ke G dan tentukan yang optimal.</p>
+<div class="ans"><ul><li>S → A → G = 2 + 6 = 8</li><li>S → B → G = 1 + 10 = 11</li><li>S → B → C → G = 1 + 1 + 2 = <span class="key">4</span> (optimal)</li></ul></div></div>
+<div class="q"><p class="qt"><b>b.</b> Trace A* sampai goal pertama kali di-pop.</p>
+<div class="ans"><div class="tw"><table><tr><th>Pop</th><th>g</th><th>f</th><th>Yang terjadi</th></tr><tr><td>S</td><td>0</td><td>2</td><td>Masuk A (g 2, f 2), B (g 1, f 9)</td></tr><tr><td>A</td><td>2</td><td>2</td><td>Masuk G (g 8, f 8)</td></tr><tr><td>G</td><td>8</td><td>8</td><td>f(G) = 8 lebih kecil dari f(B) = 9, jadi G di-pop duluan</td></tr></table></div><div class="fig" data-f="h1p"></div><p class="cap">Oranye: yang dikembalikan A*. Hijau: yang sebenarnya optimal.</p><p>A* mengembalikan <span class="key" data-why="h(B) = 8 membuat B tampak mahal (f = 9), padahal lewat B hanya butuh total 4. B tidak pernah sempat diekspansi.">S → A → G, biaya 8: suboptimal</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Identifikasi kesalahan heuristiknya.</p>
+<div class="ans"><p>h(B) = 8, padahal biaya sisa sebenarnya B → C → G = 1 + 2 = 3. Jadi <span class="key">h(B) &gt; h*(B)</span>: melanggar admissibility. Jaminan optimal A* hanya berlaku kalau heuristiknya tidak pernah melebih-lebihkan.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Apa yang terjadi dengan UCS?</p>
+<div class="ans"><p>UCS hanya memakai g: pop S (0), B (1), A (2), C (2), G (4). A dan C seri di g = 2, alfabet: A dulu.</p><p>Hasil: <span class="key">S → B → C → G, biaya 4</span>. UCS optimal selama semua biaya nonnegatif, karena tidak bergantung pada h.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Kesimpulan apa yang <i>tidak</i> boleh diambil dari contoh ini?</p>
+<div class="ans"><p>Tidak boleh menyimpulkan "A* selalu suboptimal" atau "UCS selalu lebih baik". Kegagalan di sini murni karena h melebih-lebihkan. A* dengan heuristik admissible (dan pengelolaan graph yang benar) tetap punya jaminan optimal, dan biasanya mengekspansi lebih sedikit node daripada UCS.</p></div></div>
+</article>
+
+<article class="soal" id="h2" data-t="Desain neighborhood: dua operator 4-Queens">
+<div class="ctx">
+<p>4-Queens dengan q = (2,2,4,1): satu ratu per kolom, baris boleh sama. h = −(pasangan yang menyerang). <b>Operator O1</b> memindahkan tepat satu ratu ke baris lain. <b>Operator O2</b> menukar baris dua kolom berbeda.</p>
+<div class="fig" data-f="h2b"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Berapa jumlah successor O1 dan berapa h awal?</p>
+<div class="ans"><p>O1: 4 × (4 − 1) = <span class="key">12 state</span>. Konflik awal: Q1 dan Q2 (satu baris), Q1 dan Q3 (diagonal). Dua konflik, <span class="key">h = −2</span>.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Berapa aksi swap O2 dan berapa state uniknya?</p>
+<div class="ans"><p>C(4,2) = 6 pasangan swap. Q1 dan Q2 sama-sama di baris 2, jadi swap(1,2) tidak mengubah apa pun.</p><div class="tw"><table><tr><th>Swap</th><th>Hasil</th></tr><tr><td>(1,2)</td><td>(2,2,4,1), sama dengan awal</td></tr><tr><td>(1,3)</td><td>(4,2,2,1)</td></tr><tr><td>(1,4)</td><td>(1,2,4,2)</td></tr><tr><td>(2,3)</td><td>(2,4,2,1)</td></tr><tr><td>(2,4)</td><td>(2,1,4,2)</td></tr><tr><td>(3,4)</td><td>(2,2,1,4)</td></tr></table></div><p>Ada <span class="key">5 successor unik</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Mengapa O1 dan O2 punya keterjangkauan (connectivity) berbeda?</p>
+<div class="ans"><p>O1 bisa <b>mengubah isi</b> kumpulan nilai baris, termasuk memasukkan nilai baru. O2 hanya <b>mengubah urutan</b> kumpulan nilai yang sama.</p><p>Dari (2,2,4,1), O2 <span class="key" data-why="Swap hanya mengacak {2,2,4,1}. Solusi butuh keempat baris berbeda {1,2,3,4}, dan angka 3 tidak akan pernah muncul.">tidak akan pernah mencapai (2,4,1,3)</span> karena tidak ada baris 3 di kumpulan awalnya.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Adakah goal yang tidak tercapai O1 dalam satu langkah tetapi bisa dalam beberapa langkah?</p>
+<div class="ans"><p>Solusi (2,4,1,3) berbeda dari state awal di Q2, Q3, dan Q4, jadi bukan successor satu langkah. Tetapi dengan <span class="key">beberapa langkah O1</span> (di sini tiga), state itu terjangkau. O1 bisa menjangkau semua state lengkap 4-Queens.</p><div class="fig" data-f="h2s"></div></div></div>
+<div class="q"><p class="qt"><b>e.</b> Kapan neighbor dengan nilai terbaik belum tentu lebih dekat ke goal dalam jumlah aksi?</p>
+<div class="ans"><p>Heuristik konflik menilai <b>kualitas konfigurasi</b>, bukan jumlah langkah minimum ke goal. Dua state dengan jumlah konflik sama bisa punya jarak ke solusi yang berbeda. Memilih successor terbaik menurut h adalah pilihan greedy lokal.</p></div></div>
+</article>
+
+<article class="soal" id="h3" data-t="Hill climbing: plateau yang membingungkan">
+<div class="ctx">
+<p>Graf nilai di bawah. Mulai dari <b>B</b>. Stochastic first-choice menerima proposal dengan urutan A, C, E, D; hanya kandidat yang lebih besar dari current yang diterima; proposal yang bukan tetangga tidak sah.</p>
+<div class="fig" data-f="h3g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Apa yang dilakukan steepest dari B?</p>
+<div class="ans"><p>Tetangga B: A (5) dan C (7). Yang terbaik C = 7, <b>sama</b> dengan B. Steepest ketat <span class="key">berhenti di B</span>.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Dengan satu sideways dari B, apa yang terjadi?</p>
+<div class="ans"><div class="fig" data-f="h3f"></div><p>B (7) → <i>sideways</i> → C (7). Dari C, tetangganya B (7), D (9), E (6): pilih D (9). Dari D, tetangganya C (7) dan E (6): berhenti.</p><p>Hasil <span class="key" data-why="Sideways berhasil melewati plateau B dan C, tetapi D dipisahkan dari F oleh lembah E (6). Untuk ke F harus turun 3 dulu.">D = 9</span>, padahal global F = 10. Sideways membantu melewati satu plateau, tetapi tetap bisa terjebak optimum lokal.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Identifikasi proposal stochastic yang tidak sah dan dampaknya.</p>
+<div class="ans"><p>Dari B, proposal A dan C sah (tetangga langsung). <span class="key">E dan D tidak sah</span> karena bukan tetangga B. Selama current masih B, generator successor tidak boleh menghasilkan keduanya.</p><p>Stochastic berarti memilih acak <i>di antara tetangga</i>, bukan teleport acak.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Bagaimana mencapai F = 10 dari D = 9 kalau hill climbing ketat tidak bisa?</p>
+<div class="ans"><p>D (9) → E (6) adalah langkah memburuk (Δ = −3), baru E (6) → F (10) membaik. SA bisa menerima D → E dengan peluang <span class="key">e<sup>−3/T</sup></span>. Alternatif: random restart yang kebetulan mulai di E atau F.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Mengapa klaim "sideways selalu mencapai global" salah?</p>
+<div class="ans"><p>Sideways hanya menerima nilai yang sama, tidak pernah turun. Puncak lokal D (9) terpisah dari F (10) oleh lembah E (6). Sebesar apa pun batas sideways-nya, lembah itu tidak hilang.</p></div></div>
+</article>
+
+<article class="soal" id="h4" data-t="Simulated annealing: acceptance dan freezing">
+<div class="ctx">
+<p>Maksimalkan objective, awal 5. Δ = V<sub>kandidat</sub> − V<sub>current</sub>. Langkah buruk diterima jika u &lt; e<sup>Δ/T</sup>.</p>
+<div class="tw"><table><tr><th>t</th><th>Proposal V</th><th>T</th><th>u</th></tr><tr><td>1</td><td>7</td><td>3</td><td>0,99</td></tr><tr><td>2</td><td>4</td><td>2</td><td>0,3</td></tr><tr><td>3</td><td>8</td><td>1</td><td>0,8</td></tr><tr><td>4</td><td>6</td><td>0,5</td><td>0,1</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Lakukan t = 1 dan t = 2.</p>
+<div class="ans"><ol><li>5 → 7: Δ = +2, <span class="ok">terima</span>. Current = 7.</li><li>7 → 4: Δ = −3, T = 2, P = e<sup>−1,5</sup> = 0,2231. u = 0,3 ≥ P, <span class="no">tolak</span>. Current tetap 7.</li></ol></div></div>
+<div class="q"><p class="qt"><b>b.</b> Lakukan t = 3 dan t = 4.</p>
+<div class="ans"><ol start="3"><li>7 → 8: Δ = +1, <span class="ok">terima</span>. Current = 8.</li><li>8 → 6: Δ = −2, T = 0,5, P = e<sup>−4</sup> = 0,0183. u = 0,1 ≥ P, <span class="no">tolak</span>.</li></ol><div class="fig" data-f="h4c"></div><p>Final: <span class="key">current = 8, best = 8</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Untuk proposal buruk yang sama, apa bedanya menurunkan T dan menaikkan T?</p>
+<div class="ans"><p>Untuk Δ negatif, menaikkan T membuat Δ/T makin mendekati nol, jadi e<sup>Δ/T</sup> <b>naik</b>: langkah buruk lebih sering diterima (lebih eksploratif). T mendekati nol menekan peluang itu sampai hampir nol.</p><div class="tw"><table><tr><th>Δ = −2</th><th>T = 5</th><th>T = 2</th><th>T = 1</th><th>T = 0,5</th></tr><tr><td>P = e<sup>Δ/T</sup></td><td>0,6703</td><td>0,3679</td><td>0,1353</td><td>0,0183</td></tr></table></div></div></div>
+<div class="q"><p class="qt"><b>d.</b> Apa yang terjadi saat T = 0 kalau proposalnya sama baik?</p>
+<div class="ans"><p>Harus didefinisikan dulu aturannya. Dengan aturan deterministik pada T = 0: Δ ≥ 0 diterima dan Δ &lt; 0 ditolak. Pada varian lain, T = 0 langsung menghentikan proses. Yang jelas, <b>jangan membagi dengan nol</b>.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Apakah SA menjamin optimum pada jadwal temperatur yang terbatas?</p>
+<div class="ans"><p><b>Tidak.</b> Jaminan SA bersifat asimtotik: butuh pendinginan yang sangat lambat dan waktu sangat panjang. Empat langkah seperti contoh ini tidak menjamin optimum global.</p></div></div>
+</article>
+
+<article class="soal" id="h5" data-t="Genetic algorithm: roulette dan selection pressure">
+<div class="ctx">
+<p>Kromosom 4-bit, fitness F = 1 + (jumlah bit 1)². Populasi: A = 0000, B = 1000, C = 1100, D = 1111. Roulette berurutan dengan u = 0,05 dan 0,78. Crossover setelah bit 2, mutasi membalik bit 1 pada offspring pertama.</p>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Hitung fitness dan peluang seleksi.</p>
+<div class="ans"><div class="tw"><table><tr><th>Individu</th><th>Bit 1</th><th>F</th><th>Peluang</th><th>Interval u</th></tr><tr><td>A = 0000</td><td>0</td><td>1</td><td>4%</td><td>[0 ; 0,04)</td></tr><tr><td>B = 1000</td><td>1</td><td>2</td><td>8%</td><td>[0,04 ; 0,12)</td></tr><tr><td>C = 1100</td><td>2</td><td>5</td><td>20%</td><td>[0,12 ; 0,32)</td></tr><tr><td>D = 1111</td><td>4</td><td>17</td><td>68%</td><td>[0,32 ; 1)</td></tr></table></div><p>Total = <span class="key">25</span>.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Pilih parent berdasarkan kedua u.</p>
+<div class="ans"><div class="fig" data-f="h5pm"></div><p>u = 0,05 jatuh di interval B, jadi <span class="key">B = 1000</span>. u = 0,78 jatuh di interval D, jadi <span class="key">D = 1111</span>.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Lakukan crossover dan hitung fitness anak.</p>
+<div class="ans"><p>B = 10 | 00, D = 11 | 11.</p><ul><li>O1 = 10 | 11 = <b>1011</b>, tiga bit 1, F = 1 + 9 = <span class="key">10</span>.</li><li>O2 = 11 | 00 = <b>1100</b>, dua bit 1, F = 1 + 4 = <span class="key">5</span>.</li></ul></div></div>
+<div class="q"><p class="qt"><b>d.</b> Mutasikan bit pertama O1 dan hitung fitness akhirnya.</p>
+<div class="ans"><p>1011 → <b>0011</b>. Jumlah bit 1 turun ke 2, F = 1 + 4 = <span class="key">5</span>. Mutasi bisa menurunkan kualitas, tidak menjamin perbaikan.</p><div class="fig" data-f="h5f"></div></div></div>
+<div class="q"><p class="qt"><b>e.</b> Analisis masalah premature convergence.</p>
+<div class="ans"><p>D mendapat peluang <span class="key" data-why="Fitness dikuadratkan, jadi selisih kecil di jumlah bit menjadi selisih besar di peluang. Ini selection pressure yang tinggi.">68%</span> dan bisa cepat mendominasi generasi berikutnya, sehingga keragaman populasi turun.</p><p>Mitigasi: mutasi, rank atau tournament selection, dan teknik penjaga keragaman. Fitness tinggi di populasi sekarang belum tentu optimum global.</p></div></div>
+</article>
+
+<article class="soal" id="h6" data-t="KBS: pengetahuan baru yang bertentangan">
+<div class="ctx">
+<p>KB awal: <b>R1</b> rain → wet_ground; <b>R2</b> wet_ground → slippery. Fakta: rain. Kemudian sensor terbaru mencatat ¬wet_ground tanpa menghapus rain. Rule-nya deterministik.</p>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Apa inferensi awal sebelum data baru masuk?</p>
+<div class="ans"><p>rain (fakta) ⇒ wet_ground lewat R1 ⇒ <span class="key">slippery</span> lewat R2. Explanation trace menyebut R1 dan R2.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Apa masalahnya saat ¬wet_ground ditambahkan?</p>
+<div class="ans"><div class="fig" data-f="h6f"></div><p>Kalau hasil inferensi lama dipertahankan, basis memuat wet_ground dan ¬wet_ground sekaligus. Dalam logika proposisional klasik KB ini <span class="key" data-why="Dari KB yang kontradiktif, logika klasik bisa menurunkan pernyataan apa saja. Karena itu kontradiksi harus diselesaikan dulu, bukan dilanjutkan.">tidak konsisten</span>, dan tidak boleh dipakai untuk menyimpulkan apa pun seenaknya.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Usulkan mekanisme update supaya konsisten secara operasional.</p>
+<div class="ans"><ul><li>Periksa timestamp dan keandalan sensor.</li><li>Cabut atau revisi fakta lama beserta semua turunannya (truth maintenance): wet_ground dan slippery ikut dicabut.</li><li>Atau pakai penalaran nonmonotonic/default dengan prioritas untuk fakta terbaru, asal aturannya didefinisikan jelas.</li></ul></div></div>
+<div class="q"><p class="qt"><b>d.</b> Apakah ¬wet_ground otomatis berarti ¬rain?</p>
+<div class="ans"><p><b>Tidak</b> pada sistem rule produksi biasa. R1 hanya berjalan satu arah (rain → wet_ground). Menyimpulkan ¬rain dari ¬wet_ground butuh aturan kontraposisi yang eksplisit dan asumsi logika yang sesuai.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Komponen KBS mana yang berperan dalam audit keputusan?</p>
+<div class="ans"><ul><li><b>Working memory:</b> observasi beserta asal-usulnya (sensor mana, kapan).</li><li><b>Knowledge base:</b> rule.</li><li><b>Inference engine:</b> melakukan penalaran.</li><li><b>Explanation:</b> menampilkan dasar keputusan dan konflik yang ditemukan.</li><li><b>Knowledge acquisition:</b> mengelola revisi aturan dengan validasi pakar.</li></ul></div></div>
+</article>
+
+<article class="soal" id="h7" data-t="Forward chaining: urutan, agenda, revisi">
+<div class="ctx">
+<p>WM awal = {high_temp, fan_off, power_on}. Pilih rule dengan premis terbanyak, lalu nomor terkecil. Tiap rule fire satu kali.</p>
+<div class="tw"><table><tr><th>Rule</th><th>IF</th><th>THEN</th></tr><tr><td>R1</td><td>high_temp ∧ fan_off</td><td>ADD alarm</td></tr><tr><td>R2</td><td>alarm ∧ power_on</td><td>ADD fan_on, DELETE fan_off</td></tr><tr><td>R3</td><td>fan_off</td><td>ADD technician_call</td></tr><tr><td>R4</td><td>fan_on</td><td>ADD cooled</td></tr><tr><td>R5</td><td>cooled ∧ technician_call</td><td>ADD resolved</td></tr></table></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Apa conflict set awalnya?</p>
+<div class="ans"><p><span class="key">{R1, R3}</span>: R1 punya 2 premis, R3 punya 1. R1 fire pertama dan menambah alarm.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Trace firing sampai fixed point.</p>
+<div class="ans"><div class="tw"><table><tr><th>t</th><th>Conflict set</th><th>Fire</th><th>Perubahan WM</th></tr><tr><td>1</td><td>R1, R3</td><td>R1</td><td>+alarm</td></tr><tr><td>2</td><td>R2, R3</td><td>R2</td><td>+fan_on, −fan_off</td></tr><tr><td>3</td><td>R4</td><td>R4</td><td>+cooled</td></tr></table></div><p>Urutan <span class="key">R1 → R2 → R4</span>. Setelah R2, R3 tidak lagi eligible. R5 tidak eligible karena technician_call tidak ada.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Apa WM akhir dan status resolved?</p>
+<div class="ans"><p>WM akhir = {high_temp, power_on, alarm, fan_on, cooled}.</p><div class="fig" data-f="h7f"></div><p><span class="key">resolved tidak dapat diturunkan</span> karena technician_call tidak pernah muncul.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Bagaimana kalau R3 diberi prioritas tertinggi dan fire lebih dulu?</p>
+<div class="ans"><p>R3: +technician_call → R1: +alarm → R2: +fan_on, −fan_off → R4: +cooled → R5: <span class="key">+resolved</span>.</p><p>Kebijakan conflict resolution memengaruhi hasil pada sistem yang punya DELETE.</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Mengapa "rule sekali fire" berbeda dari refractoriness per aktivasi?</p>
+<div class="ans"><p><b>Rule sekali fire</b> membatasi R1 sepanjang sesi, apa pun faktanya. <b>Refractoriness per aktivasi</b> hanya membatasi kombinasi rule, binding, dan fakta tertentu; kalau faktanya diganti kemudian, rule yang sama boleh aktif lagi. Ikuti definisi yang diberikan soal.</p></div></div>
+</article>
+
+<article class="soal" id="h8" data-t="Backward chaining: query bersyarat dan fallback">
+<div class="ctx">
+<div class="tw"><table><tr><th>R1</th><td>sensor_ok(x) ∧ network_ok(x) → ready(x)</td></tr><tr><th>R2</th><td>fallback(x) ∧ approved(x) → ready(x)</td></tr><tr><th>R3</th><td>calibrated(x) → sensor_ok(x)</td></tr></table></div>
+<p>Fakta = {calibrated(A), approved(A), fallback(B), approved(B)}. Jawaban user saat request: network_ok(A) = tidak, network_ok(B) = tidak tahu, fakta primitif lain = tidak tahu. Query ready(A) dan ready(B). Rule urut nomor, DFS.</p>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Trace query ready(A).</p>
+<div class="ans"><div class="fig" data-f="h8a"></div><ul><li>R1: sensor_ok(A) lewat R3 dari calibrated(A) <span class="ok">✓</span>. network_ok(A): request, jawab tidak <span class="no">✗</span>. R1 gagal.</li><li>R2: fallback(A) tidak ada, request, tidak tahu <span class="no">✗</span>. R2 gagal.</li></ul><p><span class="key">ready(A) tidak terbukti</span>.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Trace query ready(B).</p>
+<div class="ans"><div class="fig" data-f="h8b"></div><ul><li>R1: sensor_ok(B) lewat R3 butuh calibrated(B), tidak tahu <span class="no">✗</span>. R1 gagal.</li><li>R2: fallback(B) <span class="ok">✓</span> ∧ approved(B) <span class="ok">✓</span>.</li></ul><p><span class="key">ready(B) terbukti</span> lewat R2.</p></div></div>
+<div class="q"><p class="qt"><b>c.</b> Gambarkan struktur OR/AND kedua jalur ready.</p>
+<div class="ans"><ul class="tr"><li><b>ready(x)</b> [OR]<ul><li>R1 [AND]<ul><li>sensor_ok(x), lewat R3 dari calibrated(x)</li><li>network_ok(x), request</li></ul></li><li>R2 [AND]<ul><li>fallback(x)</li><li>approved(x)</li></ul></li></ul></li></ul><p>OR memilih salah satu rule alternatif. AND mewajibkan semua premis dalam satu rule.</p></div></div>
+<div class="q"><p class="qt"><b>d.</b> Apakah jawaban "tidak" untuk network_ok(A) membuktikan ¬ready(A)?</p>
+<div class="ans"><p><b>Tidak otomatis</b>, karena masih ada jalur R2 yang independen dari network_ok. Dengan fakta yang ada, ready(A) memang gagal dibuktikan, tetapi itu harus dibedakan dari negasi (kecuali memakai closed-world).</p></div></div>
+<div class="q"><p class="qt"><b>e.</b> Mengapa forward chaining penuh bisa membuang kerja dibanding backward query?</p>
+<div class="ans"><p>Forward menurunkan <b>semua</b> consequent yang bisa diturunkan untuk A dan B, termasuk yang tidak relevan dengan pertanyaan. Backward mulai dari ready dan berhenti begitu bukti cukup.</p><p>Tetapi backward dengan banyak cabang OR dan backtracking juga bisa mahal. Tidak ada yang selalu lebih hemat.</p></div></div>
+</article>
+
+<article class="soal" id="h9" data-t="CSP: MRV, degree, LCV">
+<div class="ctx">
+<p>Variabel X, Y, Z dengan D(X) = {1, 2}, D(Y) = {1, 2, 3}, D(Z) = {2, 3}. Constraint: X &lt; Y, Y &lt; Z, X ≠ Z. Backtracking boleh memakai MRV dan LCV setelah inferensi.</p>
+<div class="fig" data-f="h9g"></div>
+</div>
+<div class="q"><p class="qt"><b>a.</b> Tentukan solusi dan domain akhir lewat propagasi.</p>
+<div class="ans"><ol><li>X &lt; Y: Y = 1 dibuang (tidak ada X yang lebih kecil). D(Y) = {2, 3}.</li><li>Y &lt; Z: Y = 3 dibuang (tidak ada Z &gt; 3). D(Y) = {2}. Z = 2 dibuang (butuh Y &lt; 2). D(Z) = {3}.</li><li>X &lt; Y = 2: X = 2 dibuang. D(X) = {1}.</li></ol><p>Solusi: <span class="key">X = 1, Y = 2, Z = 3</span>. X ≠ Z terpenuhi.</p></div></div>
+<div class="q"><p class="qt"><b>b.</b> Jelaskan kapan MRV tidak diperlukan lagi.</p>
+<div class="ans"><p>Kalau propagasi sudah membuat <span class="key" data-why="MRV, degree, dan LCV adalah heuristik untuk memilih saat masih ada pilihan. Kalau tiap domain tinggal satu nilai, tidak ada yang perlu dipilih.">semua domain tinggal satu nilai</span>, search selesai tanpa perlu memilih apa pun. Heuristik pemilihan variabel bukan pengganti constraint inference; keduanya saling melengkapi.</p></div></div>
+</article>
+</section>
+
 <!-- ============================ TAMBAHAN ============================ -->
 <section class="panel" id="pt">
 <div class="mine"><b>Soal buatan saya</b>, untuk topik bertanda ★ di catatan yang tidak tersentuh Paket D dan E (PEAS, alpha-beta dengan tiga cabang, heuristik CSP, UCS vs BFS). Angka-angkanya sudah saya hitung ulang, tetapi tidak ada kunci dari dosen.</div>
@@ -479,7 +937,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 </article>
 </section>
 </div></main>
-<footer>Latihan IF3070. Paket D dan E adalah paket latihan (bukan soal UTS asli); tab Tambahan dibuat sendiri. Kalau ada jawaban yang berbeda dengan penjelasan dosen, ikuti dosen.</footer>
+<footer>Latihan IF3070. Paket D sampai H adalah paket latihan (bukan soal UTS asli); tab Tambahan dibuat sendiri. Kalau ada jawaban yang berbeda dengan penjelasan dosen, ikuti dosen.</footer>
 
 <script>
 (function(){
@@ -492,22 +950,26 @@ function svg(w,h,inner){return '<svg xmlns="'+NS+'" viewBox="0 0 '+w+' '+h+'" wi
 function att(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function G_(tip,inner){return '<g tabindex="0" data-tip="'+att(tip)+'">'+inner+'</g>';}
 /* graf berbobot: nodes {id:[x,y,label?,sub?]}, edges [a,b,w,t] (t = posisi label 0..1) */
+var GID=0;
 function graph(w,h,nodes,edges,o){
-  o=o||{};var s='';
+  o=o||{};var s='',gid='gm'+(++GID),cols={};
+  if(o.dir){edges.forEach(function(e){cols[e[4]||'#7F95B3']=1;});s+='<defs>'+Object.keys(cols).map(function(c,i){cols[c]=gid+'_'+i;return '<marker id="'+cols[c]+'" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="'+c+'"/></marker>';}).join('')+'</defs>';}
   edges.forEach(function(e){
     var a=nodes[e[0]],b=nodes[e[1]],t=e[3]==null?0.5:e[3];
-    s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+(e[4]||C.line)+'" stroke-width="'+(e[4]?3.5:2)+'"'+(e[5]?' stroke-dasharray="6 5"':'')+'/>';
+    var x2=b[0],y2=b[1],mk='',ec=e[4]||(o.dir?'#7F95B3':C.line);
+    if(o.dir){var ddx=b[0]-a[0],ddy=b[1]-a[1],ln=Math.sqrt(ddx*ddx+ddy*ddy),rr=(o.r||19)+3;x2=b[0]-ddx/ln*rr;y2=b[1]-ddy/ln*rr;mk=' marker-end="url(#'+cols[e[4]||'#7F95B3']+')"';}
+    s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+x2+'" y2="'+y2+'" stroke="'+ec+'" stroke-width="'+(e[4]?3.5:2)+'"'+(e[5]?' stroke-dasharray="6 5"':'')+mk+'/>';
     if(e[2]!=null&&e[2]!==''){var x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,L=String(e[2]),bw=Math.max(22,L.length*8+10);
       s+='<rect x="'+(x-bw/2)+'" y="'+(y-11)+'" width="'+bw+'" height="22" rx="6" fill="#fff" stroke="'+C.pale+'"/><text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+C.navy+'">'+esc(L)+'</text>';}
   });
   Object.keys(nodes).forEach(function(k){
     var n=nodes[k],lab=n[2]||k,r=o.r||19,hl=o.hl&&o.hl[k],g='',nb=[];
-    edges.forEach(function(e){var x=e[0]===k?e[1]:e[1]===k?e[0]:null;if(x)nb.push((nodes[x][2]||x)+(typeof e[2]==='number'?' (biaya '+e[2]+')':e[2]?' ('+e[2]+')':''));});
+    edges.forEach(function(e){var x=e[0]===k?e[1]:(!o.dir&&e[1]===k)?e[0]:null;if(x)nb.push((nodes[x][2]||x)+(typeof e[2]==='number'?' (biaya '+e[2]+')':e[2]?' ('+e[2]+')':''));});
     if(o.box){var bw=o.bw||64;g+='<rect x="'+(n[0]-bw/2)+'" y="'+(n[1]-17)+'" width="'+bw+'" height="34" rx="9" fill="'+(hl||'#EAF5FC')+'" stroke="'+C.mid+'" stroke-width="1.5"/>';}
     else g+='<circle cx="'+n[0]+'" cy="'+n[1]+'" r="'+r+'" fill="'+(hl||'#EAF5FC')+'" stroke="'+C.mid+'" stroke-width="2"/>';
     g+='<text x="'+n[0]+'" y="'+(n[1]+5)+'" text-anchor="middle" font-size="'+(o.fs||14)+'" font-weight="700" fill="'+C.navy+'">'+esc(lab)+'</text>';
     if(n[3])g+='<text x="'+n[0]+'" y="'+(n[1]+r+15)+'" text-anchor="middle" font-size="11.5" fill="'+C.mute+'">'+esc(n[3])+'</text>';
-    s+=G_('<b>'+esc(lab)+'</b>'+(n[3]?' ('+esc(n[3])+')':'')+'<br>Terhubung ke: '+esc(nb.join(', '))+(o.tip&&o.tip[k]?'<br><span class="tx">'+o.tip[k]+'</span>':''),g);
+    s+=G_('<b>'+esc(lab)+'</b>'+(n[3]?' ('+esc(n[3])+')':'')+'<br>'+(o.dir?'Bisa menuju: ':'Terhubung ke: ')+esc(nb.length?nb.join(', '):'(tidak ada)')+(o.tip&&o.tip[k]?'<br><span class="tx">'+o.tip[k]+'</span>':''),g);
   });
   return svg(w,h,s);
 }
@@ -599,10 +1061,11 @@ function flow(w,h,B,E){
   return svg(w,h,s);
 }
 /* grafik jejak SA: vals nilai current tiap waktu, segs [[label,warna]], xl label sumbu */
-function chart(vals,segs,xl,unit){
+function chart(vals,segs,xl,unit,bs){
   var w=560,h=210,x0=50,dx=(w-100)/(vals.length-1),mn=Math.min.apply(null,vals)-1,mx=Math.max.apply(null,vals)+1,s='';
   function Y(v){return 30+(mx-v)/(mx-mn)*100;}
   s+='<line x1="30" y1="150" x2="'+(w-20)+'" y2="150" stroke="'+C.line+'"/>';
+  if(bs!=null)s+='<line x1="30" y1="'+Y(bs)+'" x2="'+(w-20)+'" y2="'+Y(bs)+'" stroke="#8E6BBF" stroke-width="1.5" stroke-dasharray="5 5"/>';
   segs.forEach(function(g,i){var xa=x0+i*dx,xb=x0+(i+1)*dx;s+='<line x1="'+xa+'" y1="'+Y(vals[i])+'" x2="'+xb+'" y2="'+Y(vals[i+1])+'" stroke="'+g[1]+'" stroke-width="3"/>';
     s+='<text x="'+((xa+xb)/2)+'" y="170" text-anchor="middle" font-size="10.5" fill="'+g[1]+'">'+esc(g[0])+'</text>';});
   vals.forEach(function(v,i){var x=x0+i*dx;
@@ -618,15 +1081,71 @@ function pie(items,marks){
   function F(x){return x.toFixed(4).replace('.',',');}
   items.forEach(function(it,i){var f0=acc/tot,f1=(acc+it[1])/tot,a=P(f0,r),b=P(f1,r),m=P((f0+f1)/2,r*0.6),big=f1-f0>0.5?1:0;
     s+=G_('<b>'+it[0]+'</b><br>Fitness '+it[1]+' dari total '+tot+' = '+(it[1]/tot*100).toFixed(2).replace('.',',')+'%.<br>Rentang u: ['+F(f0)+' ; '+(f1===1?'1':F(f1))+').<br><span class="tx">Angka acak u yang jatuh di rentang ini memilih '+it[0]+'.</span>',
-      '<path d="M'+cx+','+cy+' L'+a[0]+','+a[1]+' A'+r+','+r+' 0 '+big+' 1 '+b[0]+','+b[1]+' z" fill="'+cols[i%4]+'" stroke="#fff" stroke-width="2"/><text x="'+m[0]+'" y="'+(m[1]-2)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+(i%4===3?'#fff':C.navy)+'">'+it[0]+'</text><text x="'+m[0]+'" y="'+(m[1]+13)+'" text-anchor="middle" font-size="11" fill="'+(i%4===3?'#fff':C.navy)+'">'+(it[1]/tot*100).toFixed(1).replace('.',',')+'%</text>');
+      '<path d="M'+cx+','+cy+' L'+a[0]+','+a[1]+' A'+r+','+r+' 0 '+big+' 1 '+b[0]+','+b[1]+' z" fill="'+cols[i%4]+'" stroke="#fff" stroke-width="2"/>'+(f1-f0<0.1?'':'<text x="'+m[0]+'" y="'+(m[1]-2)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+(i%4===3?'#fff':C.navy)+'">'+it[0]+'</text><text x="'+m[0]+'" y="'+(m[1]+13)+'" text-anchor="middle" font-size="11" fill="'+(i%4===3?'#fff':C.navy)+'">'+(it[1]/tot*100).toFixed(1).replace('.',',')+'%</text>'));
     acc+=it[1];});
   if(!marks)s+='<text x="'+cx+'" y="'+(cy-r-8)+'" text-anchor="middle" font-size="11" fill="'+C.mute+'">u = 0, searah jarum jam</text>';
   (marks||[]).forEach(function(mk){var a=P(mk[0],r-30),b=P(mk[0],r+16),t=P(mk[0],r+30);
     s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+C.bad+'" stroke-width="3"/><text x="'+t[0]+'" y="'+(t[1]+4)+'" text-anchor="'+(t[0]>cx?'start':'end')+'" font-size="12" font-weight="700" fill="'+C.bad+'">'+esc(mk[1])+'</text>';});
   return svg(300+(marks?90:0),235,'<g transform="translate('+(marks?45:0)+',0)">'+s+'</g>');
 }
+function succTab(q0){
+  var n=q0.length,h='<table><tr><th>Perubahan</th><th>State</th><th>Konflik</th><th>h</th></tr>',best=null,c,r,q,k;
+  for(c=0;c<n;c++)for(r=1;r<=n;r++){if(r===q0[c])continue;q=q0.slice();q[c]=r;k=conflicts(q);if(best===null||k<best)best=k;}
+  for(c=0;c<n;c++)for(r=1;r<=n;r++){if(r===q0[c])continue;q=q0.slice();q[c]=r;k=conflicts(q);var pr=pairs(q);
+    h+='<tr data-tip="'+att('<b>('+q.join(',')+')</b><br>'+(pr.length?'Pasangan yang menyerang: '+pr.join('; ')+'.':'Tidak ada yang menyerang.'))+'"'+(k===best?' style="background:#FBFAE0;font-weight:700"':'')+'><td>Q'+(c+1)+': '+q0[c]+' → '+r+'</td><td>('+q.join(',')+')</td><td>'+k+'</td><td>'+(k?'−'+k:'0')+'</td></tr>';}
+  return h+'</table><p class="note">Baris kuning adalah successor terbaik. Arahkan kursor ke satu baris untuk melihat pasangan yang menyerang.</p>';
+}
+function cgraph(dx,dy,dz,tx,ty,tz){
+  return graph(420,150,{X:[60,40,'X',dx],Y:[210,40,'Y',dy],Z:[360,40,'Z',dz]},[['X','Y','X < Y'],['Y','Z','Y < Z']],{tip:{X:tx,Y:ty,Z:tz}}).replace('</svg>','<path d="M60,78 Q210,160 360,78" fill="none" stroke="'+C.line+'" stroke-width="2"/><rect x="180" y="108" width="60" height="22" rx="6" fill="#fff" stroke="'+C.pale+'"/><text x="210" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="'+C.navy+'">X ≠ Z</text></svg>');
+}
+function wgrid(m,T){return grid([['(1,3)','(2,3)','(3,3)'],['(1,2)','(2,2)','(3,2)'],['(1,1)','(2,1)','(3,1)']],{cw:104,ch:66,fs:17,hl:m.hl,sub:function(r,c){return m.sub[(c+1)+','+(3-r)]||'';},tip:function(r,c){var k=(c+1)+','+(3-r);return '<b>Kotak ('+k+')</b><br>'+(T[k]||'Belum ada percept yang menyentuh kotak ini, jadi statusnya belum diketahui (bukan berarti aman).');}});}
+function gaflow(a,b,x,o1,o2,m,r,k1,k2,kr){return flow(440,425,{P1:[110,38,a,'blue'],P2:[320,38,b,'blue'],X:[215,125,x,'purple'],O1:[110,215,o1,k1],O2:[320,215,o2,k2],M:[110,305,m,'purple'],R:[110,385,r,kr]},[['P1','X'],['P2','X'],['X','O1'],['X','O2'],['O1','M'],['M','R']]);}
+function chain(R,E){return flow(480,385,{R1:[240,35,R[0],'blue'],R2:[240,135,R[1],'yel'],R3:[110,245,R[2],'red'],R4:[370,245,R[3],'green'],R5:[240,350,R[4],'red']},[['R1','R2',E[0]],['R2','R3',E[1],'d'],['R2','R4',E[2]],['R3','R5',E[3],'d'],['R4','R5',E[4]]]);}
 var ROBOT={S:[40,120],A:[190,35],B:[190,205],C:[350,55],D:[350,190],G:[500,120]};
 var F={
+  f1g:function(){return graph(500,250,{S:[50,120,'S','h=4'],A:[250,40,'A','h=0'],B:[250,200,'B','h=3'],G:[450,120,'G','h=0']},[['S','A',3],['S','B',1],['B','A',1],['A','G',2],['B','G',6]],{dir:true,tip:{S:'g = 0, f = 4.',A:'Pertama masuk dengan g = 3 (f = 3). Setelah B di-pop, ketemu jalur g = 2 (f = 2), jadi A dibuka lagi.',B:'g = 1, f = 1 + 3 = 4.',G:'Pertama g = 5 lewat A versi lama, lalu diperbaiki jadi g = 4.'}});},
+  f1f:function(){return flow(500,355,{S:[250,32,'Pop 1: S|g 0, f 4','blue'],A1:[110,125,'Pop 2: A|g 3, f 3|lalu CLOSED','yel','<b>A versi pertama</b><br>Di-pop dengan g = 3 karena f-nya (3) paling kecil. Ternyata ini belum jalur terbaik ke A.'],B:[390,125,'Pop 3: B|g 1, f 4','blue'],A2:[250,230,'Pop 4: A (reopen)|g 2, f 2','green','<b>Reopen</b><br>g baru (2) lebih kecil dari g lama (3), jadi A dikeluarkan dari CLOSED dan diproses ulang.'],G:[250,322,'Pop 5: G|g 4, f 4, goal','green']},[['S','A1','biaya 3'],['S','B','biaya 1','g'],['B','A2','biaya 1, g membaik','g'],['A1','A2','dibuka lagi','d'],['A2','G','biaya 2','g']]);},
+  f2b:function(){return board([1,3,3,5,2]);},
+  f2n:function(){return board([1,1,3,5,2]);},
+  f2s:function(){return board([1,3,5,2,4]);},
+  f2tab:function(){return succTab([1,3,3,5,2]);},
+  f3g:function(){return graph(520,200,{S:[60,100,'S : 7'],A:[190,40,'A : 7'],B:[190,165,'B : 6'],C:[320,40,'C : 9'],D:[450,40,'D : 10'],E:[385,150,'E : 8']},[['S','A'],['S','B'],['A','C'],['C','D'],['C','E'],['D','E']],{box:true,hl:{S:'#FBFAE0',D:'#DDF3E7'},tip:{S:'Titik awal. Tetangganya 7 dan 6, tidak ada yang lebih dari 7.',A:'Nilainya sama dengan S. Hanya bisa didatangi lewat sideways, dan dari sini C (9) kelihatan.',B:'Lebih rendah dari S, selalu ditolak.',C:'Dari sini D (10) lebih tinggi daripada E (8), jadi steepest memilih D.',D:'Nilai tertinggi di graf: maksimum global.',E:'Tetangganya C (9) dan D (10). Dari sini hill climbing naik ke D.'}});},
+  f3f:function(){return flow(400,250,{S:[90,32,'S : 7|mulai','yel'],B:[90,125,'B : 6|ditolak','red'],A:[250,32,'A : 7|sideways','blue'],C:[250,125,'C : 9|naik, reset','green'],D:[250,215,'D : 10|maksimum global','green']},[['S','B','turun','d'],['S','A','sama'],['A','C','+2','g'],['C','D','+1','g']]);},
+  f4c:function(){return chart([12,16,11,14,9],[['naik, diterima',C.good,'Δ = +4, lebih baik, langsung diterima.'],['turun, diterima',C.bad,'Δ = −5, T = 4, P = 0,2865, u = 0,20 < P: diterima.'],['naik, diterima',C.good,'Δ = +3, lebih baik, langsung diterima.'],['turun, diterima',C.bad,'Δ = −5, T = 1, P = 0,006738, u = 0,005 < P: diterima.']],['Awal','Iterasi 1','Iterasi 2','Iterasi 3','Iterasi 4'],'V',16);},
+  f5pm:function(){return pie([['P1',13],['P2',17],['P3',12],['P4',16]],[[0.30,'u1 = 0,30'],[0.85,'u2 = 0,85']]);},
+  f5f:function(){return gaflow('P2 = 101 ¦ 100|F = 17 (elite)','P4 = 001 ¦ 011|F = 16','Crossover|setelah bit 3','O1 = 101011|k = 4, penalti 6|F = 16','O2 = 001100|k = 2|F = 11','Mutasi bit 4|0 → 1','101111|k = 5, penalti 12|F = 14','yel','blue','red');},
+  f6grid:function(){return wgrid({hl:{'3,1':'#DDF3E7','3,3':'#DDF3E7','2,2':'#FBFAE0'},sub:{'1,1':'no breeze','3,1':'no breeze','2,2':'BREEZE'}},{'1,1':'Dikunjungi, no breeze. Artinya (2,1) dan (1,2) bebas pit.','3,1':'Dikunjungi, no breeze. Artinya (2,1) dan (3,2) bebas pit.','2,2':'Dikunjungi, ada breeze. Minimal satu dari (1,2), (3,2), (2,1), (2,3) berisi pit.','1,2':'Bebas pit, karena bertetangga dengan (1,1) yang no breeze.','2,1':'Bebas pit, karena bertetangga dengan (1,1) dan (3,1) yang no breeze.','3,2':'Bebas pit, karena bertetangga dengan (3,1) yang no breeze.','2,3':'Satu-satunya kandidat yang tersisa dari breeze di (2,2). Pit pasti di sini.'});},
+  f6f:function(){return flow(590,260,{BZ:[295,32,'Breeze (2,2)|P(1,2) ∨ P(3,2) ∨ P(2,1) ∨ P(2,3)','yel'],N1:[110,135,'No breeze (1,1)|¬P(1,2), ¬P(2,1)','red'],N2:[480,135,'No breeze (3,1)|¬P(3,2), ¬P(2,1)','red'],R:[295,228,'P(2,3)|satu-satunya yang tersisa','green']},[['BZ','R','coret tiga kandidat'],['N1','R','','d'],['N2','R','','d']]);},
+  f6arch:function(){return arch(['Working memory|percept tiap kotak','Knowledge base|aturan breeze dan pit','Inference engine|eliminasi kandidat','Kesimpulan: P(2,3)|','Explanation|disjungsi + literal negatif']);},
+  f7f:function(){return chain(['R1(a): device ∧ hot|+ risk(a)','R2(a): risk ∧ auto|+ cooling(a)|− hot(a)','R3(a): hot|+ alarm(a)|TIDAK FIRE','R4(a): cooling|+ stabilized(a)','R5(a): alarm ∧ stabilized|+ cleared(a)|GAGAL'],['risk(a)','hapus hot(a)','cooling(a)','alarm(a) ✗','stabilized(a) ✓']);},
+  f8f:function(){return flow(620,360,{RD:[310,32,'ready(a)|OR: R1 atau R2','blue'],R1:[170,125,'R1: inspected ∧ power|gagal','red'],R2:[470,125,'R2: backup ∧ authorized|sukses','green'],IN:[95,225,'inspected(a) ✓|OR: R3 atau R4','green'],PW:[255,225,'power(a) ✗|bukan fakta','red'],BK:[410,225,'backup(a) ✓','green'],AU:[540,225,'authorized(a) ✓','green'],R3:[75,325,'R3: ready(a)|SIKLUS, dilewati','grey','<b>Siklus</b><br>R3 butuh ready(a), padahal ready(a) adalah goal yang sedang dibuktikan. Loop checking melewati cabang ini.'],R4:[305,325,'R4: sensor ✓ ∧ calibrated ✓|calibrated lewat R5: technician ✓','green']},[['RD','R1','coba pertama','d'],['RD','R2','backtrack','g'],['R1','IN'],['R1','PW','','d'],['R2','BK','','g'],['R2','AU','','g'],['IN','R3','','d'],['IN','R4']]);},
+  f9g:function(){return cgraph('{1,2,3}','{1,2,3}','{1,2,3}','Domain awal {1,2,3}. Setelah AC-3 tinggal {1}.','Domain awal {1,2,3}. Setelah AC-3 tinggal {2}.','Domain awal {1,2,3}. Setelah AC-3 tinggal {3}.');},
+  g1g:function(){return graph(560,255,{S:[50,120,'S','h=5'],A:[200,40,'A','h=4'],C:[360,40,'C','h=3'],B:[200,205,'B','h=1'],G:[510,120,'G','h=0']},[['S','A',2],['S','B',5],['A','C',2],['A','G',9,0.4],['B','G',2],['C','G',3]],{dir:true,tip:{S:'g = 0.',A:'g = 2. A*: f = 2 + 4 = 6.',B:'g = 5. A*: f = 5 + 1 = 6, seri dengan A.',C:'g = 4 (lewat A). A*: f = 4 + 3 = 7.',G:'Pertama ditemukan dengan g = 11 (lewat A langsung), lalu diperbaiki jadi 7.'}});},
+  g1p:function(){return graph(560,255,{S:[50,120,'S'],A:[200,40,'A'],C:[360,40,'C'],B:[200,205,'B'],G:[510,120,'G']},[['S','A',2,null,'#1E8A5A'],['S','B',5,null,'#E08A1E'],['A','C',2,null,'#1E8A5A'],['A','G',9,0.4],['B','G',2,null,'#E08A1E'],['C','G',3,null,'#1E8A5A']],{dir:true});},
+  g2f:function(){return flow(500,185,{S0:[250,32,'(1,1,1)|A=B dan B=C dilanggar, h = −2','blue'],F1:[88,140,'flip A: (2,1,1)|B=C dilanggar|h = −1','yel'],F2:[250,140,'flip B: (1,2,1)|tidak ada konflik|h = 0','green'],F3:[412,140,'flip C: (1,1,2)|A=B dilanggar|h = −1','yel']},[['S0','F1'],['S0','F2','','g'],['S0','F3']]);},
+  g3g:function(){return graph(560,220,{A:[60,110,'A : 4'],B:[175,110,'B : 6'],C:[290,45,'C : 7'],D:[405,45,'D : 8'],E:[290,175,'E : 10'],F:[405,175,'F : 9'],G:[510,175,'G : 11']},[['A','B'],['B','C'],['C','D'],['B','E'],['E','F'],['F','G']],{box:true,hl:{B:'#FBFAE0',E:'#FBE4E1',G:'#DDF3E7'},tip:{A:'Dari sini naik ke B, lalu ke E.',B:'Titik awal. Tetangga: 4, 7, 10. Steepest memilih yang terbesar, E.',C:'Dari sini naik ke D (8), bukan ke B (6).',D:'Tetangganya hanya C (7). Maksimum lokal bernilai 8.',E:'Lebih tinggi dari B (6) dan F (9): maksimum lokal bernilai 10.',F:'Lembah kecil antara E dan G. Dari sini G (11) lebih tinggi dari E (10), jadi naik ke G.',G:'Nilai tertinggi: maksimum global.'}});},
+  g4c:function(){return chart([20,18,18,19,17],[['cost turun, diterima',C.good,'Δ = +2, lebih baik, langsung diterima.'],['cost naik, ditolak','#E08A1E','Δ = −4, P = 0,1353, u = 0,4 ≥ P: ditolak, cost tetap 18.'],['cost naik, diterima',C.bad,'Δ = −1, P = 0,3679, u = 0,2 < P: diterima.'],['cost turun, diterima',C.good,'Δ = +2, lebih baik, langsung diterima.']],['Awal','Langkah 1','Langkah 2','Langkah 3','Langkah 4'],'Cost');},
+  g5f:function(){return flow(470,325,{P1:[120,32,'P1 = A B ¦ C D|F = 9','blue'],P2:[340,32,'P2 = D C ¦ A B|F = 4','blue'],X:[230,115,'Crossover|setelah posisi 2','purple'],O1:[120,205,'O1 = A B A B|A, B dobel; C, D hilang','red'],O2:[340,205,'O2 = D C C D|C, D dobel; A, B hilang','red'],R:[120,292,'Repair: A B C D|cost 11, F = 9','green']},[['P1','X'],['P2','X'],['X','O1'],['X','O2'],['O1','R','ganti duplikat']]);},
+  g6f:function(){return flow(560,230,{FA:[130,32,'fever(A) ∧ cough(A)','blue'],SA:[130,115,'R1: suspect(A)','green'],RA:[130,198,'R2: refer(A)','green'],FB:[410,32,'fever(B), cough(B) tidak ada','yel'],SB:[410,125,'suspect(B): UNKNOWN|bukan ¬suspect(B)','red']},[['FA','SA','','g'],['SA','RA','','g'],['FB','SB','R1 tidak cocok','d']]);},
+  g6arch:function(){return arch(['Working memory|fever, cough tiap kasus','Knowledge base|rule R1 dan R2','Inference engine|mencocokkan fakta dan rule','Kesimpulan|suspect, refer','Explanation|rule yang fire: R1, R2']);},
+  g7f:function(){return flow(480,285,{R1:[240,35,'R1: A ∧ B|+ C, − B','yel'],R2:[100,140,'R2: B|+ E|TIDAK FIRE','red'],R3:[370,135,'R3: C ∧ D|+ F','green'],R4:[100,250,'R4: E ∧ D|+ G|GAGAL','red'],R5:[370,245,'R5: F|+ H','green']},[['R1','R2','hapus B','d'],['R1','R3','C'],['R2','R4','E ✗','d'],['R3','R5','F']]);},
+  g8f:function(){return flow(560,250,{Z:[280,32,'Z|OR: R1 atau R2','blue'],R1:[150,120,'R1: P ∧ Q|dicoba dulu, sukses','green'],R2:[410,120,'R2: R ∧ Q|alternatif','grey'],P:[70,215,'P lewat R3|A ✓','green'],Q:[280,215,'Q lewat R4|B ✓, dipakai bersama','yel','<b>Q dipakai dua rule</b><br>R1 dan R2 sama-sama butuh Q. Dengan memoization, Q cukup dibuktikan sekali.'],R:[490,215,'R lewat R5|C ✓','grey']},[['Z','R1','','g'],['Z','R2','cadangan'],['R1','P','','g'],['R1','Q','','g'],['R2','Q'],['R2','R']]);},
+  g9t:function(){return tree({t:'max',name:'root',k:[{t:'min',name:'A',k:[{t:'max',k:L([8,4])},{t:'max',k:L([6,1])}]},{t:'min',name:'B',k:[{t:'max',k:L([5,2])},{t:'max',k:L([9,3])}]}]});},
+  g9a:function(){return tree({t:'max',name:'root',val:6,k:[{t:'min',name:'A',val:6,k:[{t:'max',val:8,k:L([8,4])},{t:'max',val:6,k:L([6,1])}]},{t:'min',name:'B',val:'≤ 5',k:[{t:'max',val:5,k:L([5,2])},{t:'max',cut:true,k:L([9,3])}]}]});},
+  h1g:function(){return graph(580,255,{S:[50,120,'S','h=2'],A:[220,40,'A','h=0'],B:[220,205,'B','h=8'],C:[390,205,'C','h=1'],G:[530,110,'G','h=0']},[['S','A',2],['S','B',1],['A','G',6],['B','C',1],['C','G',2],['B','G',10,0.42]],{dir:true,tip:{S:'g = 0, f = 2.',A:'g = 2, f = 2 + 0 = 2. Di-pop kedua.',B:'g = 1, tetapi f = 1 + 8 = 9. Heuristiknya melebih-lebihkan: sisa biaya sebenarnya hanya 3.',C:'Tidak pernah dibangkitkan A* karena B tidak sempat diekspansi.',G:'Masuk OPEN dengan g = 8, f = 8, lalu di-pop sebelum B (f = 9).'}});},
+  h1p:function(){return graph(580,255,{S:[50,120,'S'],A:[220,40,'A'],B:[220,205,'B'],C:[390,205,'C'],G:[530,110,'G']},[['S','A',2,null,'#E08A1E'],['S','B',1,null,'#1E8A5A'],['A','G',6,null,'#E08A1E'],['B','C',1,null,'#1E8A5A'],['C','G',2,null,'#1E8A5A'],['B','G',10,0.42]],{dir:true});},
+  h2b:function(){return board([2,2,4,1]);},
+  h2s:function(){return board([2,4,1,3]);},
+  h3g:function(){return graph(550,205,{A:[50,100,'A : 5'],B:[155,100,'B : 7'],C:[265,100,'C : 7'],D:[380,40,'D : 9'],E:[380,165,'E : 6'],F:[500,165,'F : 10']},[['A','B'],['B','C'],['C','D'],['D','E'],['E','F'],['C','E']],{box:true,hl:{B:'#FBFAE0',D:'#FBE4E1',F:'#DDF3E7'},tip:{A:'Lebih rendah dari B.',B:'Titik awal. Tetangganya 5 dan 7: tidak ada yang lebih dari 7.',C:'Nilainya sama dengan B. Dari sini D (9) kelihatan.',D:'Tetangganya C (7) dan E (6): maksimum lokal bernilai 9.',E:'Lembah di antara D dan F. Tetangganya 7, 9, dan 10.',F:'Nilai tertinggi: maksimum global. Hanya terhubung ke E.'}});},
+  h3f:function(){return flow(520,250,{B:[80,32,'B : 7|mulai','yel'],C:[230,32,'C : 7|sideways','blue'],D:[230,128,'D : 9|berhenti, lokal','yel'],E:[430,128,'E : 6|lembah','red'],F:[430,218,'F : 10|global, tak tercapai','grey']},[['B','C','sama'],['C','D','+2','g'],['D','E','turun 3','d'],['E','F','','d']]);},
+  h4c:function(){return chart([5,7,7,8,8],[['naik, diterima',C.good,'Δ = +2, lebih baik, langsung diterima.'],['turun, ditolak','#E08A1E','Δ = −3, P = 0,2231, u = 0,3 ≥ P: ditolak, nilai tetap 7.'],['naik, diterima',C.good,'Δ = +1, lebih baik, langsung diterima.'],['turun, ditolak','#E08A1E','Δ = −2, P = 0,0183, u = 0,1 ≥ P: ditolak, nilai tetap 8.']],['Awal','t = 1','t = 2','t = 3','t = 4'],'V');},
+  h5pm:function(){return pie([['A',1],['B',2],['C',5],['D',17]],[[0.05,'u = 0,05'],[0.78,'u = 0,78']]);},
+  h5f:function(){return gaflow('B = 10 ¦ 00|F = 2','D = 11 ¦ 11|F = 17','Crossover|setelah bit 2','O1 = 1011|3 bit 1, F = 10','O2 = 1100|2 bit 1, F = 5','Mutasi bit 1|1 → 0','0011|2 bit 1, F = 5','yel','blue','red');},
+  h6f:function(){return flow(500,240,{RN:[110,32,'rain|fakta','blue'],WG:[110,122,'wet_ground|diturunkan R1','yel'],SL:[110,208,'slippery|diturunkan R2','yel'],NW:[380,122,'¬wet_ground|sensor terbaru','red']},[['RN','WG','R1'],['WG','SL','R2'],['NW','WG','kontradiksi','d']]);},
+  h7f:function(){return chain(['R1: high_temp ∧ fan_off|+ alarm','R2: alarm ∧ power_on|+ fan_on|− fan_off','R3: fan_off|+ technician_call|TIDAK FIRE','R4: fan_on|+ cooled','R5: cooled ∧ technician_call|+ resolved|GAGAL'],['alarm','hapus fan_off','fan_on','technician_call ✗','cooled ✓']);},
+  h8a:function(){return flow(640,265,{RD:[300,32,'ready(A)|OR: R1 atau R2','blue'],R1:[170,125,'R1: sensor_ok ∧ network_ok|gagal','red'],R2:[470,125,'R2: fallback ∧ approved|gagal','red'],SO:[95,228,'sensor_ok(A) ✓|R3: calibrated(A) ✓','green'],NW:[270,228,'network_ok(A)|request: tidak ✗','red'],FB:[425,228,'fallback(A)|tidak tahu ✗','red'],AP:[560,228,'approved(A) ✓|tidak diperiksa','grey','<b>approved(A)</b><br>Memang fakta, tetapi premis pertama R2 sudah gagal, jadi premis ini tidak sempat diperiksa.']},[['RD','R1','coba pertama','d'],['RD','R2','backtrack','d'],['R1','SO'],['R1','NW','','d'],['R2','FB','','d'],['R2','AP']]);},
+  h8b:function(){return flow(620,265,{RD:[300,32,'ready(B)|OR: R1 atau R2','blue'],R1:[160,125,'R1: sensor_ok ∧ network_ok|gagal','red'],R2:[460,125,'R2: fallback ∧ approved|sukses','green'],SO:[160,228,'sensor_ok(B)|R3: calibrated(B) tidak tahu ✗','red'],FB:[410,228,'fallback(B) ✓','green'],AP:[540,228,'approved(B) ✓','green']},[['RD','R1','coba pertama','d'],['RD','R2','backtrack','g'],['R1','SO','','d'],['R2','FB','','g'],['R2','AP','','g']]);},
+  h9g:function(){return cgraph('{1,2}','{1,2,3}','{2,3}','Domain awal {1,2}. Setelah propagasi tinggal {1}.','Domain awal {1,2,3}. Setelah propagasi tinggal {2}.','Domain awal {2,3}. Setelah propagasi tinggal {3}.');},
   d1p:function(){return graph(540,240,ROBOT,[['S','A',2],['S','B',4,null,'#1E8A5A'],['A','C',3],['B','D',1,null,'#1E8A5A'],['C','G',6],['D','G',3,null,'#1E8A5A'],['A','D',5,0.3],['B','C',4,0.3]],{hl:{S:'#DDF3E7',B:'#DDF3E7',D:'#DDF3E7',G:'#DDF3E7'}});},
   t4u:function(){return F.d1p();},
   t4b:function(){return graph(540,240,ROBOT,[['S','A',2,null,'#E08A1E'],['S','B',4],['A','C',3,null,'#E08A1E'],['B','D',1],['C','G',6,null,'#E08A1E'],['D','G',3],['A','D',5,0.3],['B','C',4,0.3]],{hl:{S:'#FCEBD3',A:'#FCEBD3',C:'#FCEBD3',G:'#FCEBD3'}});},
@@ -685,7 +1204,7 @@ var KEY='latsol-if3070-done',done={};
 try{done=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}}
 var soals=[].slice.call(document.querySelectorAll('.soal'));
-function label(id){var n=id.slice(1),p=id[0]==='d'?'D':id[0]==='e'?'E':'T';return (id==='d9'||id==='e9')?p+' bonus':p+n;}
+function label(id){var n=id.slice(1),p=id[0].toUpperCase();return (p!=='T'&&n==='9')?p+' bonus':p+n;}
 function refresh(){
   var n=0;soals.forEach(function(s){var d=!!done[s.id];if(d)n++;s.classList.toggle('done',d);var a=document.querySelector('.jump a[href="#'+s.id+'"]');if(a)a.classList.toggle('done',d);});
   document.getElementById('prog').textContent=n+' dari '+soals.length+' soal selesai';
@@ -730,6 +1249,7 @@ refresh();
   const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
   /* alasan di balik tiap jawaban kunci */
   const WHY = {"d1": ["Ikuti cara UCS: S ke B = 4, lalu B ke D cuma 1, jadi D tercapai dengan biaya 5. Lewat A, D baru tercapai dengan 2 + 5 = 7. Dari D ke G tambah 3.", "Steepest-ascent melihat SEMUA tetangga lalu mengambil yang nilainya paling tinggi: 9 > 8 > 7 > 5."], "d2": ["h dibuat negatif supaya 'makin besar makin baik'. Nol konflik (h = 0) adalah nilai tertinggi yang mungkin.", "Tiap kolom punya 4 baris dan satu sudah ditempati ratunya, jadi sisa 3 pilihan pindah. Ada 4 kolom.", "Dari 12 successor hanya ini yang konfliknya 1; sisanya 2 sampai 4. Karena tidak ada seri, aturan tie-break tidak terpakai.", "Cek cepat: semua barisnya berbeda (2, 4, 1, 3) dan tidak ada pasangan dengan selisih baris = selisih kolom."], "d3": ["Hill climbing biasa hanya menerima nilai yang LEBIH BESAR. Nilai yang sama (5 = 5) tidak dihitung naik.", "E (7) dan F (9) baru terjangkau setelah berani melangkah datar ke D.", "Stochastic hill climbing memilih tetangga secara acak tetapi tetap hanya menerima yang naik. D dan A dua-duanya tidak naik."], "d4": ["Current hanya berubah kalau proposal diterima. Proposal iterasi 5 ditolak, jadi nilainya tetap 12.", "Ini satu-satunya langkah turun yang diterima. Iterasi 3 dan 5 juga turun, tetapi ditolak karena u ≥ P."], "d5": ["Ini penyebut untuk semua probabilitas roulette.", "Rentang P2 dari 9/38 = 0,2368 sampai 18/38 = 0,4737. Angka 0,28 ada di dalamnya.", "Rentang P4 dari 22/38 = 0,5789 sampai 1. Angka 0,91 ada di dalamnya.", "Hitung dari kromosom anak, bukan dari induknya: 01110 punya tiga bit 1, dan 3² = 9.", "11101 punya empat bit 1, dan 4² = 16.", "Satu bit 0 menjadi 1, jumlah bit 1 naik dari 3 ke 4. Fitness melonjak dari 9 ke 16 karena dikuadratkan.", "Elitism menyalin individu terbaik apa adanya ke generasi berikut, tanpa crossover dan mutasi, supaya solusi terbaik tidak hilang."], "d6": ["Breeze di (2,1) menjamin minimal satu dari tiga tetangganya berisi pit. Dua di antaranya sudah dipastikan bersih, jadi tinggal satu kemungkinan.", "Tanpa Breeze(2,1) tidak ada lagi fakta yang mengharuskan adanya pit. Kita hanya tidak tahu; itu bukan berarti tahu bahwa (3,1) aman."], "d7": ["Conflict set berisi semua rule yang SEMUA premisnya ada di working memory dan belum pernah fire. R2 belum masuk karena fakta risiko belum ada.", "Aturan soal: premis terbanyak menang. R1 punya 2 premis, R3 dan R6 hanya 1.", "Di putaran 3 sampai 5 semua kandidat punya 1 premis, jadi yang dipilih nomor terkecil.", "R5 butuh dua fakta sekaligus. Fakta pemeriksaan hanya bisa dibuat R3, dan R3 kehilangan premisnya (alarm_aktif) di putaran 2.", "Sekarang kedua premis R5 ada di working memory, dan R5 (2 premis) menang atas R6 dan R7 (1 premis)."], "d8": ["Z punya dua rule (cabang OR). Cukup satu rule yang semua premisnya terbukti.", "Hanya rule di cabang yang berhasil yang masuk bukti. R1, R3, R4 memang dicoba, tetapi cabangnya gagal.", "Backward chaining berhenti begitu goal terbukti, jadi alternatif OR lainnya tidak disentuh."], "d9": ["MAX di root memilih anak terbesar: A = 4 lawan B = 3.", "B adalah node MIN dan sudah punya anak bernilai 3, jadi nilai B pasti ≤ 3. Root sudah memegang 4 dari A, sehingga B tidak mungkin dipilih apa pun isi sisa cabangnya."], "e1": ["g = biaya yang sudah ditempuh dari S. h = taksiran sisa biaya ke G. f = taksiran total biaya kalau lewat node itu.", "Tiap langkah diambil node dengan f terkecil. B (7) menang atas A (8), lalu D (7) menang atas A (8) dan C (12).", "Saat G di-pop, g-nya 7. Karena heuristiknya admissible, biaya ini dijamin optimal."], "e2": ["Tiga perpindahan bersebelahan: A ke B, B ke C, C ke D.", "Tanda minus dipasang supaya hill climbing, yang selalu memaksimalkan, otomatis meminimalkan cost.", "Bandingkan (1,4) dengan (2,3): elemen pertamanya 1 < 2, jadi (1,4) lebih kecil secara leksikografis."], "e3": ["Tetangga terbaik, (2,3), nilainya 6, sama dengan current. Aturan ketat butuh nilai > 6.", "Dari (3,4) tetangganya hanya 2 dan 8, dua-duanya lebih kecil, jadi berhenti.", "Lebih mudah dihitung lewat komplemen: 1 dikurangi peluang gagal semuanya.", "Rata-rata butuh 4 kali mulai. Itu nilai harapan, bukan jaminan."], "e4": ["Proposal iterasi 4 ditolak, jadi cost tetap 13. Perhatikan: cost terbaik yang pernah dicapai (11) justru sudah ditinggalkan.", "Di soal minimasi, 'langkah buruk' berarti cost NAIK."], "e5": ["Diurutkan dari fitness terbesar. P4 paling bawah walaupun manfaatnya terbesar (16), karena kena penalti 8.", "Yang dijumlahkan adalah fitness setelah penalti, bukan manfaat mentahnya.", "Dari tiga peserta: 12 > 10 > 9. P3 (14) tidak ikut bertanding, jadi tidak bisa menang.", "Tiga sensor aktif, lebih satu dari yang diminta, jadi kena penalti 8 × 1.", "1 + 7 − 8 = 0, lalu max(1, 0) = 1. Batas bawah 1 menjaga fitness tetap positif supaya roulette masih bisa dipakai.", "Sekarang tepat dua sensor yang aktif, jadi tidak ada penalti."], "e6": ["Ketiga premis rule cocok dengan C = AI3070, P = Matdis, M = Daffa."], "e7": ["Eligible berarti semua premis cocok untuk binding yang sama, di sini x = A.", "Tiap anggota conflict set adalah pasangan rule dan binding. R5 muncul dua kali karena cocok untuk A dan untuk B.", "Premis terbanyak menang: R1(A) punya 2 premis, R5 hanya 1."], "e8": ["Semua premis R4 terbukti untuk x = C1.", "R4 gagal, tetapi operasional masih punya rule kedua (R5). Itulah arti cabang OR.", "Tidak ada rule yang berhasil. Sistem hanya boleh berkata 'tidak bisa dibuktikan'."], "e9": ["X < Y < Z dengan nilai 1 sampai 3 hanya punya satu susunan yang mungkin."], "t1": ["Goal-based hanya membedakan 'sampai' dan 'belum sampai'. Utility-based bisa menilai seberapa bagus suatu cara untuk sampai.", "Ciri level 1: solusinya dicari dengan search atas state yang sudah dirumuskan, tanpa basis pengetahuan dan tanpa belajar."], "t2": ["Nilai root sama dengan nilai anak yang terbaik bagi MAX.", "Q adalah node MIN dan sudah menemukan 2, jadi nilainya pasti ≤ 2 dan kalah dari P = 3. Daun berikutnya tidak bisa mengubah keputusan.", "Pemangkasan butuh α yang sudah tinggi. Di urutan ini α naik pelan-pelan (1, lalu 2), jadi tiap cabang masih 'mungkin lebih baik' dan harus diperiksa habis.", "P tidak bisa dipangkas karena dialah yang menetapkan α. Dari dua cabang lainnya paling banyak 2 daun masing-masing."], "t3": ["Degree = jumlah tetangga yang belum diisi. Variabel yang paling banyak mengikat diisi dulu supaya kegagalan cepat ketahuan.", "MRV tidak bisa membedakan (semuanya tersisa 2 nilai), jadi turun ke degree, lalu ke alfabet.", "Selama proses tidak pernah ada domain yang kosong, jadi tidak perlu mundur."], "t4": ["G baru dinyatakan goal saat diambil dari agenda, dan saat itu g-nya 8.", "BFS tidak melihat bobot sama sekali, hanya urutan masuk antrean.", "Agenda UCS menyimpan g terbaik untuk tiap node, jadi G diperbarui dari 11 menjadi 8."]};
+  $$('.key[data-why]').forEach(k => { k.setAttribute('data-tip', '<b>Kenapa?</b><br>' + k.getAttribute('data-why')); k.tabIndex = 0; });
   Object.keys(WHY).forEach(id => { const ks = $$('#' + id + ' .ans .key'); WHY[id].forEach((t, i) => { if (ks[i] && t) { ks[i].setAttribute('data-tip', '<b>Kenapa?</b><br>' + t); ks[i].tabIndex = 0; } }); });
   /* ---------- mesin popover ---------- */
   const tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip);
