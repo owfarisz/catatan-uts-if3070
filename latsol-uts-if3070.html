@@ -69,6 +69,19 @@ ul.tr,ul.tr ul{list-style:none;margin:0;padding-left:18px;border-left:2px solid 
 ul.tr{border-left:none;padding-left:0}
 ul.tr li{margin:3px 0;padding-left:6px}
 code{background:#EEF4FB;border-radius:4px;padding:0 4px;font-size:.9em}
+.gl{border-bottom:1.5px dotted var(--mid);cursor:help}
+.gl:hover,.gl:focus{background:var(--ytint);outline:none}
+.key[data-tip]{cursor:help;border-bottom:1.5px dotted #A9A62A}
+.key[data-tip]:hover{background:#F3F1A8}
+svg [data-tip],tr[data-tip]{cursor:help}
+svg g[data-tip]:hover{opacity:.72}
+tr[data-tip]:hover td{background:var(--stint)}
+svg g[data-tip]:focus{outline:none}
+.tip{position:absolute;z-index:200;max-width:330px;background:#fff;border:1.5px solid var(--navy);border-radius:10px;box-shadow:0 8px 24px rgba(38,63,119,.22);padding:9px 12px;font-size:.84rem;line-height:1.5;color:var(--ink);pointer-events:none;text-align:left}
+.tip.pinned{pointer-events:auto;border-color:#B9B52E;box-shadow:0 0 0 3px var(--yel),0 8px 24px rgba(38,63,119,.22)}
+.tip b:first-child{color:var(--navy)}
+.tip .tx{color:var(--mute);font-size:.8rem}
+[data-tip]{-webkit-tap-highlight-color:transparent}
 footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 @media(max-width:560px){body{font-size:15px}.soal{padding:14px 12px 8px}.prog{margin-left:0}}
 </style>
@@ -90,7 +103,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 </div></nav>
 
 <main><div class="wrap">
-<div class="how"><b>Cara pakai:</b> jawaban tiap subsoal disamarkan. Arahkan kursor ke kotaknya untuk mengintip, klik (atau ketuk di HP) supaya tetap terbuka, klik "tutup" untuk menyamarkan lagi. Centang "selesai" kalau satu soal sudah beres, progresnya tersimpan di browser ini.</div>
+<div class="how"><b>Cara pakai:</b> jawaban tiap subsoal disamarkan. Arahkan kursor ke kotaknya untuk mengintip, klik (atau ketuk di HP) supaya tetap terbuka, klik "tutup" untuk menyamarkan lagi. Centang "selesai" kalau satu soal sudah beres, progresnya tersimpan di browser ini.<br><b>Detail tambahan:</b> kata <span style="border-bottom:1.5px dotted #4076B4">bergaris titik-titik</span> memunculkan arti istilahnya, <span class="key" style="border-bottom:1.5px dotted #A9A62A">jawaban berlatar kuning</span> memunculkan alasan kenapa hasilnya begitu, dan tiap node, sel, atau kotak di gambar memunculkan hitungannya. Hover untuk melihat, klik untuk menahan, klik di luar untuk menutup.</div>
 
 <!-- ============================ PAKET D ============================ -->
 <section class="panel on" id="pd">
@@ -201,7 +214,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 
 <article class="soal" id="d7" data-t="RBS: forward chaining dengan ADD dan DELETE">
 <div class="ctx">
-<p>Forward chaining dengan working memory (WM) berupa himpunan fakta. Rule boleh ADD dan DELETE fakta, dan efeknya langsung berlaku. Resolusi konflik: pilih rule dengan jumlah premis paling banyak, kalau seri pilih nomor terkecil. Refractoriness: satu rule hanya boleh fire satu kali. Conflict set dievaluasi ulang setelah tiap fire. Jalankan sampai agenda kosong.</p>
+<p>Forward chaining dengan working memory (WM) berupa himpunan fakta. Rule boleh ADD dan DELETE fakta, dan efeknya langsung berlaku. Resolusi konflik: pilih rule dengan jumlah premis paling banyak, kalau seri pilih nomor terkecil. Refractoriness: satu rule hanya boleh fire satu kali. Conflict set dievaluasi ulang setelah tiap fire. Jalankan sampai tidak ada rule yang bisa fire.</p>
 <div class="tw"><table><tr><th>Rule</th><th>IF</th><th>THEN</th></tr><tr><td>R1</td><td>hujan AND stok_basah</td><td>ADD risiko</td></tr><tr><td>R2</td><td>risiko AND mode_auto</td><td>ADD kipas_nyala; DELETE alarm_aktif</td></tr><tr><td>R3</td><td>alarm_aktif</td><td>ADD pemeriksaan</td></tr><tr><td>R4</td><td>kipas_nyala</td><td>ADD stabil</td></tr><tr><td>R5</td><td>stabil AND pemeriksaan</td><td>ADD aman</td></tr><tr><td>R6</td><td>hujan</td><td>ADD log_cuaca</td></tr><tr><td>R7</td><td>risiko</td><td>ADD notifikasi</td></tr></table></div>
 <p>WM awal = {hujan, stok_basah, alarm_aktif, mode_auto}.</p>
 </div>
@@ -331,7 +344,7 @@ footer{color:var(--mute);font-size:.82rem;text-align:center;padding:0 16px 40px}
 <div class="q"><p class="qt"><b>b.</b> Hitung total fitness dan probabilitas roulette semua individu.</p>
 <div class="ans"><p>ΣF = 12 + 10 + 14 + 9 = <span class="key">45</span>.</p><div class="tw"><table><tr><th>Individu</th><th>F</th><th>Probabilitas</th></tr><tr><td>P1</td><td>12</td><td>12/45 = 26,67%</td></tr><tr><td>P2</td><td>10</td><td>22,22%</td></tr><tr><td>P3</td><td>14</td><td>31,11%</td></tr><tr><td>P4</td><td>9</td><td>20,00%</td></tr></table></div></div></div>
 <div class="q"><p class="qt"><b>c.</b> Lakukan tournament selection pada peserta P1, P2, P4 (ambil yang terbesar). Apakah ini sama dengan roulette?</p>
-<div class="ans"><p>Pemenangnya <span class="key">P1 (F = 12)</span>.</p><p><b>Tidak sama.</b> Tournament mengambil fitness tertinggi dari subset yang dipertandingkan (deterministik di dalam subset itu). Roulette memberi tiap individu peluang sebanding fitness terhadap seluruh populasi, jadi yang lemah pun masih bisa terpilih.</p></div></div>
+<div class="ans"><p>Pemenangnya <span class="key">P1 (F = 12)</span>.</p><p><b>Tidak sama.</b> Tournament mengambil fitness tertinggi dari subset yang dipertandingkan (hasilnya pasti di dalam subset itu). Roulette memberi tiap individu peluang sebanding fitness terhadap seluruh populasi, jadi yang lemah pun masih bisa terpilih.</p></div></div>
 <div class="q"><p class="qt"><b>d.</b> Silangkan P1 = 11|00 dengan P3 = 01|01 pada potongan setelah bit 2. Hitung fitness kedua offspring.</p>
 <div class="ans"><ul><li>O1 = 11 | 01 = <b>1101</b>: A, B, D aktif, manfaat 17, k = 3. F = max(1, 1 + 17 − 8) = <span class="key">10</span>.</li><li>O2 = 01 | 00 = <b>0100</b>: hanya B aktif, manfaat 7, k = 1. F = max(1, 1 + 7 − 8) = max(1, 0) = <span class="key">1</span>.</li></ul><p>Kedua anak <b>tidak valid</b> terhadap constraint "tepat dua", tetapi tetap punya fitness.</p></div></div>
 <div class="q"><p class="qt"><b>e.</b> Mutasikan bit ke-2 pada O1, hitung fitness barunya, dan kaitkan dengan elitism = 1.</p>
@@ -476,7 +489,9 @@ var C={navy:'#263F77',blue:'#315A96',mid:'#4076B4',sky:'#5FB6E6',pale:'#8FC5EA',
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 function svg(w,h,inner){return '<svg xmlns="'+NS+'" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">'+inner+'</svg>';}
 
-/* graf berbobot: nodes {id:[x,y,label?]}, edges [a,b,w,t] (t = posisi label 0..1) */
+function att(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function G_(tip,inner){return '<g tabindex="0" data-tip="'+att(tip)+'">'+inner+'</g>';}
+/* graf berbobot: nodes {id:[x,y,label?,sub?]}, edges [a,b,w,t] (t = posisi label 0..1) */
 function graph(w,h,nodes,edges,o){
   o=o||{};var s='';
   edges.forEach(function(e){
@@ -486,70 +501,89 @@ function graph(w,h,nodes,edges,o){
       s+='<rect x="'+(x-bw/2)+'" y="'+(y-11)+'" width="'+bw+'" height="22" rx="6" fill="#fff" stroke="'+C.pale+'"/><text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+C.navy+'">'+esc(L)+'</text>';}
   });
   Object.keys(nodes).forEach(function(k){
-    var n=nodes[k],lab=n[2]||k,r=o.r||19,hl=o.hl&&o.hl[k];
-    if(o.box){var bw=o.bw||64;s+='<rect x="'+(n[0]-bw/2)+'" y="'+(n[1]-17)+'" width="'+bw+'" height="34" rx="9" fill="'+(hl||'#EAF5FC')+'" stroke="'+C.mid+'" stroke-width="1.5"/>';}
-    else s+='<circle cx="'+n[0]+'" cy="'+n[1]+'" r="'+r+'" fill="'+(hl||'#EAF5FC')+'" stroke="'+C.mid+'" stroke-width="2"/>';
-    s+='<text x="'+n[0]+'" y="'+(n[1]+5)+'" text-anchor="middle" font-size="'+(o.fs||14)+'" font-weight="700" fill="'+C.navy+'">'+esc(lab)+'</text>';
-    if(n[3])s+='<text x="'+n[0]+'" y="'+(n[1]+r+15)+'" text-anchor="middle" font-size="11.5" fill="'+C.mute+'">'+esc(n[3])+'</text>';
+    var n=nodes[k],lab=n[2]||k,r=o.r||19,hl=o.hl&&o.hl[k],g='',nb=[];
+    edges.forEach(function(e){var x=e[0]===k?e[1]:e[1]===k?e[0]:null;if(x)nb.push((nodes[x][2]||x)+(typeof e[2]==='number'?' (biaya '+e[2]+')':e[2]?' ('+e[2]+')':''));});
+    if(o.box){var bw=o.bw||64;g+='<rect x="'+(n[0]-bw/2)+'" y="'+(n[1]-17)+'" width="'+bw+'" height="34" rx="9" fill="'+(hl||'#EAF5FC')+'" stroke="'+C.mid+'" stroke-width="1.5"/>';}
+    else g+='<circle cx="'+n[0]+'" cy="'+n[1]+'" r="'+r+'" fill="'+(hl||'#EAF5FC')+'" stroke="'+C.mid+'" stroke-width="2"/>';
+    g+='<text x="'+n[0]+'" y="'+(n[1]+5)+'" text-anchor="middle" font-size="'+(o.fs||14)+'" font-weight="700" fill="'+C.navy+'">'+esc(lab)+'</text>';
+    if(n[3])g+='<text x="'+n[0]+'" y="'+(n[1]+r+15)+'" text-anchor="middle" font-size="11.5" fill="'+C.mute+'">'+esc(n[3])+'</text>';
+    s+=G_('<b>'+esc(lab)+'</b>'+(n[3]?' ('+esc(n[3])+')':'')+'<br>Terhubung ke: '+esc(nb.join(', '))+(o.tip&&o.tip[k]?'<br><span class="tx">'+o.tip[k]+'</span>':''),g);
   });
   return svg(w,h,s);
 }
-/* grid nilai: rows[][]; o.hl {"r,c":warna}; o.path [[r,c],...]; o.sub fungsi label kecil */
+/* grid nilai: rows[][]; o.hl {"r,c":warna}; o.path [[r,c],...]; o.sub label kecil; o.tip(r,c) */
 function grid(rows,o){
-  o=o||{};var cw=o.cw||84,ch=o.ch||64,s='',R=rows.length,K=rows[0].length;
+  o=o||{};var cw=o.cw||84,ch=o.ch||64,s='',R=rows.length,K=rows[0].length,gmax=-Infinity;
+  rows.forEach(function(rw){rw.forEach(function(v){if(typeof v==='number'&&v>gmax)gmax=v;});});
   for(var r=0;r<R;r++)for(var c=0;c<K;c++){
-    var key=(r+1)+','+(c+1),x=c*cw+1,y=r*ch+1;
-    s+='<rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" fill="'+((o.hl&&o.hl[key])||((r+c)%2?'#F3F8FD':'#fff'))+'" stroke="'+C.line+'"/>';
-    s+='<text x="'+(x+6)+'" y="'+(y+14)+'" font-size="10.5" fill="'+C.mute+'">'+(o.sub?o.sub(r,c):key)+'</text>';
-    s+='<text x="'+(x+cw/2)+'" y="'+(y+ch/2+11)+'" text-anchor="middle" font-size="'+(o.fs||22)+'" font-weight="700" fill="'+C.navy+'">'+esc(rows[r][c])+'</text>';
+    var key=(r+1)+','+(c+1),x=c*cw+1,y=r*ch+1,v=rows[r][c],tp;
+    if(o.tip)tp=o.tip(r,c);
+    else{var nb=[],best=-Infinity,bk='';[['atas',-1,0],['bawah',1,0],['kiri',0,-1],['kanan',0,1]].forEach(function(d){var rr=r+d[1],cc=c+d[2];if(rr<0||cc<0||rr>=R||cc>=K)return;var w=rows[rr][cc];nb.push(d[0]+' ('+(rr+1)+','+(cc+1)+') = '+w);if(w>best){best=w;bk='('+(rr+1)+','+(cc+1)+')';}});
+      tp='<b>Sel ('+key+'), nilai '+v+'</b><br>Tetangga: '+nb.join('; ')+'.<br><span class="tx">'+(best>v?'Kalau hill climbing ada di sini, ia naik ke '+bk+' = '+best+'.':best===v?'Tetangga terbaik hanya seri ('+best+'). Hill climbing ketat berhenti di sini; dengan sideways ia boleh pindah ke '+bk+'.':(v===gmax?'Semua tetangga lebih rendah dan ini nilai terbesar di grid: maksimum global.':'Semua tetangga lebih rendah: maksimum lokal. Hill climbing yang sampai di sini akan berhenti walaupun ada sel bernilai '+gmax+'.'))+'</span>';}
+    var g='<rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" fill="'+((o.hl&&o.hl[key])||((r+c)%2?'#F3F8FD':'#fff'))+'" stroke="'+C.line+'"/>';
+    g+='<text x="'+(x+6)+'" y="'+(y+14)+'" font-size="10.5" fill="'+C.mute+'">'+(o.sub?o.sub(r,c):key)+'</text>';
+    g+='<text x="'+(x+cw/2)+'" y="'+(y+ch/2+11)+'" text-anchor="middle" font-size="'+(o.fs||22)+'" font-weight="700" fill="'+C.navy+'">'+esc(v)+'</text>';
+    s+=G_(tp,g);
   }
   if(o.path){var p=o.path.map(function(q){return [(q[1]-0.5)*cw+27,(q[0]-0.5)*ch+21];});
-    s+='<polyline points="'+p.map(function(q){return q.join(',');}).join(' ')+'" fill="none" stroke="'+C.good+'" stroke-width="4" stroke-linejoin="round" opacity=".8"/>';
-    p.forEach(function(q,i){s+='<circle cx="'+q[0]+'" cy="'+q[1]+'" r="10" fill="'+(i?C.good:C.navy)+'"/><text x="'+q[0]+'" y="'+(q[1]+4)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">'+i+'</text>';});}
+    s+='<polyline points="'+p.map(function(q){return q.join(',');}).join(' ')+'" fill="none" stroke="'+C.good+'" stroke-width="4" stroke-linejoin="round" opacity=".8" pointer-events="none"/>';
+    p.forEach(function(q,i){s+='<g pointer-events="none"><circle cx="'+q[0]+'" cy="'+q[1]+'" r="10" fill="'+(i?C.good:C.navy)+'"/><text x="'+q[0]+'" y="'+(q[1]+4)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">'+i+'</text></g>';});}
   return svg(K*cw+2,R*ch+2,s);
 }
-function conflicts(q){var n=0;for(var i=0;i<q.length;i++)for(var j=i+1;j<q.length;j++)if(q[i]===q[j]||Math.abs(q[i]-q[j])===j-i)n++;return n;}
+function conflicts(q){return pairs(q).length;}
+function pairs(q){var a=[];for(var i=0;i<q.length;i++)for(var j=i+1;j<q.length;j++){if(q[i]===q[j])a.push('Q'+(i+1)+' dan Q'+(j+1)+' (satu baris)');else if(Math.abs(q[i]-q[j])===j-i)a.push('Q'+(i+1)+' dan Q'+(j+1)+' (diagonal)');}return a;}
 function board(q){
-  var z=58,s='',n=q.length;
+  var z=58,s='',n=q.length,k0=conflicts(q);
   for(var r=1;r<=n;r++){s+='<text x="14" y="'+((r-0.5)*z+6)+'" text-anchor="middle" font-size="13" fill="'+C.mute+'">'+r+'</text>';
-    for(var c=1;c<=n;c++){var x=28+(c-1)*z,y=(r-1)*z+1;
-      s+='<rect x="'+x+'" y="'+y+'" width="'+z+'" height="'+z+'" fill="'+((r+c)%2?'#DDE8F3':'#fff')+'" stroke="'+C.line+'"/>';
-      if(q[c-1]===r)s+='<text x="'+(x+z/2)+'" y="'+(y+z/2+12)+'" text-anchor="middle" font-size="34" fill="'+C.bad+'">♛</text>';}}
-  for(var k=1;k<=n;k++)s+='<text x="'+(28+(k-0.5)*z)+'" y="'+(n*z+18)+'" text-anchor="middle" font-size="13" fill="'+C.mute+'">Q'+k+'</text>';
+    for(var c=1;c<=n;c++){var x=28+(c-1)*z,y=(r-1)*z+1,g,tp;
+      g='<rect x="'+x+'" y="'+y+'" width="'+z+'" height="'+z+'" fill="'+((r+c)%2?'#DDE8F3':'#fff')+'" stroke="'+C.line+'"/>';
+      if(q[c-1]===r){g+='<text x="'+(x+z/2)+'" y="'+(y+z/2+12)+'" text-anchor="middle" font-size="34" fill="'+C.bad+'">♛</text>';
+        var mine=pairs(q).filter(function(p){return p.indexOf('Q'+c+' ')>=0;});
+        tp='<b>Q'+c+' di baris '+r+'</b><br>'+(mine.length?'Terlibat konflik: '+mine.join('; ')+'.':'Tidak menyerang siapa pun.');}
+      else{var q2=q.slice();q2[c-1]=r;var pr=pairs(q2),k=pr.length;
+        tp='<b>Kalau Q'+c+' pindah ke baris '+r+'</b><br>State jadi ('+q2.join(',')+'), konflik '+k+' pasang, h = '+(k?'−'+k:'0')+'.'+(k?'<br><span class="tx">'+pr.join('; ')+'</span>':'')+'<br><span class="tx">'+(k<k0?'Lebih baik dari sekarang (h = −'+k0+').':k===k0?'Sama dengan sekarang.':'Lebih buruk dari sekarang (h = −'+k0+').')+'</span>';}
+      s+=G_(tp,g);}}
+  for(var kk=1;kk<=n;kk++)s+='<text x="'+(28+(kk-0.5)*z)+'" y="'+(n*z+18)+'" text-anchor="middle" font-size="13" fill="'+C.mute+'">Q'+kk+'</text>';
   return svg(28+n*z+2,n*z+26,s);
 }
 /* pohon game: node {t:'max'|'min', name, val, k:[...]} ; daun {n:angka, cut:true} */
+function mm(n){return n.k?(n.t==='max'?Math.max:Math.min).apply(null,n.k.map(mm)):n.n;}
 function tree(spec,o){
   o=o||{};var leaves=[],step=o.step||56,dy=o.dy||78,pad=34,els='',lines='';
   (function lay(n,d){n.d=d;if(n.k){n.k.forEach(function(c){lay(c,d+1);});n.x=(n.k[0].x+n.k[n.k.length-1].x)/2;}else{n.x=pad+leaves.length*step;leaves.push(n);}})(spec,0);
   var maxd=0;leaves.forEach(function(l){if(l.d>maxd)maxd=l.d;});
+  var CUT='Tidak pernah dikunjungi alpha-beta. Node MIN di atasnya sudah pasti bernilai lebih kecil atau sama dengan α milik MAX, jadi cabang itu tidak akan dipilih apa pun isinya.';
   (function draw(n,cut){
-    var y=30+n.d*dy,c=cut||n.cut;
+    var y=30+n.d*dy,c=cut||n.cut,g='',tp;
     if(n.k)n.k.forEach(function(ch){var cc=c||ch.cut;lines+='<line x1="'+n.x+'" y1="'+(y+(n.t==='min'?4:14))+'" x2="'+ch.x+'" y2="'+(30+ch.d*dy-(ch.k?16:14))+'" stroke="'+(cc?C.bad:C.line)+'" stroke-width="2"'+(cc?' stroke-dasharray="5 5"':'')+'/>';draw(ch,c);});
     if(n.k){var up=n.t==='max',pts=up?[[n.x,y-18],[n.x-19,y+14],[n.x+19,y+14]]:[[n.x-19,y-16],[n.x+19,y-16],[n.x,y+16]];
-      els+='<polygon points="'+pts.map(function(p){return p.join(',');}).join(' ')+'" fill="'+(c?'#F4F4F4':(up?'#EAF5FC':'#FBFAE0'))+'" stroke="'+(c?'#B8B8B8':(up?C.mid:'#B9B63A'))+'" stroke-width="2"/>';
-      if(n.name)els+='<text x="'+n.x+'" y="'+(up?y+9:y-2)+'" text-anchor="middle" font-size="11.5" font-weight="700" fill="'+(c?'#999':C.navy)+'">'+esc(n.name)+'</text>';
-      if(n.val!=null)els+='<text x="'+(n.x+25)+'" y="'+(y+4)+'" font-size="13" font-weight="700" fill="'+(c?'#999':C.good)+'">'+esc(n.val)+'</text>';
+      g+='<polygon points="'+pts.map(function(p){return p.join(',');}).join(' ')+'" fill="'+(c?'#F4F4F4':(up?'#EAF5FC':'#FBFAE0'))+'" stroke="'+(c?'#B8B8B8':(up?C.mid:'#B9B63A'))+'" stroke-width="2"/>';
+      if(n.name)g+='<text x="'+n.x+'" y="'+(up?y+9:y-2)+'" text-anchor="middle" font-size="11.5" font-weight="700" fill="'+(c?'#999':C.navy)+'">'+esc(n.name)+'</text>';
+      if(n.val!=null)g+='<text x="'+(n.x+25)+'" y="'+(y+4)+'" font-size="13" font-weight="700" fill="'+(c?'#999':C.good)+'">'+esc(n.val)+'</text>';
+      var kv=n.k.map(mm),v=mm(n);
+      tp='<b>Node '+(up?'MAX':'MIN')+(n.name?' '+esc(n.name):'')+'</b><br>'+(up?'MAX mengambil yang terbesar':'MIN mengambil yang terkecil')+' dari anak-anaknya: '+(up?'max':'min')+'('+kv.join(', ')+') = <b>'+v+'</b>.'+(c?'<br><span class="tx">'+CUT+'</span>':typeof n.val==='string'?'<br><span class="tx">Di alpha-beta node ini hanya diketahui batasnya ('+esc(n.val)+') karena sisa anaknya dipangkas. Itu sudah cukup untuk memutuskan.</span>':'');
     }else{
-      els+='<rect x="'+(n.x-15)+'" y="'+(y-14)+'" width="30" height="28" rx="5" fill="'+(c?'#F4F4F4':'#fff')+'" stroke="'+(c?C.bad:C.mid)+'" stroke-width="1.6"'+(c?' stroke-dasharray="4 3"':'')+'/><text x="'+n.x+'" y="'+(y+5)+'" text-anchor="middle" font-size="14" font-weight="700" fill="'+(c?'#999':C.navy)+'"'+(c?' text-decoration="line-through"':'')+'>'+n.n+'</text>';
+      g+='<rect x="'+(n.x-15)+'" y="'+(y-14)+'" width="30" height="28" rx="5" fill="'+(c?'#F4F4F4':'#fff')+'" stroke="'+(c?C.bad:C.mid)+'" stroke-width="1.6"'+(c?' stroke-dasharray="4 3"':'')+'/><text x="'+n.x+'" y="'+(y+5)+'" text-anchor="middle" font-size="14" font-weight="700" fill="'+(c?'#999':C.navy)+'"'+(c?' text-decoration="line-through"':'')+'>'+n.n+'</text>';
+      tp='<b>Daun bernilai '+n.n+'</b><br>Nilai utilitas state akhir dari sudut pandang MAX.'+(c?'<br><span class="tx">'+CUT+'</span>':'');
     }
+    els+=G_(tp,g);
   })(spec,false);
   return svg(pad*2+(leaves.length-1)*step+30,30+maxd*dy+26,lines+els);
 }
 function L(a,cut){return a.map(function(n){return {n:n,cut:cut&&cut.indexOf(n)>=0};});}
+var ARCH={wm:'Fakta khusus kasus yang sedang ditangani (case-specific facts). Isinya berubah tiap sesi dan bertambah selama inferensi.',kb:'Pengetahuan domain yang berlaku umum untuk semua kasus (DSKB). Diisi dan diperbarui lewat knowledge acquisition bersama pakar.',ie:'Mesin penalaran: mencocokkan fakta di working memory dengan aturan di knowledge base untuk menghasilkan fakta atau kesimpulan baru.',out:'Hasil inferensi yang diserahkan ke pengguna atau dipakai agen untuk bertindak.',ex:'Menjawab pertanyaan "kenapa?" dengan menampilkan jejak fakta dan aturan yang dipakai. Komponen ini opsional, perlu kalau pengguna butuh alasan.'};
 function arch(labels){ // working memory, KB, engine, kesimpulan, explanation
   var N={wm:[110,40,labels[0]],kb:[330,40,labels[1]],ie:[220,115,labels[2]],out:[220,185,labels[3]],ex:[220,250,labels[4]]};
   var s='<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="'+C.mid+'"/></marker></defs>';
   [['wm','ie'],['kb','ie'],['ie','out'],['out','ex']].forEach(function(e){var a=N[e[0]],b=N[e[1]];s+='<line x1="'+a[0]+'" y1="'+(a[1]+20)+'" x2="'+b[0]+'" y2="'+(b[1]-22)+'" stroke="'+C.mid+'" stroke-width="2" marker-end="url(#ar)"/>';});
   var col={wm:'#FBFAE0',kb:'#EAF5FC',ie:'#EEE8F8',out:'#DDF3E7',ex:'#F3F6FA'};
   Object.keys(N).forEach(function(k){var n=N[k],t=n[2].split('|');
-    s+='<rect x="'+(n[0]-100)+'" y="'+(n[1]-21)+'" width="200" height="42" rx="10" fill="'+col[k]+'" stroke="'+C.line+'" stroke-width="1.5"/>';
-    s+='<text x="'+n[0]+'" y="'+(n[1]-2)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+C.navy+'">'+esc(t[0])+'</text><text x="'+n[0]+'" y="'+(n[1]+14)+'" text-anchor="middle" font-size="11" fill="'+C.mute+'">'+esc(t[1]||'')+'</text>';});
+    s+=G_('<b>'+esc(t[0])+'</b><br>'+ARCH[k],'<rect x="'+(n[0]-100)+'" y="'+(n[1]-21)+'" width="200" height="42" rx="10" fill="'+col[k]+'" stroke="'+C.line+'" stroke-width="1.5"/><text x="'+n[0]+'" y="'+(n[1]-2)+'" text-anchor="middle" font-size="13" font-weight="700" fill="'+C.navy+'">'+esc(t[0])+'</text><text x="'+n[0]+'" y="'+(n[1]+14)+'" text-anchor="middle" font-size="11" fill="'+C.mute+'">'+esc(t[1]||'')+'</text>');});
   return svg(440,280,s);
 }
 var ROBOT={S:[40,120],A:[190,35],B:[190,205],C:[350,55],D:[350,190],G:[500,120]};
 var F={
-  d1g:function(){return graph(540,240,ROBOT,[['S','A',2],['S','B',4],['A','C',3],['B','D',1],['C','G',6],['D','G',3],['A','D',5,0.3],['B','C',4,0.3]]);},
+  d1g:function(){return graph(540,240,ROBOT,[['S','A',2],['S','B',4],['A','C',3],['B','D',1],['C','G',6],['D','G',3],['A','D',5,0.3],['B','C',4,0.3]],{tip:{S:'Titik awal, g = 0.',A:'Biaya termurah dari S: 2 (langsung).',B:'Biaya termurah dari S: 4 (langsung). Lewat A lalu C malah 2 + 3 + 4 = 9.',C:'Biaya termurah dari S: 5 (S, A, C).',D:'Biaya termurah dari S: 5 (S, B, D). Lewat A jadinya 2 + 5 = 7.',G:'Goal. Biaya termurah 8 lewat D; lewat C jadinya 5 + 6 = 11.'}});},
   t4g:function(){return F.d1g();},
   d1grid:function(){return grid([[4,7,3],[5,6,8],[2,9,1]],{hl:{'2,2':'#FBFAE0'}});},
   d2b:function(){return board([2,2,4,1]);},
@@ -557,24 +591,24 @@ var F={
     var q0=[2,2,4,1],h='<table><tr><th>Perubahan</th><th>State</th><th>Konflik</th><th>h</th></tr>',best=null;
     for(var c=0;c<4;c++)for(var r=1;r<=4;r++){if(r===q0[c])continue;var q=q0.slice();q[c]=r;var k=conflicts(q);if(best===null||k<best)best=k;}
     for(c=0;c<4;c++)for(r=1;r<=4;r++){if(r===q0[c])continue;q=q0.slice();q[c]=r;k=conflicts(q);
-      h+='<tr'+(k===best?' style="background:#FBFAE0;font-weight:700"':'')+'><td>Q'+(c+1)+': '+q0[c]+' → '+r+'</td><td>('+q.join(',')+')</td><td>'+k+'</td><td>'+(k?'−'+k:'0')+'</td></tr>';}
-    return h+'</table><p class="note">Baris kuning adalah successor terbaik.</p>';},
-  d3g:function(){return graph(560,200,{A:[50,100,'A : 2'],B:[170,35,'B : 5'],D:[300,35,'D : 5'],E:[420,35,'E : 7'],F:[520,35,'F : 9'],C:[170,165,'C : 4'],G:[300,165,'G : 6']},[['A','B'],['B','D'],['D','E'],['E','F'],['A','C'],['C','G']],{box:true,hl:{B:'#FBFAE0'}});},
+      var pr=pairs(q);h+='<tr data-tip="'+att('<b>('+q.join(',')+')</b><br>'+(pr.length?'Pasangan yang menyerang: '+pr.join('; ')+'.':'Tidak ada yang menyerang.'))+'"'+(k===best?' style="background:#FBFAE0;font-weight:700"':'')+'><td>Q'+(c+1)+': '+q0[c]+' → '+r+'</td><td>('+q.join(',')+')</td><td>'+k+'</td><td>'+(k?'−'+k:'0')+'</td></tr>';}
+    return h+'</table><p class="note">Baris kuning adalah successor terbaik. Arahkan kursor ke satu baris untuk melihat pasangan mana yang menyerang.</p>';},
+  d3g:function(){return graph(560,200,{A:[50,100,'A : 2'],B:[170,35,'B : 5'],D:[300,35,'D : 5'],E:[420,35,'E : 7'],F:[520,35,'F : 9'],C:[170,165,'C : 4'],G:[300,165,'G : 6']},[['A','B'],['B','D'],['D','E'],['E','F'],['A','C'],['C','G']],{box:true,hl:{B:'#FBFAE0'},tip:{A:'Lebih rendah dari kedua tetangganya. Dari sini hill climbing naik ke B (5), bukan ke C (4).',B:'Titik awal. Tetangganya 2 dan 5, tidak ada yang lebih dari 5: inilah shoulder.',D:'Nilainya sama dengan B. Hanya bisa didatangi lewat sideways move, dan dari sini E (7) kelihatan.',E:'Lebih tinggi dari D, dan masih ada F (9) di sebelahnya.',F:'Nilai tertinggi di graf: maksimum global.',C:'Dari sini hill climbing naik ke G (6).',G:'Satu-satunya tetangganya C (4), lebih rendah. Jadi G adalah maksimum lokal: lebih rendah dari F tetapi hill climbing berhenti di sini.'}});},
   d6grid:function(){var m={'1,1':'no breeze','2,1':'BREEZE','1,2':'no breeze'};
-    return grid([['(1,3)','(2,3)','(3,3)'],['(1,2)','(2,2)','(3,2)'],['(1,1)','(2,1)','(3,1)']],{cw:104,ch:66,fs:17,hl:{'3,1':'#DDF3E7','3,2':'#FBFAE0','2,1':'#DDF3E7'},sub:function(r,c){return m[(c+1)+','+(3-r)]||'';}});},
+    return grid([['(1,3)','(2,3)','(3,3)'],['(1,2)','(2,2)','(3,2)'],['(1,1)','(2,1)','(3,1)']],{cw:104,ch:66,fs:17,hl:{'3,1':'#DDF3E7','3,2':'#FBFAE0','2,1':'#DDF3E7'},sub:function(r,c){return m[(c+1)+','+(3-r)]||'';},tip:function(r,c){var k=(c+1)+','+(3-r),T={'1,1':'Sudah dikunjungi, no breeze. Artinya (2,1) dan (1,2) bebas pit.','2,1':'Sudah dikunjungi, ada breeze. Minimal satu dari (1,1), (3,1), (2,2) berisi pit.','1,2':'Sudah dikunjungi, no breeze. Artinya (1,1), (2,2), (1,3) bebas pit.','3,1':'Satu-satunya kandidat pit yang tersisa dari breeze di (2,1). Pit pasti di sini.','2,2':'Bebas pit, karena bertetangga dengan (1,2) yang no breeze.','1,3':'Bebas pit, karena bertetangga dengan (1,2) yang no breeze.'};return '<b>Kotak ('+k+')</b><br>'+(T[k]||'Belum ada percept yang menyentuh kotak ini, jadi statusnya belum diketahui (bukan berarti aman).');}});},
   d6arch:function(){return arch(['Working memory|percept tiap lokasi','Knowledge base|aturan tetangga dan pit','Inference engine|eliminasi kandidat','Kesimpulan: P(3,1)|','Explanation|bukti dan aturan yang dipakai']);},
   d9t:function(){return tree({t:'max',name:'root',k:[{t:'min',name:'A',k:[{t:'max',k:L([5,1])},{t:'max',k:L([4,2])}]},{t:'min',name:'B',k:[{t:'max',k:L([3,0])},{t:'max',k:L([9,8])}]}]});},
   d9a:function(){return tree({t:'max',name:'root',val:4,k:[{t:'min',name:'A',val:4,k:[{t:'max',val:5,k:L([5,1])},{t:'max',val:4,k:L([4,2])}]},{t:'min',name:'B',val:'≤ 3',k:[{t:'max',val:3,k:L([3,0])},{t:'max',cut:true,k:L([9,8])}]}]});},
   e1g:function(){var n={S:[40,120,'S','h=6'],A:[190,35,'A','h=6'],B:[190,195,'B','h=4'],C:[350,45,'C','h=5'],D:[350,190,'D','h=2'],G:[500,120,'G','h=0']};
-    return graph(540,250,n,[['S','A',2],['S','B',3],['A','C',2],['B','D',2],['C','G',5],['D','G',2],['A','D',5,0.3],['B','C',4,0.3]]);},
+    return graph(540,250,n,[['S','A',2],['S','B',3],['A','C',2],['B','D',2],['C','G',5],['D','G',2],['A','D',5,0.3],['B','C',4,0.3]],{tip:{S:'g = 0, f = 0 + 6 = 6. Di-pop pertama.',A:'g = 2, f = 2 + 6 = 8. Tidak pernah di-pop karena selalu ada node dengan f = 7.',B:'g = 3, f = 3 + 4 = 7. Di-pop kedua.',C:'g = 7 (lewat B), f = 7 + 5 = 12. Tidak pernah di-pop.',D:'g = 5 (lewat B), f = 5 + 2 = 7. Di-pop ketiga.',G:'g = 7 (lewat D), f = 7 + 0 = 7. Di-pop keempat: goal.'}});},
   e3grid:function(){return grid([[2,5,4,3],[4,6,6,2],[1,3,8,9]],{hl:{'2,2':'#FBFAE0'}});},
   e3path:function(){return grid([[2,5,4,3],[4,6,6,2],[1,3,8,9]],{hl:{'2,2':'#FBFAE0','3,4':'#DDF3E7'},path:[[2,2],[2,3],[3,3],[3,4]]});},
   e6net:function(){return graph(620,150,{AI:[70,40,'AI3070'],MK:[70,115,'MataKuliah'],MD:[330,40,'Matdis'],DF:[550,40,'Daffa'],BM:[550,115,'Bima']},[['AI','MK','is-a'],['AI','MD','prerequisite'],['DF','MD','lulus'],['BM','MD','?',0.4,null,true]],{box:true,bw:96,fs:13});},
   e6arch:function(){return arch(['Working memory|kelulusan mahasiswa','Knowledge base|prasyarat dan rule','Inference engine|binding variabel M, C, P','Kesimpulan|layak atau belum terbukti','Explanation|aturan dan bukti kelulusan']);},
-  e9g:function(){return graph(420,150,{X:[60,40,'X'],Y:[210,40,'Y'],Z:[360,40,'Z']},[['X','Y','X < Y'],['Y','Z','Y < Z']]).replace('</svg>','<path d="M60,60 Q210,150 360,60" fill="none" stroke="'+C.line+'" stroke-width="2"/><rect x="180" y="94" width="60" height="22" rx="6" fill="#fff" stroke="'+C.pale+'"/><text x="210" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="'+C.navy+'">X ≠ Z</text></svg>');},
+  e9g:function(){return graph(420,150,{X:[60,40,'X'],Y:[210,40,'Y'],Z:[360,40,'Z']},[['X','Y','X < Y'],['Y','Z','Y < Z']],{tip:{X:'Domain awal {1,2,3}. Setelah propagasi tinggal {1}.',Y:'Domain awal {1,2,3}. Setelah propagasi tinggal {2}: harus lebih besar dari X dan lebih kecil dari Z.',Z:'Domain awal {1,2,3}. Setelah propagasi tinggal {3}.'}}).replace('</svg>','<path d="M60,60 Q210,150 360,60" fill="none" stroke="'+C.line+'" stroke-width="2"/><rect x="180" y="94" width="60" height="22" rx="6" fill="#fff" stroke="'+C.pale+'"/><text x="210" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="'+C.navy+'">X ≠ Z</text></svg>');},
   t2t:function(){return tree({t:'max',name:'root',k:[{t:'min',name:'P',k:L([6,3,8])},{t:'min',name:'Q',k:L([5,2,9])},{t:'min',name:'R',k:L([7,4,1])}]},{step:50});},
   t2a:function(){return tree({t:'max',name:'root',val:3,k:[{t:'min',name:'P',val:3,k:L([6,3,8])},{t:'min',name:'Q',val:'≤ 2',k:L([5,2,9],[9])},{t:'min',name:'R',val:1,k:L([7,4,1])}]},{step:50});},
-  t3g:function(){return graph(460,200,{A:[50,100],B:[170,35],C:[170,165],D:[300,100],E:[410,100]},[['A','B'],['A','C'],['B','C'],['B','D'],['C','D'],['D','E']]);}
+  t3g:function(){return graph(460,200,{A:[50,100],B:[170,35],C:[170,165],D:[300,100],E:[410,100]},[['A','B'],['A','C'],['B','C'],['B','D'],['C','D'],['D','E']],{tip:{A:'Degree 2. Di solusi: biru.',B:'Degree 3. Dipilih pertama (degree heuristic, seri alfabet). Di solusi: merah.',C:'Degree 3. Dipilih kedua. Di solusi: hijau.',D:'Degree 3. Di solusi: biru.',E:'Degree 1, paling longgar, jadi diisi paling akhir. Di solusi: merah.'}});}
 };
 document.querySelectorAll('[data-f]').forEach(function(el){var f=F[el.getAttribute('data-f')];if(f)el.innerHTML=f();});
 
@@ -620,6 +654,216 @@ tabs.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribu
 function fromHash(){var id=location.hash.slice(1);if(!id)return;var el=document.getElementById(id);if(!el)return;if(el.classList.contains('panel'))show(id);else if(el.parentNode.classList.contains('panel')){show(el.parentNode.id);el.scrollIntoView();}}
 window.addEventListener('hashchange',fromHash);fromHash();
 refresh();
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  /* alasan di balik tiap jawaban kunci */
+  const WHY = {"d1": ["Ikuti cara UCS: S ke B = 4, lalu B ke D cuma 1, jadi D tercapai dengan biaya 5. Lewat A, D baru tercapai dengan 2 + 5 = 7. Dari D ke G tambah 3.", "Steepest-ascent melihat SEMUA tetangga lalu mengambil yang nilainya paling tinggi: 9 > 8 > 7 > 5."], "d2": ["h dibuat negatif supaya 'makin besar makin baik'. Nol konflik (h = 0) adalah nilai tertinggi yang mungkin.", "Tiap kolom punya 4 baris dan satu sudah ditempati ratunya, jadi sisa 3 pilihan pindah. Ada 4 kolom.", "Dari 12 successor hanya ini yang konfliknya 1; sisanya 2 sampai 4. Karena tidak ada seri, aturan tie-break tidak terpakai.", "Cek cepat: semua barisnya berbeda (2, 4, 1, 3) dan tidak ada pasangan dengan selisih baris = selisih kolom."], "d3": ["Hill climbing biasa hanya menerima nilai yang LEBIH BESAR. Nilai yang sama (5 = 5) tidak dihitung naik.", "E (7) dan F (9) baru terjangkau setelah berani melangkah datar ke D.", "Stochastic hill climbing memilih tetangga secara acak tetapi tetap hanya menerima yang naik. D dan A dua-duanya tidak naik."], "d4": ["Current hanya berubah kalau proposal diterima. Proposal iterasi 5 ditolak, jadi nilainya tetap 12.", "Ini satu-satunya langkah turun yang diterima. Iterasi 3 dan 5 juga turun, tetapi ditolak karena u ≥ P."], "d5": ["Ini penyebut untuk semua probabilitas roulette.", "Rentang P2 dari 9/38 = 0,2368 sampai 18/38 = 0,4737. Angka 0,28 ada di dalamnya.", "Rentang P4 dari 22/38 = 0,5789 sampai 1. Angka 0,91 ada di dalamnya.", "Hitung dari kromosom anak, bukan dari induknya: 01110 punya tiga bit 1, dan 3² = 9.", "11101 punya empat bit 1, dan 4² = 16.", "Satu bit 0 menjadi 1, jumlah bit 1 naik dari 3 ke 4. Fitness melonjak dari 9 ke 16 karena dikuadratkan.", "Elitism menyalin individu terbaik apa adanya ke generasi berikut, tanpa crossover dan mutasi, supaya solusi terbaik tidak hilang."], "d6": ["Breeze di (2,1) menjamin minimal satu dari tiga tetangganya berisi pit. Dua di antaranya sudah dipastikan bersih, jadi tinggal satu kemungkinan.", "Tanpa Breeze(2,1) tidak ada lagi fakta yang mengharuskan adanya pit. Kita hanya tidak tahu; itu bukan berarti tahu bahwa (3,1) aman."], "d7": ["Conflict set berisi semua rule yang SEMUA premisnya ada di working memory dan belum pernah fire. R2 belum masuk karena fakta risiko belum ada.", "Aturan soal: premis terbanyak menang. R1 punya 2 premis, R3 dan R6 hanya 1.", "Di putaran 3 sampai 5 semua kandidat punya 1 premis, jadi yang dipilih nomor terkecil.", "R5 butuh dua fakta sekaligus. Fakta pemeriksaan hanya bisa dibuat R3, dan R3 kehilangan premisnya (alarm_aktif) di putaran 2.", "Sekarang kedua premis R5 ada di working memory, dan R5 (2 premis) menang atas R6 dan R7 (1 premis)."], "d8": ["Z punya dua rule (cabang OR). Cukup satu rule yang semua premisnya terbukti.", "Hanya rule di cabang yang berhasil yang masuk bukti. R1, R3, R4 memang dicoba, tetapi cabangnya gagal.", "Backward chaining berhenti begitu goal terbukti, jadi alternatif OR lainnya tidak disentuh."], "d9": ["MAX di root memilih anak terbesar: A = 4 lawan B = 3.", "B adalah node MIN dan sudah punya anak bernilai 3, jadi nilai B pasti ≤ 3. Root sudah memegang 4 dari A, sehingga B tidak mungkin dipilih apa pun isi sisa cabangnya."], "e1": ["g = biaya yang sudah ditempuh dari S. h = taksiran sisa biaya ke G. f = taksiran total biaya kalau lewat node itu.", "Tiap langkah diambil node dengan f terkecil. B (7) menang atas A (8), lalu D (7) menang atas A (8) dan C (12).", "Saat G di-pop, g-nya 7. Karena heuristiknya admissible, biaya ini dijamin optimal."], "e2": ["Tiga perpindahan bersebelahan: A ke B, B ke C, C ke D.", "Tanda minus dipasang supaya hill climbing, yang selalu memaksimalkan, otomatis meminimalkan cost.", "Bandingkan (1,4) dengan (2,3): elemen pertamanya 1 < 2, jadi (1,4) lebih kecil secara leksikografis."], "e3": ["Tetangga terbaik, (2,3), nilainya 6, sama dengan current. Aturan ketat butuh nilai > 6.", "Dari (3,4) tetangganya hanya 2 dan 8, dua-duanya lebih kecil, jadi berhenti.", "Lebih mudah dihitung lewat komplemen: 1 dikurangi peluang gagal semuanya.", "Rata-rata butuh 4 kali mulai. Itu nilai harapan, bukan jaminan."], "e4": ["Proposal iterasi 4 ditolak, jadi cost tetap 13. Perhatikan: cost terbaik yang pernah dicapai (11) justru sudah ditinggalkan.", "Di soal minimasi, 'langkah buruk' berarti cost NAIK."], "e5": ["Diurutkan dari fitness terbesar. P4 paling bawah walaupun manfaatnya terbesar (16), karena kena penalti 8.", "Yang dijumlahkan adalah fitness setelah penalti, bukan manfaat mentahnya.", "Dari tiga peserta: 12 > 10 > 9. P3 (14) tidak ikut bertanding, jadi tidak bisa menang.", "Tiga sensor aktif, lebih satu dari yang diminta, jadi kena penalti 8 × 1.", "1 + 7 − 8 = 0, lalu max(1, 0) = 1. Batas bawah 1 menjaga fitness tetap positif supaya roulette masih bisa dipakai.", "Sekarang tepat dua sensor yang aktif, jadi tidak ada penalti."], "e6": ["Ketiga premis rule cocok dengan C = AI3070, P = Matdis, M = Daffa."], "e7": ["Eligible berarti semua premis cocok untuk binding yang sama, di sini x = A.", "Tiap anggota conflict set adalah pasangan rule dan binding. R5 muncul dua kali karena cocok untuk A dan untuk B.", "Premis terbanyak menang: R1(A) punya 2 premis, R5 hanya 1."], "e8": ["Semua premis R4 terbukti untuk x = C1.", "R4 gagal, tetapi operasional masih punya rule kedua (R5). Itulah arti cabang OR.", "Tidak ada rule yang berhasil. Sistem hanya boleh berkata 'tidak bisa dibuktikan'."], "e9": ["X < Y < Z dengan nilai 1 sampai 3 hanya punya satu susunan yang mungkin."], "t1": ["Goal-based hanya membedakan 'sampai' dan 'belum sampai'. Utility-based bisa menilai seberapa bagus suatu cara untuk sampai.", "Ciri level 1: solusinya dicari dengan search atas state yang sudah dirumuskan, tanpa basis pengetahuan dan tanpa belajar."], "t2": ["Nilai root sama dengan nilai anak yang terbaik bagi MAX.", "Q adalah node MIN dan sudah menemukan 2, jadi nilainya pasti ≤ 2 dan kalah dari P = 3. Daun berikutnya tidak bisa mengubah keputusan.", "Pemangkasan butuh α yang sudah tinggi. Di urutan ini α naik pelan-pelan (1, lalu 2), jadi tiap cabang masih 'mungkin lebih baik' dan harus diperiksa habis.", "P tidak bisa dipangkas karena dialah yang menetapkan α. Dari dua cabang lainnya paling banyak 2 daun masing-masing."], "t3": ["Degree = jumlah tetangga yang belum diisi. Variabel yang paling banyak mengikat diisi dulu supaya kegagalan cepat ketahuan.", "MRV tidak bisa membedakan (semuanya tersisa 2 nilai), jadi turun ke degree, lalu ke alfabet.", "Selama proses tidak pernah ada domain yang kosong, jadi tidak perlu mundur."], "t4": ["G baru dinyatakan goal saat diambil dari agenda, dan saat itu g-nya 8.", "BFS tidak melihat bobot sama sekali, hanya urutan masuk antrean.", "Agenda UCS menyimpan g terbaik untuk tiap node, jadi G diperbarui dari 11 menjadi 8."]};
+  Object.keys(WHY).forEach(id => { const ks = $$('#' + id + ' .ans .key'); WHY[id].forEach((t, i) => { if (ks[i] && t) { ks[i].setAttribute('data-tip', '<b>Kenapa?</b><br>' + t); ks[i].tabIndex = 0; } }); });
+  /* ---------- mesin popover ---------- */
+  const tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip);
+  let pinned = null, shownFor = null;
+  function show(el) {
+    shownFor = el; tip.innerHTML = el.getAttribute('data-tip'); tip.hidden = false; tip.style.left = '0px'; tip.style.top = '0px';
+    const r = el.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    let x = r.left + r.width / 2 - tw / 2; x = Math.max(8, Math.min(x, vw - tw - 8));
+    let y = r.bottom + 8; if (y + th > vh - 8 && r.top - th - 8 > 0) y = r.top - th - 8;
+    tip.style.left = (x + window.scrollX) + 'px'; tip.style.top = (y + window.scrollY) + 'px';
+    tip.classList.toggle('pinned', pinned === el);
+  }
+  function hide() { tip.hidden = true; shownFor = null; }
+  const find = t => t && t.closest ? t.closest('[data-tip]') : null;
+  document.addEventListener('mouseover', e => { if (pinned) return; const el = find(e.target); if (el) { if (el !== shownFor) show(el); } else if (!tip.contains(e.target)) hide(); });
+  document.addEventListener('click', e => {
+    if (tip.contains(e.target)) return; const el = find(e.target);
+    if (!el) { pinned = null; hide(); return; }
+    if (pinned === el) { pinned = null; hide(); } else { pinned = document.contains(el) ? el : null; if (document.contains(el)) show(el); else hide(); }
+  });
+  document.addEventListener('focusin', e => { const el = find(e.target); if (el && !pinned) show(el); });
+  document.addEventListener('focusout', () => { if (!pinned) hide(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { pinned = null; hide(); } });
+  window.addEventListener('resize', () => { pinned = null; hide(); });
+  const G = [
+    [['percept sequence'], 'Seluruh riwayat persepsi yang pernah diterima agen sampai saat ini.', 'Vacuum world: [A, Clean], [A, Dirty], …'],
+    [['percept', 'percepts'], 'Masukan yang diterima agen dari sensornya pada satu saat.', 'Vacuum world: [A, Dirty]. Wumpus: [Stench, Breeze, Glitter, Bump, Scream].'],
+    [['agent function'], 'Pemetaan abstrak dari percept sequence ke aksi. Bisa ditulis sebagai tabel, tetapi tabelnya tak terbatas.', ''],
+    [['agent program'], 'Implementasi konkret dan ringkas dari agent function; inilah yang benar-benar dijalankan.', 'Tiga aturan pada reflex vacuum agent.'],
+    [['performance measure'], 'Kriteria objektif untuk menilai keberhasilan perilaku agen. Ditentukan perancang, dilihat dari luar.', 'Taksi: aman, cepat, legal, nyaman, profit.'],
+    [['rational agent'], 'Agen yang, untuk tiap percept sequence, memilih aksi yang diharapkan memaksimalkan performance measure berdasarkan bukti dan pengetahuan yang dimilikinya.', 'Rasional tidak sama dengan mahatahu dan tidak sama dengan sukses.'],
+    [['omniscience', 'mahatahu'], 'Mengetahui hasil sebenarnya dari setiap aksi. Rasionalitas tidak menuntut ini.', 'Tidak membawa payung karena tidak mendengar ramalan hujan tetap rasional.'],
+    [['limited rationality'], 'Bertindak sebaik mungkin dalam batas kemampuan komputasi yang ada.', ''],
+    [['PEAS'], 'Performance measure, Environment, Actuators, Sensors: empat hal untuk menspesifikasikan task environment.', 'Di Kuis 1 bernilai 15 poin bersama 6 properti lingkungan.'],
+    [['fully observable'], 'Sensor memberi akses ke seluruh state lingkungan yang relevan pada tiap saat.', 'Catur. Lawannya: partially observable.'],
+    [['partially observable'], 'Ada bagian state yang relevan tetapi tidak tertangkap sensor.', 'Taksi (kendaraan terhalang), poker (kartu lawan), Wumpus world.'],
+    [['deterministic', 'deterministik'], 'State berikutnya sepenuhnya ditentukan state sekarang dan aksi agen.', 'Catur; menerapkan kaidah inferensi.'],
+    [['stochastic', 'stokastik'], 'Hasil aksi tidak pasti; ada unsur acak atau pihak lain yang tak terduga.', 'Taksi; robot Mars yang rodanya tergelincir.'],
+    [['episodic', 'episodik'], 'Pengalaman terbagi menjadi episode yang berdiri sendiri; keputusan sekarang tidak memengaruhi episode berikutnya.', 'Filter spam, inspeksi foto produk.'],
+    [['sequential', 'sekuensial'], 'Keputusan sekarang memengaruhi keputusan dan keadaan berikutnya.', 'Catur, taksi, labirin, pembuktian teorema.'],
+    [['semidynamic', 'semidinamis', 'semi dinamis'], 'Lingkungan tidak berubah saat agen berpikir, tetapi skor kinerjanya berubah seiring waktu.', 'Catur dengan jam; ujian berbatas waktu.'],
+    [['static', 'statis'], 'Lingkungan tidak berubah selagi agen berpikir.', 'Sudoku, catur tanpa jam.'],
+    [['dynamic', 'dinamis'], 'Lingkungan bisa berubah selagi agen berpikir atau bertindak.', 'Taksi, trading saham, email yang terus berdatangan.'],
+    [['discrete', 'diskrit', 'diskret'], 'Jumlah state, percept, dan aksi terbatas dan terdefinisi jelas.', 'Catur, Wumpus world.'],
+    [['continuous', 'kontinu'], 'State atau aksi bernilai riil dalam suatu rentang.', 'Kecepatan dan sudut kemudi taksi.'],
+    [['single agent'], 'Hanya satu agen yang bertindak di lingkungan.', 'Sudoku, vacuum cleaner.'],
+    [['multiagent', 'multi agent', 'multi-agent'], 'Ada entitas lain yang juga bertindak demi tujuannya sendiri.', 'Catur (kompetitif), taksi (banyak pengemudi).'],
+    [['simple reflex'], 'Agen yang memilih aksi hanya dari percept saat ini lewat condition–action rules. Tanpa memori.', ''],
+    [['model-based reflex', 'model-based'], 'Reflex agent yang menyimpan state internal dan memperbaruinya dengan model: bagaimana dunia berubah dan apa efek aksi.', 'Chatbot yang mengingat 3 pesan terakhir.'],
+    [['goal-based'], 'Agen yang memprediksi akibat aksi lalu memilih yang mencapai goal. Tidak membandingkan kualitas antar cara.', ''],
+    [['utility-based'], 'Agen yang menilai seberapa baik tiap state dengan fungsi utility dan memilih yang tertinggi; bisa menimbang tujuan yang bertentangan.', 'Memilih rute lebih jauh tetapi bebas macet.'],
+    [['problem solving agent', 'problem-solving agent'], 'Level 1: punya informasi semua state dan aturan, tinggal mencari rangkaian aksi menuju goal.', 'WAZE/Google Map, penjadwalan pesawat.'],
+    [['knowledge based agent', 'knowledge-based agent'], 'Level 2: hanya punya pengetahuan dasar/premis; menalar fakta baru dari percept.', 'Hero DOTA dengan rules, sistem pakar.'],
+    [['learning agent'], 'Level 3: tidak punya state maupun pengetahuan dasar; membentuk pengetahuan dari data atau pengalaman.', 'Diagnosis dari data pasien dokter gigi.'],
+    [['Turing test'], 'Uji acting humanly: lulus jika penanya manusia tidak bisa membedakan jawaban komputer dari jawaban manusia.', 'Menguji beraksi seperti manusia, bukan berpikir seperti manusia.'],
+    [['cognitive modeling'], 'Pendekatan thinking humanly: membuat model komputasi dari proses berpikir manusia dan mengujinya dengan eksperimen psikologi.', 'GPS, SOAR.'],
+    [['laws of thought'], 'Pendekatan thinking rationally: penalaran yang benar dengan logika.', 'Modus ponens, modus tollens.'],
+    [['state space'], 'Himpunan semua state yang mungkin; berbentuk graf dengan node = state dan arc = aksi.', '8-queens: 8^8 state.'],
+    [['initial state'], 'State tempat pencarian dimulai.', ''],
+    [['transition model'], 'Fungsi f(s, a) → s′: state hasil jika aksi a dilakukan di state s.', ''],
+    [['agenda', 'frontier'], 'Daftar node yang sudah dibangkitkan tetapi belum diekspansi. Strategi pencarian = cara memilih node dari sini.', 'BFS: antrean; DFS: tumpukan; UCS dan A*: terurut.'],
+    [['branching factor'], 'Banyaknya anak per node (b).', 'Catur: sekitar 35.'],
+    [['BFS'], 'Breadth-first search: agenda FIFO, menjelajah level demi level; menemukan jalur dengan langkah paling sedikit.', ''],
+    [['DFS'], 'Depth-first search: agenda LIFO, menyelam sedalam mungkin; hemat memori tetapi tidak menjamin jalur pendek.', ''],
+    [['UCS'], 'Uniform-cost search: selalu mengekspansi node dengan biaya jalur g terkecil; menemukan jalur termurah.', ''],
+    [['greedy best-first', 'Greedy'], 'Mengekspansi node dengan h(n) terkecil, yaitu yang tampak paling dekat ke goal. Cepat, tidak optimal.', ''],
+    [['A*'], 'Best-first search dengan f(n) = g(n) + h(n). Optimal jika h admissible.', ''],
+    [['g(n)'], 'Biaya nyata jalur dari start sampai node n.', ''],
+    [['h(n)'], 'Heuristik: perkiraan biaya dari node n ke goal.', 'Straight-line distance; banyaknya busur minimal.'],
+    [['f(n)'], 'Fungsi evaluasi. Pada A*: f(n) = g(n) + h(n), perkiraan biaya total jalur lewat n.', ''],
+    [['admissible'], 'Heuristik yang tidak pernah melebih-lebihkan: h(n) ≤ biaya sebenarnya h*(n) untuk semua n.', 'Buktikan dengan membandingkan h dan jarak terpendek tiap node.'],
+    [['path relevant'], 'Jalur menuju goal adalah bagian dari solusi.', 'Pencarian rute.'],
+    [['path irrelevant'], 'Hanya konfigurasi akhir yang penting; jalurnya tidak.', 'N-queens → cocok untuk local search.'],
+    [['complete-state'], 'Formulasi di mana tiap state sudah berisi semua variabel/komponen sejak awal.', '8 ratu sudah ada di papan, tinggal digeser.'],
+    [['objective function'], 'Fungsi nilai state yang ingin dimaksimalkan pada local search.', 'h = −(pasangan ratu saling menyerang).'],
+    [['heuristic cost function'], 'Fungsi nilai state berupa biaya yang ingin diminimalkan.', 'Jumlah pasangan ratu saling menyerang.'],
+    [['neighbor', 'tetangga'], 'State yang dicapai dengan satu perubahan kecil dari state sekarang.', '8-queens: pindahkan satu ratu di kolomnya.'],
+    [['successor', 'suksesor'], 'State hasil menerapkan satu aksi pada state sekarang.', '8-queens punya 8 × 7 = 56 suksesor.'],
+    [['global maximum', 'global optimum'], 'State dengan nilai terbaik di seluruh state space; inilah tujuan local search.', ''],
+    [['flat local maximum', 'plateau'], 'Dataran: semua tetangga bernilai sama dan tidak ada jalan naik.', ''],
+    [['local maximum', 'local optimum'], 'State yang lebih baik dari semua tetangganya tetapi bukan yang terbaik secara global.', '8-queens h = −1 dengan 56 suksesor yang semuanya lebih buruk.'],
+    [['shoulder'], 'Dataran yang masih punya jalan naik di ujungnya. Steepest ascent berhenti di sini; sideways move bisa melewatinya.', ''],
+    [['steepest ascent'], 'Hill climbing yang selalu pindah ke suksesor terbaik dan berhenti jika suksesor terbaik ≤ current.', ''],
+    [['sideways move'], 'Varian yang juga mau pindah ke tetangga bernilai sama (≥), dengan batas langkah menyamping berturut-turut.', 'Batas 100 → sukses 8-queens naik dari 14% ke 94%.'],
+    [['stochastic hill climbing', 'Stochastic HC'], 'Varian yang mengambil satu tetangga acak dan pindah hanya jika lebih baik; berhenti saat iterasi maksimum.', ''],
+    [['random restart'], 'Mengulang hill climbing dari state awal acak sampai goal ditemukan. Perkiraan restart = 1/p.', ''],
+    [['simulated annealing'], 'Seperti stochastic hill climbing, tetapi langkah buruk masih diterima dengan peluang e^(ΔE/T) yang mengecil seiring T turun.', ''],
+    [['ΔE'], 'Selisih nilai: next.value − current.value. Positif = lebih baik (pada maksimasi).', 'Saat meminimalkan penalti, pakai negatif penalti.'],
+    [['fitness function', 'fitness'], 'Ukuran kualitas individu pada GA; makin tinggi makin baik.', '8-queens: pasangan ratu yang tidak saling menyerang, maksimum 28.'],
+    [['roulette wheel'], 'Seleksi di mana peluang terpilih sebanding dengan fitness; bilangan random menunjuk ke rentang kumulatif.', 'Fitness 10, 20, 5, 15 → 0–20%, 21–60%, 61–70%, 71–100%.'],
+    [['crossover point'], 'Posisi tempat dua induk dipotong dan ditukar. Perhatikan konvensi soal: "point 4, indeks mulai 1" = pertukaran mulai digit ke-4.', ''],
+    [['crossover'], 'Menggabungkan dua induk: bagian depan induk 1 + bagian belakang induk 2. Perannya eksploitasi.', ''],
+    [['mutation', 'mutasi'], 'Mengubah satu karakter secara acak dengan peluang kecil. Perannya eksplorasi dan menjaga keragaman.', ''],
+    [['selection'], 'Tahap GA yang memilih induk; peluangnya sebanding dengan fitness.', ''],
+    [['minimax'], 'Algoritma memilih langkah terbaik dengan asumsi lawan bermain optimal: MAX ambil terbesar, MIN ambil terkecil.', ''],
+    [['game tree'], 'Pohon dengan node = state permainan dan edge = langkah.', ''],
+    [['ply'], 'Satu langkah oleh satu pemain. 3-ply = tiga tingkat aksi.', ''],
+    [['pruning', 'dipangkas', 'pemangkasan'], 'Melewati cabang yang tidak mungkin memengaruhi keputusan. Hasil akhir tetap sama dengan minimax.', 'Ditandai dua garis pada cabang.'],
+    [['alpha', 'α'], 'Nilai terbaik (terbesar) yang sudah dijamin untuk MAX di jalur dari akar. Diperbarui di node MAX.', 'Di node MIN: pangkas jika v ≤ α.'],
+    [['beta', 'β'], 'Nilai terbaik (terkecil) yang sudah dijamin untuk MIN di jalur dari akar. Diperbarui di node MIN.', 'Di node MAX: pangkas jika v ≥ β.'],
+    [['CSP'], 'Constraint satisfaction problem: cari nilai untuk semua variabel dari domainnya sehingga semua constraint terpenuhi.', ''],
+    [['constraint graph'], 'Graf dengan node = variabel dan arc = constraint biner.', 'Dipakai untuk menghitung degree.'],
+    [['complete assignment'], 'Semua variabel sudah diberi nilai.', ''],
+    [['partial assignment'], 'Baru sebagian variabel yang diberi nilai; inilah state pada backtracking.', ''],
+    [['unary'], 'Constraint yang hanya melibatkan satu variabel.', 'SA ≠ green; T2 ∈ {Lab A, Lab B}.'],
+    [['binary'], 'Constraint yang melibatkan dua variabel.', 'WA ≠ NT.'],
+    [['higher-order'], 'Constraint yang melibatkan tiga variabel atau lebih.', '6p1 + 5p2 + 10p3 + 5p4 ≤ 16.'],
+    [['node consistency'], 'Semua nilai di domain memenuhi constraint unary variabel itu.', ''],
+    [['arc consistency', 'arc-consistent'], 'Untuk setiap nilai x di domain X ada suatu nilai y di domain Y yang memenuhi constraint (X, Y).', ''],
+    [['path consistency', 'path-consistent'], 'Untuk setiap pasangan nilai (Xi, Xj) yang konsisten, ada nilai Xm yang cocok dengan keduanya.', 'A < B < C: pasangan (A, C) butuh B di antaranya.'],
+    [['constraint propagation'], 'Pemangkasan domain yang berantai: menghapus nilai di satu variabel dapat memicu penghapusan di variabel lain.', ''],
+    [['backtracking search', 'backtracking'], 'DFS yang mengisi satu variabel per langkah dan mundur begitu constraint dilanggar.', ''],
+    [['MRV'], 'Minimum remaining values: pilih variabel dengan nilai legal paling sedikit (fail-first).', ''],
+    [['degree heuristic'], 'Pilih variabel yang punya constraint terbanyak dengan variabel yang belum diisi. Untuk variabel pertama dan pemecah seri MRV.', ''],
+    [['LCV'], 'Least constraining value: pilih nilai yang menyisakan pilihan terbanyak bagi variabel lain.', ''],
+    [['forward checking'], 'Setelah mengisi X, hapus nilai yang bertentangan dari domain tetangga X yang belum diisi.', ''],
+    [['MAC'], 'Maintaining arc consistency: setelah tiap pengisian, propagasi arc consistency berantai sampai stabil. Mendeteksi gagal lebih awal daripada forward checking.', ''],
+    [['KBS'], 'Knowledge-based system: sistem yang menerapkan pengetahuan untuk memecahkan masalah. KBS = problem-solving method + knowledge + data.', ''],
+    [['expert system', 'sistem pakar'], 'KBS yang pengetahuannya berasal dari pakar manusia dan dipakai pengguna non-pakar untuk berkonsultasi.', 'MYCIN.'],
+    [['inference engine'], 'Bagian yang menalar: menerapkan pengetahuan di knowledge base pada fakta kasus. Di arsitektur Puppe disebut problem solving component.', ''],
+    [['knowledge base'], 'Tempat pengetahuan domain disimpan, terpisah dari inference engine.', ''],
+    [['knowledge engineer'], 'Orang yang menggali pengetahuan dari pakar dan menuangkannya ke bentuk formal.', ''],
+    [['elicitation'], 'Proses mengekstraksi pengetahuan dari pakar, biasanya lewat interview berulang.', ''],
+    [['knowledge acquisition component'], 'Komponen opsional: pintu masuk pengetahuan baru dari pakar/KE ke knowledge base.', 'Diperlukan jika pengetahuan diperbarui.'],
+    [['explanation component'], 'Komponen opsional yang menjelaskan mengapa suatu kesimpulan diperoleh dengan menelusuri jejak inferensi.', ''],
+    [['interviewer component'], 'Antarmuka dengan pengguna: menerima data kasus dan menampilkan hasil. Pada embedded KBS menjadi interface component.', ''],
+    [['problem solving component'], 'Inference engine pada arsitektur Puppe: mencocokkan fakta kasus dengan pengetahuan domain.', ''],
+    [['case-specific facts', 'CSF'], 'Fakta sementara milik satu kasus atau sesi.', 'Gejala pasien ini; bacaan sensor saat ini.'],
+    [['DSKB'], 'Domain-specific knowledge base: pengetahuan domain yang persisten dan dipakai untuk semua kasus.', ''],
+    [['ill-structured'], 'Masalah dengan solusi tidak pasti, goal tidak terdefinisi, dan operator tidak diketahui. Cocok untuk KBS.', ''],
+    [['well-structured', 'well-formed'], 'Masalah dengan solusi pasti, goal dan operator eksplisit. Cocok untuk program konvensional.', ''],
+    [['embedded'], 'KBS yang menjadi komponen di dalam sistem lebih besar; yang berinteraksi dengannya adalah subsistem lain.', ''],
+    [['production rules', 'production rule'], 'Representasi pengetahuan berbentuk IF kondisi THEN aksi.', ''],
+    [['semantic network'], 'Representasi berupa graf: node = konsep, edge = relasi. Struktural, bukan statistik.', ''],
+    [['frames', 'frame'], 'Representasi berupa struktur slot (atribut) dan filler (nilai).', ''],
+    [['case-based reasoning'], 'Menyelesaikan masalah baru dengan memakai ulang solusi kasus lama yang mirip.', ''],
+    [['Bayes network'], 'Representasi probabilistik untuk menalar dalam ketidakpastian.', ''],
+    [['LHS'], 'Left-hand side: bagian IF dari rule (kondisi, premise).', ''],
+    [['RHS'], 'Right-hand side: bagian THEN dari rule (aksi, conclusion).', ''],
+    [['working memory'], 'Memori jangka pendek RBS: fakta yang sedang diketahui; berubah selama inferensi.', ''],
+    [['production memory'], 'Memori jangka panjang RBS: kumpulan rule.', ''],
+    [['pattern matcher', 'pattern matching'], 'Mencocokkan fakta di working memory dengan pola kondisi rule, termasuk mengikat variabel.', ''],
+    [['conflict set'], 'Kumpulan rule yang semua kondisinya terpenuhi pada satu putaran.', ''],
+    [['conflict resolution', 'conflict-resolution'], 'Strategi memilih satu rule dari conflict set.', 'Refractoriness, fact recency, specificity, rule order.'],
+    [['refractoriness'], 'Rule yang sudah dijalankan dengan nilai variabel yang sama tidak dipilih lagi.', ''],
+    [['specificity'], 'Pilih rule yang paling spesifik, yaitu yang kondisinya paling banyak.', ''],
+    [['fact recency'], 'Pilih rule yang dipicu oleh fakta yang paling baru masuk working memory.', ''],
+    [['rule order'], 'Pilih rule yang urutannya paling awal di basis aturan.', ''],
+    [['meta rules', 'meta rule'], 'Rule tentang rule, mis. aturan yang menyingkirkan rule lain yang tidak berguna.', ''],
+    [['forward chaining'], 'Penalaran data-driven: dari fakta, jalankan rule yang kondisinya (LHS) terpenuhi sampai tidak ada lagi.', ''],
+    [['backward chaining'], 'Penalaran goal-driven: dari pertanyaan, cari rule yang kesimpulannya (RHS) cocok, lalu buktikan kondisinya.', ''],
+    [['FindOut'], 'Prosedur backward chaining: cari tahu nilai suatu goal lewat rule yang menyimpulkannya; jika tidak ada, tanya pengguna.', ''],
+    [['Monitor'], 'Prosedur backward chaining: coba satu rule dengan memeriksa kondisinya satu per satu.', ''],
+    [['request'], 'Bertanya ke pengguna karena tidak ada rule yang bisa menyimpulkan hal itu.', '']
+    ,[['steepest-ascent', 'steepest ascent'], 'Varian hill climbing yang memeriksa SEMUA tetangga lalu pindah ke yang nilainya paling tinggi, asalkan lebih baik dari state sekarang.', 'Dari sel bernilai 6 dengan tetangga 7, 9, 5, 8: pindah ke 9.']
+    ,[['sideways'], 'Langkah ke tetangga yang nilainya SAMA dengan state sekarang. Dipakai untuk melewati bagian datar (shoulder), biasanya dibatasi jumlahnya supaya tidak berputar-putar.', '']
+    ,[['elitism'], 'Menyalin sejumlah individu terbaik langsung ke generasi berikutnya tanpa crossover dan mutasi, supaya solusi terbaik tidak hilang.', 'Elitism = 1: satu individu ber-fitness tertinggi pasti lolos.']
+    ,[['tournament selection', 'tournament'], 'Seleksi GA: ambil beberapa individu sebagai peserta, lalu yang fitness-nya tertinggi di antara mereka menang.', '']
+    ,[['roulette'], 'Seleksi GA dengan peluang terpilih sebanding fitness. Tiap individu mendapat rentang di [0,1); angka acak u menentukan siapa yang terpilih.', 'Fitness 9 dari total 38 mendapat rentang selebar 9/38.']
+    ,[['offspring'], 'Individu baru (anak) hasil crossover dua parent.', '']
+    ,[['cutoff'], 'Saat alpha-beta berhenti memeriksa anak-anak suatu node karena hasilnya sudah tidak mungkin mengubah keputusan di atasnya.', 'Di node MIN: begitu nilainya ≤ α, sisa anaknya dipangkas.']
+    ,[['closed-world'], 'Asumsi bahwa apa pun yang tidak tercatat atau tidak bisa dibuktikan dianggap SALAH. Tanpa asumsi ini, "tidak terbukti" hanya berarti "tidak tahu".', '']
+    ,[['binding'], 'Pengikatan variabel pada rule ke objek tertentu. Semua premis dalam satu rule harus memakai binding yang sama.', 'R1 dengan x = A: tipe(A,server) dan suhu(A,tinggi).']
+    ,[['pattern matching'], 'Mencocokkan premis rule (yang berisi variabel) dengan fakta di working memory untuk mencari binding yang memenuhi.', '']
+    ,[['fixed point'], 'Keadaan saat tidak ada lagi rule yang bisa fire, sehingga working memory berhenti berubah.', '']
+    ,[['AND-OR tree', 'AND-OR proof tree', 'AND-OR'], 'Pohon bukti backward chaining. Cabang OR = beberapa rule untuk goal yang sama (cukup satu berhasil). Cabang AND = premis-premis satu rule (semua harus berhasil).', '']
+    ,[['tie-break', 'tie-breaking'], 'Aturan tambahan untuk memilih saat beberapa kandidat sama bagusnya.', 'Seri f pada A*: pilih huruf alfabet lebih kecil.']
+    ,[['path cost'], 'Total biaya langkah dari initial state sampai suatu node. Pada UCS dan A* ini ditulis g(n).', '']
+    ,[['goal test'], 'Pemeriksaan apakah suatu state adalah goal. Pada UCS dan A* harus dilakukan saat node diambil dari agenda, bukan saat dibangkitkan.', '']
+    ,[['local search'], 'Pencarian yang hanya menyimpan state sekarang dan berpindah ke tetangganya. Yang dicari state terbaik, bukan jalur.', 'Hill climbing, simulated annealing, genetic algorithm.']
+    ,[['hill climbing'], 'Local search paling sederhana: terus pindah ke tetangga yang lebih baik sampai tidak ada lagi. Cepat tetapi bisa terjebak di maksimum lokal atau shoulder.', '']
+    ,[['temperatur'], 'Parameter T pada simulated annealing. Makin tinggi T, makin besar peluang menerima langkah buruk; T diturunkan pelan-pelan.', 'Δ = −2: T = 5 memberi P = 0,67, T = 0,5 memberi P = 0,018.']
+    ,[['fitness'], 'Nilai kualitas satu individu pada genetic algorithm. Makin besar makin baik dan makin mungkin terpilih jadi parent.', '']
+    ,[['kromosom'], 'Representasi satu kandidat solusi pada genetic algorithm, biasanya deretan bit atau simbol.', '10110 adalah kromosom lima bit dengan tiga bit 1.']
+    ,[['pit'], 'Lubang di Wumpus world. Kotak yang bersebelahan (ortogonal) dengan pit terasa breeze.', '']
+    ,[['breeze'], 'Percept di Wumpus world: terasa di kotak yang bersebelahan ortogonal dengan pit.', '']
+    ,[['frame'], 'Representasi pengetahuan berbentuk objek dengan slot (atribut) dan nilainya.', 'Frame AI3070: jenis = MataKuliah, prerequisite = [Matdis].']
+    ,[['production rule'], 'Aturan berbentuk IF kondisi THEN aksi atau kesimpulan.', '']
+    ,[['degree'], 'Pada CSP: banyaknya constraint suatu variabel dengan variabel lain yang belum diisi.', '']
+  ];
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  try {
+    const entries = []; G.forEach(g => g[0].forEach(t => entries.push({ t, key: g[0][0], html: '<b>' + g[0][0] + '</b><br>' + g[1] + (g[2] ? '<br><span class="tx">Contoh: ' + g[2] + '</span>' : '') })));
+    entries.sort((a, b) => b.t.length - a.t.length);
+    const byLower = {}; entries.forEach(e => { if (!byLower[e.t.toLowerCase()]) byLower[e.t.toLowerCase()] = e; });
+    const SKIP = 'button,a,code,svg,th,h2,label,input,.gl,.cover,.pin,.key,.sh,.cap';
+    $$('.soal').forEach(body => {
+      const used = new Set();
+      const mk = () => { const left = entries.filter(e => !used.has(e.key)); return left.length ? new RegExp('(?<![\\p{L}\\p{N}_-])(' + left.map(e => esc(e.t)).join('|') + ')(?![\\p{L}\\p{N}_*(-])', 'iu') : null; };
+      let re = mk(); const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement && n.parentElement.closest(SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+      const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        let cur = node;
+        while (re && cur && cur.nodeValue.length > 2) {
+          const m = re.exec(cur.nodeValue); if (!m) break; const e = byLower[m[1].toLowerCase()]; if (!e) break;
+          const mid = cur.splitText(m.index), rest = mid.splitText(m[1].length), sp = document.createElement('span');
+          sp.className = 'gl'; sp.tabIndex = 0; sp.setAttribute('data-tip', e.html); mid.parentNode.replaceChild(sp, mid); sp.appendChild(mid);
+          used.add(e.key); re = mk(); cur = rest;
+        }
+      });
+    });
+  } catch (err) { /* browser lama tanpa lookbehind: glosarium dilewati */ }
 })();
 </script>
 </body>
