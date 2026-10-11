@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Catatan UTS IF3070 — Dasar Inteligensi Artifisial</title>
+<title>Catatan UTS IF3070: Dasar Inteligensi Artifisial</title>
 <style>
 :root{
   --navy:#263F77; --blue1:#315A96; --blue2:#4076B4; --sky:#5FB6E6; --pale:#8FC5EA; --yellow:#E0DE50;
@@ -223,6 +223,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
   <div class="tools">
     <label><input type="checkbox" id="only1"> Tampilkan hanya topik ★ Wajib</label>
     <label><input type="checkbox" id="openAll"> Buka semua topik ○</label>
+    <a href="latsol-uts-if3070.html" style="padding:7px 16px;border-radius:999px;background:#E0DE50;color:#263F77;font-weight:700;font-size:.9rem;text-decoration:none;white-space:nowrap">Latihan soal + jawaban →</a>
     <span class="small" style="color:#DCEBFA;flex-basis:100%">Kata <span style="border-bottom:1.5px dotted #fff">bergaris titik-titik</span>, lencana, dan bagian diagram bisa di-hover atau diklik untuk detail.</span>
   </div>
 </div></div>
@@ -242,7 +243,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <section class="panel" id="tab-peta">
 <div class="intro">
   <h2>Peta UTS: apa yang benar-benar keluar</h2>
-  <p class="lead">Hasil membaca seluruh <code>wrap soal dai.pdf</code> (59 halaman, dibaca sebagai gambar — termasuk pohon, graf, dan tabel). Tab-tab materi memakai peta ini untuk menentukan seberapa panjang tiap topik dibahas.</p>
+  <p class="lead">Hasil membaca seluruh <code>wrap soal dai.pdf</code> (59 halaman, dibaca sebagai gambar, termasuk pohon, graf, dan tabel). Tab-tab materi memakai peta ini untuk menentukan seberapa panjang tiap topik dibahas.</p>
 </div>
 
 <details class="topic t1" id="peta-sumber" open>
@@ -353,7 +354,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <!-- ======================= 01a WHAT IS AI ======================= -->
 <section class="panel" id="tab-m1a">
 <div class="intro">
-  <h2>Materi 01a — What is AI</h2>
+  <h2>Materi 01a: What is AI</h2>
   <p class="lead">Inti materi: AI didefinisikan lewat 4 pendekatan, dan tidak semua sistem otomatis adalah AI. Sisanya (contoh aplikasi, sejarah Loebner Prize) hanya ilustrasi.</p>
   <div class="toc"></div>
 </div>
@@ -363,13 +364,13 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <div class="body">
 <p>Slide merangkum 8 definisi AI (Russell &amp; Norvig, Fig. 1.1) ke dalam matriks 2 × 2. Dua pertanyaan yang memisahkan keempatnya:</p>
 <ul>
-<li><b>Baris — apa yang diukur?</b> proses <i>berpikir</i> (thinking, internal) atau <i>perilaku</i> (acting, eksternal).</li>
-<li><b>Kolom — dibandingkan dengan apa?</b> <i>manusia</i> (humanly: semirip mungkin dengan manusia) atau <i>rasionalitas</i> (rationally: melakukan hal yang benar/terbaik).</li>
+<li><b>Baris: apa yang diukur?</b> proses <i>berpikir</i> (thinking, internal) atau <i>perilaku</i> (acting, eksternal).</li>
+<li><b>Kolom: dibandingkan dengan apa?</b> <i>manusia</i> (humanly: semirip mungkin dengan manusia) atau <i>rasionalitas</i> (rationally: melakukan hal yang benar/terbaik).</li>
 </ul>
 <div class="scroll">
 <svg viewBox="0 0 760 330" width="100%" style="max-width:760px" role="img" aria-label="Matriks empat pendekatan AI">
-  <text x="250" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#263F77">HUMANLY — tolok ukurnya manusia</text>
-  <text x="570" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#263F77">RATIONALLY — tolok ukurnya rasionalitas</text>
+  <text x="250" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#263F77">HUMANLY: tolok ukurnya manusia</text>
+  <text x="570" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="#263F77">RATIONALLY: tolok ukurnya rasionalitas</text>
   <text x="22" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#263F77" transform="rotate(-90 22 105)">THINKING</text>
   <text x="22" y="250" text-anchor="middle" font-size="13" font-weight="700" fill="#263F77" transform="rotate(-90 22 250)">ACTING</text>
   <g font-size="12">
@@ -378,33 +379,33 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
   <text x="60" y="76" fill="#1A2540">Cognitive modeling: memodelkan cara</text>
   <text x="60" y="92" fill="#1A2540">manusia berpikir (proses internal).</text>
   <text x="60" y="114" fill="#55657F">"…machines with minds, in the full and</text>
-  <text x="60" y="129" fill="#55657F">literal sense" — Haugeland 1985</text>
+  <text x="60" y="129" fill="#55657F">literal sense" (Haugeland 1985)</text>
   <text x="60" y="148" fill="#55657F">"automation of activities we associate with</text>
-  <text x="60" y="163" fill="#55657F">human thinking…" — Bellman 1978</text>
+  <text x="60" y="163" fill="#55657F">human thinking…" (Bellman 1978)</text>
   <rect x="390" y="34" width="350" height="138" rx="12" fill="#EAF4FC" stroke="#8FC5EA"/>
   <text x="405" y="56" font-size="15" font-weight="700" fill="#263F77">Thinking Rationally (TR)</text>
   <text x="405" y="76" fill="#1A2540">Laws of thought: penalaran yang benar</text>
   <text x="405" y="92" fill="#1A2540">dengan logika (right thinking: reasoning).</text>
   <text x="405" y="114" fill="#55657F">"study of mental faculties through the use of</text>
-  <text x="405" y="129" fill="#55657F">computational models" — Charniak &amp; McDermott 1985</text>
+  <text x="405" y="129" fill="#55657F">computational models" (Charniak &amp; McDermott 1985)</text>
   <text x="405" y="148" fill="#55657F">"computations that make it possible to perceive,</text>
-  <text x="405" y="163" fill="#55657F">reason, and act" — Winston 1992</text>
+  <text x="405" y="163" fill="#55657F">reason, and act" (Winston 1992)</text>
   <rect x="45" y="182" width="330" height="138" rx="12" fill="#fff" stroke="#8FC5EA"/>
   <text x="60" y="204" font-size="15" font-weight="700" fill="#263F77">Acting Humanly (AH)</text>
   <text x="60" y="224" fill="#1A2540">Turing test: berperilaku (dari luar) seperti</text>
   <text x="60" y="240" fill="#1A2540">manusia sampai sulit dibedakan.</text>
   <text x="60" y="262" fill="#55657F">"machines that perform functions that require</text>
-  <text x="60" y="277" fill="#55657F">intelligence when performed by people" — Kurzweil 1990</text>
+  <text x="60" y="277" fill="#55657F">intelligence when performed by people" (Kurzweil 1990)</text>
   <text x="60" y="296" fill="#55657F">"make computers do things at which, at the</text>
-  <text x="60" y="311" fill="#55657F">moment, people are better" — Rich &amp; Knight 1991</text>
+  <text x="60" y="311" fill="#55657F">moment, people are better" (Rich &amp; Knight 1991)</text>
   <rect x="390" y="182" width="350" height="138" rx="12" fill="#FBFAD8" stroke="#E0DE50" stroke-width="2"/>
   <text x="405" y="204" font-size="15" font-weight="700" fill="#263F77">Acting Rationally (AR)</text>
   <text x="405" y="224" fill="#1A2540">Rational agent: bertindak untuk mencapai hasil</text>
   <text x="405" y="240" fill="#1A2540">terbaik (atau hasil harapan terbaik).</text>
   <text x="405" y="262" fill="#55657F">"Computational intelligence is the study of the</text>
-  <text x="405" y="277" fill="#55657F">design of intelligent agents" — Poole et al. 1998</text>
+  <text x="405" y="277" fill="#55657F">design of intelligent agents" (Poole et al. 1998)</text>
   <text x="405" y="296" fill="#55657F">"AI is concerned with intelligent behavior</text>
-  <text x="405" y="311" fill="#55657F">in artifacts" — Nilsson 1998</text>
+  <text x="405" y="311" fill="#55657F">in artifacts" (Nilsson 1998)</text>
   </g>
 </svg>
 </div>
@@ -436,9 +437,9 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <h3>Kemampuan yang dibutuhkan untuk lulus Turing test</h3>
 <div class="grid2">
 <div class="box sky"><h4>Turing test</h4>
-<ul><li><b>Natural language processing</b> — berkomunikasi (speak/listen)</li><li><b>Knowledge representation</b> — menyimpan yang diketahui</li><li><b>Automated reasoning</b> — menjawab dan menyimpulkan</li><li><b>Machine learning</b> — beradaptasi dengan hal baru</li></ul></div>
+<ul><li><b>Natural language processing</b>: berkomunikasi (speak/listen)</li><li><b>Knowledge representation</b>: menyimpan yang diketahui</li><li><b>Automated reasoning</b>: menjawab dan menyimpulkan</li><li><b>Machine learning</b>: beradaptasi dengan hal baru</li></ul></div>
 <div class="box sky"><h4>Total Turing test menambahkan</h4>
-<ul><li><b>Computer vision</b> — melihat (kamera)</li><li><b>Robotics</b> — memanipulasi objek dan bergerak (aktuator)</li></ul>
+<ul><li><b>Computer vision</b>: melihat (kamera)</li><li><b>Robotics</b>: memanipulasi objek dan bergerak (aktuator)</li></ul>
 <p class="small muted">Catatan slide: mempelajari prinsip dasar kecerdasan lebih penting daripada menduplikasinya, sehingga hanya sedikit upaya yang diarahkan untuk lulus Turing test.</p></div>
 </div>
 </div></details>
@@ -454,7 +455,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <tr><td><b>Potensi</b></td><td>Menaikkan produktivitas, menurunkan biaya operasi, menyederhanakan alur kerja.</td><td>Sama, ditambah alur kerja cerdas yang mengikuti kebutuhan yang berubah.</td></tr>
 </tbody></table></div>
 <p><b>Tanda bukan AI:</b> rumus tetap, flowchart tetap, pilihan input yang sudah disediakan, aturan sensor–aksi tunggal, urutan terprogram tanpa pengambilan keputusan. Contoh dosen: <i>IVR/call center otomatis</i> → non-AI karena hanya menavigasi menu berdasarkan input dan memutar pesan rekaman.</p>
-<p class="small muted">Slide juga mengutip: "By definition, no AI ever works; if it works, it's not AI" — persoalan yang sudah terspesifikasi jelas cenderung "keluar" dari AI. Dan revolusi AI masa kini tidak mencoba membuat ulang otak, melainkan memakai machine learning, data masif, sensor canggih, dan algoritma untuk menguasai tugas-tugas diskret.</p>
+<p class="small muted">Slide juga mengutip: "By definition, no AI ever works; if it works, it's not AI": persoalan yang sudah terspesifikasi jelas cenderung "keluar" dari AI. Dan revolusi AI masa kini tidak mencoba membuat ulang otak, melainkan memakai machine learning, data masif, sensor canggih, dan algoritma untuk menguasai tugas-tugas diskret.</p>
 </div></details>
 
 <details class="topic t1" id="a-latihan" open>
@@ -471,7 +472,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <div class="mcq" data-opts="TH|AH|TR|AR|Non-AI" data-ans="AR"><p>AI bermain catur seperti AlphaZero</p><p class="why" hidden>Memilih tindakan yang memaksimalkan kemungkinan memperoleh hasil baik/menang.</p></div>
 <div class="mcq" data-opts="TH|AH|TR|AR|Non-AI" data-ans="Non-AI"><p>IVR / call center otomatis</p><p class="why" hidden>Navigasi berdasarkan input pengguna dengan pesan suara yang sudah direkam; tidak ada penalaran.</p></div>
 
-<h3>A2. Kuis 1 — benar atau salah (dengan alasan)</h3>
+<h3>A2. Kuis 1: benar atau salah (dengan alasan)</h3>
 <p class="small muted">Di kuis, tiap butir bernilai 1 poin untuk B/S dan 2 poin untuk alasan. Tiga butir pertama dari Kuis 1 (10 Okt 2024), tiga berikutnya dari slide Pembahasan Kuis 1.</p>
 <div class="mcq" data-opts="Benar|Salah" data-ans="Salah"><p>Aplikasi chatbot yang dipergunakan maskapai penerbangan berinteraksi dengan pelanggannya merupakan contoh pendekatan AI "berpikir rational".</p><p class="why" hidden>Chatbot yang berinteraksi dengan pelanggan = <b>acting humanly</b>: agen bertindak seperti manusia.</p></div>
 <div class="mcq" data-opts="Benar|Salah" data-ans="Salah"><p>Mobil tanpa awak merupakan contoh pendekatan "bertindak seperti manusia".</p><p class="why" hidden><b>Acting rationally</b>: memilih tindakan terbaik untuk mencapai tujuan, bukan meniru manusia.</p></div>
@@ -480,7 +481,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <div class="mcq" data-opts="Benar|Salah" data-ans="Salah"><p>Persoalan teka-teki logika yang diselesaikan dengan algoritma Backtracking Search merupakan contoh aplikasi AI dengan pendekatan thinking rationally.</p><p class="why" hidden>Kunci dosen: seharusnya <b>acting rationally</b>. Pencarian = bertindak mencapai tujuan; thinking rationally baru tepat jika memakai kaidah inferensi logika.</p></div>
 <div class="mcq" data-opts="Benar|Salah" data-ans="Salah"><p>Agen yang bekerja pada lingkungan tugas "partially observable" tidak akan bisa bersifat rational.</p><p class="why" hidden>Rasional ≠ omniscience. Agen tetap bisa bertindak rasional berdasarkan pengetahuan yang dimilikinya.</p></div>
 
-<h3>B. Latihan di slide — pendekatan</h3>
+<h3>B. Latihan di slide: pendekatan</h3>
 <div class="callout mine"><b>Jawaban saya.</b> Slide tidak memberi kunci untuk bagian B dan C; jawaban diturunkan dari definisi di atas. Nomor 4 dan 5 sejalan dengan kunci Pembahasan Kuis 1 (backtracking search → acting rationally).</div>
 <div class="mcq" data-opts="TH|AH|TR|AR" data-ans="TH"><p>1. Pengenalan gambar dengan hierarchical temporal memory yang meniru prinsip biologi neocortex.</p><p class="why" hidden>Meniru cara kerja otak manusia = memodelkan proses berpikir manusia.</p></div>
 <div class="mcq" data-opts="TH|AH|TR|AR" data-ans="AR"><p>2. Berbekal pengetahuan (algoritma) dan tujuan (goal), sistem mencari rangkaian aksi untuk menghasilkan solusi terbaik.</p><p class="why" hidden>Goal + knowledge → bertindak untuk hasil terbaik: definisi rational agent.</p></div>
@@ -488,7 +489,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <div class="mcq" data-opts="TH|AH|TR|AR" data-ans="AR"><p>4. Logic puzzle diselesaikan dengan pencarian memakai algoritma backtracking.</p><p class="why" hidden>Pencarian rangkaian langkah menuju goal = problem-solving agent, bertindak rasional. Bandingkan dengan nomor 5.</p></div>
 <div class="mcq" data-opts="TH|AH|TR|AR" data-ans="TR"><p>5. Teka-teki diselesaikan dengan kaidah inferensi logika (modus ponens, modus tollens, dll.).</p><p class="why" hidden>Menarik kesimpulan dengan hukum logika = laws of thought.</p></div>
 
-<h3>C. Latihan di slide — AI atau bukan</h3>
+<h3>C. Latihan di slide: AI atau bukan</h3>
 <div class="mcq" data-opts="AI|Non-AI" data-ans="Non-AI"><p>1. Software akuntansi dengan rumus rugi-laba; input file xls berstruktur kolom pasti.</p><p class="why" hidden>Rumus tetap atas input terstruktur: selalu dikerjakan dengan cara yang sama.</p></div>
 <div class="mcq" data-opts="AI|Non-AI" data-ans="AI"><p>2. Lampu lalu lintas yang durasinya ditentukan dari jumlah kendaraan, dihitung otomatis dari gambar kamera CCTV.</p><p class="why" hidden>Mempersepsi lingkungan (computer vision) dan menyesuaikan keputusan dengan kondisi yang berubah.</p></div>
 <div class="mcq" data-opts="AI|Non-AI" data-ans="Non-AI"><p>3. Tanya jawab pemesanan hotel dengan flowchart tetap; pelanggan memilih dari kandidat input yang disediakan.</p><p class="why" hidden>Alur dan pilihan sudah ditentukan di dalam program.</p></div>
@@ -522,7 +523,7 @@ footer{max-width:1060px;margin:0 auto;padding:0 16px 50px;color:var(--muted);fon
 <!-- ======================= 01b INTELLIGENT AGENT ======================= -->
 <section class="panel" id="tab-m1b">
 <div class="intro">
-  <h2>Materi 01b — Intelligent Agent</h2>
+  <h2>Materi 01b: Intelligent Agent</h2>
   <p class="lead">Alur materi: apa itu agen → kapan agen disebut rasional → cara menspesifikasikan tugasnya (PEAS) → 6 sifat lingkungan → struktur program agen → 3 level agen (problem solving, knowledge based, learning).</p>
   <div class="toc"></div>
 </div>
@@ -564,7 +565,7 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <div class="body">
 <div class="callout key"><b>Definisi.</b> Untuk setiap percept sequence yang mungkin, rational agent memilih aksi yang <b>diharapkan memaksimalkan performance measure</b>, berdasarkan bukti dari percept sequence dan pengetahuan bawaan yang dimilikinya.</div>
 <p><b>Performance measure</b> = kriteria objektif keberhasilan perilaku agen. Untuk vacuum cleaner: banyak kotoran terangkat, waktu, listrik, kebisingan.</p>
-<p>Contoh payung di slide — tiga hal yang sering tertukar:</p>
+<p>Contoh payung di slide, tiga hal yang sering tertukar:</p>
 <div class="grid3">
 <div class="box"><h4>Rasional</h4>Mendengar ramalan hujan lalu membawa payung. Agen bertindak sesuai apa yang <i>dipercayainya</i> akan mencapai tujuan.</div>
 <div class="box"><h4>Rasional ≠ mahatahu (omniscience)</h4>Ramalan terbaru hujan, tetapi saya tidak mendengarnya dan tidak membawa payung. <b>Tetap rasional</b>, karena saya tidak tahu.</div>
@@ -607,10 +608,10 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <p>Intelligent agent yang dipasang pada klien email untuk mendeteksi spam email dan memasukkannya ke folder tertentu. Deskripsikan PEAS dan enam properti lingkungannya.</p>
 <details class="sol"><summary>Jawaban mahasiswa yang dinilai + koreksi dosen</summary><div>
 <ul>
-<li><b>P</b> — ketepatan mendeteksi spam; ketepatan memasukkan email ke folder yang sesuai. <span class="good">✓</span></li>
-<li><b>E</b> — "email yang masuk" hanya diberi nilai sebagian. Lengkapi: klien email, email masuk, folder, pengguna/pengirim.</li>
-<li><b>A</b> — yang memindahkan email terdeteksi spam ke folder. <span class="good">✓</span></li>
-<li><b>S</b> — jawaban "pendeteksi email spam" dikoreksi dosen menjadi <b>pembaca</b> email: sensor adalah yang <i>membaca</i> isi/atribut email, bukan pendeteksinya.</li>
+<li><b>P</b>: ketepatan mendeteksi spam; ketepatan memasukkan email ke folder yang sesuai. <span class="good">✓</span></li>
+<li><b>E</b>: "email yang masuk" hanya diberi nilai sebagian. Lengkapi: klien email, email masuk, folder, pengguna/pengirim.</li>
+<li><b>A</b>: yang memindahkan email terdeteksi spam ke folder. <span class="good">✓</span></li>
+<li><b>S</b>: jawaban "pendeteksi email spam" dikoreksi dosen menjadi <b>pembaca</b> email: sensor adalah yang <i>membaca</i> isi/atribut email, bukan pendeteksinya.</li>
 <li><b>Properti</b> (semuanya dicentang benar): fully observable (seluruh email yang masuk dapat diamati); deterministic; episodic (aksi pada satu email tidak memengaruhi email berikutnya); discrete; dynamic (email terus berdatangan); single agent.</li>
 </ul>
 <div class="callout trap"><b>Pelajaran dari coretan nilai.</b> Sensor = alat <i>mempersepsi</i> (pembaca), aktuator = alat <i>bertindak</i> (pemindah). Jangan menulis fungsi utama agen ("pendeteksi spam") sebagai sensor.</div>
@@ -663,7 +664,7 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <tr><td>Autonomous taxi</td><td class="c">½</td><td class="c bad">−</td><td class="c bad">−</td><td class="c bad">−</td><td class="c bad">−</td><td class="c bad">−</td><td class="c"><b>LA</b></td></tr>
 <tr><td>Automatic vacuum cleaner</td><td class="c">½</td><td class="c good">v</td><td class="c bad">−</td><td class="c bad">−</td><td class="c bad">−</td><td class="c bad">−</td><td class="c"><b>PS</b></td></tr>
 </tbody></table></div>
-<p class="small">Cara membaca: keempatnya partially observable, stochastic, sequential, dynamic, dan continuous — pola "dunia nyata". Yang membedakan hanya single/multi agent dan tipe agennya. Alasan kolom tipe agen tidak tertulis di pembahasan; tafsiran saya: diagnosis medis menalar dari pengetahuan pakar → KA; robot gudang dan vacuum cleaner mencari rute/rangkaian aksi → PS; taksi otonom belajar dari pengalaman mengemudi → LA.</p>
+<p class="small">Cara membaca: keempatnya partially observable, stochastic, sequential, dynamic, dan continuous: pola "dunia nyata". Yang membedakan hanya single/multi agent dan tipe agennya. Alasan kolom tipe agen tidak tertulis di pembahasan; tafsiran saya: diagnosis medis menalar dari pengetahuan pakar → KA; robot gudang dan vacuum cleaner mencari rute/rangkaian aksi → PS; taksi otonom belajar dari pengalaman mengemudi → LA.</p>
 
 <h3>Latihan (HMIF)</h3>
 <div class="mcq" data-opts="Episodic|Stochastic|Sequential|Dynamic" data-ans="Episodic"><p>Filter spam memeriksa email satu per satu; keputusan untuk satu email tidak memengaruhi email berikutnya.</p><p class="why" hidden>Tiap email adalah episode yang berdiri sendiri.</p></div>
@@ -679,7 +680,7 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <summary><h2>Struktur program agen: 5 tipe</h2><div class="meta"><span class="badge t2">◆ Penting</span><span class="src">HMIF</span></div></summary>
 <div class="body">
 <p>Tiap tipe menambah satu kemampuan di atas tipe sebelumnya. Pilih tipe untuk melihat komponen yang bertambah.</p>
-<div class="widget" id="agentDiag"><div class="wt">Diagram interaktif — tipe agen</div>
+<div class="widget" id="agentDiag"><div class="wt">Diagram interaktif: tipe agen</div>
 <div class="ctl">
   <button class="btn pri" data-agent="simple">Simple reflex</button>
   <button class="btn" data-agent="model">Model-based reflex</button>
@@ -750,24 +751,24 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <details class="topic t1" id="b-level" open>
 <summary><h2>Tiga level agen: Problem Solving, Knowledge Based, Learning</h2><div class="meta"><span class="badge t1">★ Wajib</span><span class="src">Kuis 1</span><span class="src">Dosen Okt 2026</span><span class="src">HMIF</span></div></summary>
 <div class="body">
-<p>Slide membedakan ketiganya lewat <b>apa yang sudah diketahui agen</b> di Wumpus World (gua 4 × 4: Wumpus memakan siapa pun yang masuk ruangannya, bisa dipanah — agen hanya punya satu panah; pit menjebak siapa pun; ada emas).</p>
+<p>Slide membedakan ketiganya lewat <b>apa yang sudah diketahui agen</b> di Wumpus World (gua 4 × 4: Wumpus memakan siapa pun yang masuk ruangannya, bisa dipanah, tetapi agen hanya punya satu panah; pit menjebak siapa pun; ada emas).</p>
 <div class="grid3">
-<div class="box navy"><h4>Level 1 — Problem Solving Agent</h4>
+<div class="box navy"><h4>Level 1: Problem Solving Agent</h4>
 <p class="small">Punya informasi <b>semua state</b>: posisi Wumpus, pit, emas (goal). Tinggal <b>mencari jalur</b> dari initial state ke goal secepat mungkin.</p>
 <p class="small"><b>Alat:</b> DFS, BFS, IDS, UCS; Greedy, A*; Minimax; hill climbing, SA, GA.</p>
 <p class="small"><b>Contoh lain:</b> N-puzzle, block world, maze, path finding.</p></div>
-<div class="box sky"><h4>Level 2 — Knowledge Based Agent</h4>
+<div class="box sky"><h4>Level 2: Knowledge Based Agent</h4>
 <p class="small">Tidak tahu semua state; hanya punya <b>pengetahuan dasar/premis</b> (kotak di sebelah Wumpus berbau, di sebelah pit berangin, glitter jika ada emas, …). Tiap menerima percept, agen <b>menalar fakta baru</b> selangkah demi selangkah.</p>
 <p class="small"><b>Alat:</b> representasi pengetahuan + inferensi (logika, rule).</p>
 <p class="small"><b>Contoh lain:</b> expert system, perbaikan mobil, agro-medis, deteksi TB.</p></div>
-<div class="box"><h4>Level 3 — Learning Agent</h4>
+<div class="box"><h4>Level 3: Learning Agent</h4>
 <p class="small">Tidak punya state <b>maupun</b> pengetahuan dasar. Bermain berkali-kali (mungkin mati); data pengamatan menjadi masukan belajar. Hasilnya: pengetahuan dasar, mis. "kotak di sebelah pit berangin".</p>
 <p class="small"><b>Alat:</b> supervised, unsupervised, reinforcement learning.</p>
 <p class="small"><b>Contoh lain:</b> pengenalan tulisan tangan, suara, wajah.</p></div>
 </div>
 <div class="callout key"><b>Cara menentukan level di soal:</b> tanyakan dari mana "kepintaran" sistem berasal. Peta/aturan dunia lengkap lalu mencari rangkaian aksi → <b>PS</b>. Pengetahuan pakar/premis lalu menyimpulkan → <b>KB</b>. Data/pengalaman lalu membentuk pengetahuan sendiri → <b>Learning</b>.</div>
 
-<h3>Kuis 1 — tentukan level agennya</h3>
+<h3>Kuis 1: tentukan level agennya</h3>
 <div class="mcq" data-opts="Problem solving|Knowledge based|Learning" data-ans="Knowledge based"><p>Agent hero pada permainan DOTA: dituliskan aturan-aturan (rules) yang dimanfaatkan agent untuk menentukan aksi berdasarkan kondisi yang ditemui, tanpa informasi di awal musuh berada di mana.</p><p class="why" hidden>Kunci dosen: ada pengetahuan dasar yang diberikan ke agen, tetapi agen harus menangkap dari percept dan rules, aksi apa yang seharusnya dilakukan.</p></div>
 <div class="mcq" data-opts="Problem solving|Knowledge based|Learning" data-ans="Learning"><p>Agen mendapatkan data kumpulan pasien dokter gigi: semua gejala tiap pasien beserta diagnosis akhirnya. Agen menentukan diagnosis untuk pasien baru dengan gejala tertentu.</p><p class="why" hidden>Kunci dosen: dari kumpulan data, agen berusaha <i>mendapatkan</i> pengetahuan.</p></div>
 <div class="mcq" data-opts="Problem solving|Knowledge based|Learning" data-ans="Problem solving"><p>Aplikasi penjadwalan pesawat di bandara: agen mendapat informasi semua penerbangan, semua batasan yang tidak boleh dilanggar, serta algoritma pencarian.</p><p class="why" hidden>Kunci dosen: semua informasi sudah diberikan; agen mencari assignment jadwal yang tidak melanggar batasan.</p></div>
@@ -793,7 +794,7 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <div class="body">
 <ul>
 <li><b>Table-lookup agent</b> (agent function sebagai tabel): tabel sangat besar, lama dibangun, tidak otonom, dan kalaupun belajar butuh waktu lama mengisi tabel. Alternatifnya reflex agent yang merespons secara fleksibel.</li>
-<li><b>Planning agent:</b> secara eksplisit mempertimbangkan konsekuensi masa depan — membangkitkan rangkaian aksi, mensimulasikan akibatnya, memilih yang memberi utilitas (performance measure) terbesar, lalu berkomitmen pada aksi pertamanya.</li>
+<li><b>Planning agent:</b> secara eksplisit mempertimbangkan konsekuensi masa depan: membangkitkan rangkaian aksi, mensimulasikan akibatnya, memilih yang memberi utilitas (performance measure) terbesar, lalu berkomitmen pada aksi pertamanya.</li>
 <li><b>AI agent vs agentic AI</b> (Sapkota dkk.): AI agent = program otonom untuk <i>tugas spesifik</i>, bekerja sendiri, belajar dalam domainnya (chatbot layanan, asisten virtual). Agentic AI = <i>sistem banyak agen</i> yang berkolaborasi untuk tujuan kompleks multi-langkah (supply chain, optimasi proses bisnis). Dari sisi kemampuan: AI agent = eksekusi tugas, reaktif; agentic AI = menetapkan tujuan sendiri, proaktif, perencanaan multi-langkah; generative agent = menghasilkan konten.</li>
 </ul>
 </div></details>
@@ -801,7 +802,7 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <!-- ======================= 02 CLASSICAL SEARCH ======================= -->
 <section class="panel" id="tab-m2">
 <div class="intro">
-  <h2>Materi 02 — Problem Solving Agent: Classical Search</h2>
+  <h2>Materi 02: Problem Solving Agent: Classical Search</h2>
   <p class="lead">Problem-solving agent merumuskan masalah, <b>mencari</b> rangkaian aksi dari initial state ke goal state, lalu mengeksekusinya. Semua algoritma di bab ini memakai satu kerangka (agenda) dan hanya berbeda pada <i>node mana yang diambil lebih dulu</i>.</p>
   <div class="toc"></div>
 </div>
@@ -812,7 +813,7 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <div class="grid2">
 <div class="box"><h4>Enam komponen</h4>
 <ol>
-<li><b>Set of states</b> S — state space membentuk graf (node = state, arc = aksi)</li>
+<li><b>Set of states</b> S: state space membentuk graf (node = state, arc = aksi)</li>
 <li><b>Initial state</b></li>
 <li><b>Goal state(s)</b> / goal test</li>
 <li><b>Actions</b> (deterministik)</li>
@@ -822,10 +823,10 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <p><b>Solusi</b> = jalur di graf dari initial ke goal. Kriteria: waktu/ruang komputasi dan kualitas solusi.</p></div>
 <div class="box"><h4>Asumsi (dan ke mana jika asumsi gagal)</h4>
 <ul>
-<li>Agen tahu dinamika dunia (state, aksi) — jika tidak: <i>learning</i></li>
-<li>State dunia terbatas dan cukup kecil untuk dienumerasi — jika tak hingga: <i>logic</i></li>
-<li>Dunia deterministik — jika tidak: <i>uncertainty</i></li>
-<li>Agen tahu state saat ini — jika tidak: <i>logic, uncertainty</i></li>
+<li>Agen tahu dinamika dunia (state, aksi); jika tidak: <i>learning</i></li>
+<li>State dunia terbatas dan cukup kecil untuk dienumerasi; jika tak hingga: <i>logic</i></li>
+<li>Dunia deterministik; jika tidak: <i>uncertainty</i></li>
+<li>Agen tahu state saat ini; jika tidak: <i>logic, uncertainty</i></li>
 <li>Utilitas rangkaian state = jumlah sepanjang jalur</li>
 </ul>
 <p class="small muted">Lingkungan perencanaan rute di slide: static, discrete, deterministic, observable.</p></div>
@@ -843,11 +844,11 @@ Apakah ini "perilaku yang baik"? Tergantung <b>performance measure</b> → masuk
 <summary><h2>Kerangka agenda + BFS, DFS, UCS</h2><div class="meta"><span class="badge t2">◆ Penting</span><span class="src">HMIF</span><span class="src">Latihan slide</span></div></summary>
 <div class="body">
 <div class="flow"><span>Agenda berisi start</span><i>→</i><span>Ambil 1 node<br><small>strategi = node yang mana</small></span><i>→</i><span>Goal? → berhenti</span><i>→</i><span>Belum pernah diekspansi?<br><small>masukkan anak-anaknya ke agenda</small></span><i>↺</i></div>
-<p class="small">Goal dicek saat node <b>diambil</b>, bukan saat ditambahkan. Bedanya ketiga algoritma hanya di bentuk agenda — contoh setelah A diekspansi di graf G1:</p>
+<p class="small">Goal dicek saat node <b>diambil</b>, bukan saat ditambahkan. Bedanya ketiga algoritma hanya di bentuk agenda. Contoh setelah A diekspansi di graf G1:</p>
 <div class="grid3">
-<div class="box"><h4>BFS — antrean</h4><div class="qviz"><em>keluar ←</em><span class="out">Z</span><span>S</span><span>T</span><span class="in">anak baru</span><em>← masuk</em></div><span class="small">Masuk dari belakang, keluar dari depan. Yang paling lama menunggu diambil dulu.</span></div>
-<div class="box"><h4>DFS — tumpukan</h4><div class="qviz"><em>keluar ←</em><span class="in">anak baru</span><span class="out">Z</span><span>S</span><span>T</span></div><span class="small">Anak baru masuk di depan dan langsung diambil berikutnya. Menyelam sedalam mungkin.</span></div>
-<div class="box"><h4>UCS — urut biaya g</h4><div class="qviz"><em>keluar ←</em><span class="out">Z 75</span><span>T 118</span><span>S 140</span></div><span class="small">Selalu diurutkan ulang; yang biaya jalurnya terkecil diambil dulu.</span></div>
+<div class="box"><h4>BFS: antrean</h4><div class="qviz"><em>keluar ←</em><span class="out">Z</span><span>S</span><span>T</span><span class="in">anak baru</span><em>← masuk</em></div><span class="small">Masuk dari belakang, keluar dari depan. Yang paling lama menunggu diambil dulu.</span></div>
+<div class="box"><h4>DFS: tumpukan</h4><div class="qviz"><em>keluar ←</em><span class="in">anak baru</span><span class="out">Z</span><span>S</span><span>T</span></div><span class="small">Anak baru masuk di depan dan langsung diambil berikutnya. Menyelam sedalam mungkin.</span></div>
+<div class="box"><h4>UCS: urut biaya g</h4><div class="qviz"><em>keluar ←</em><span class="out">Z 75</span><span>T 118</span><span>S 140</span></div><span class="small">Selalu diurutkan ulang; yang biaya jalurnya terkecil diambil dulu.</span></div>
 </div>
 <div class="tw"><table>
 <thead><tr><th>Algoritma</th><th>Agenda</th><th>Diambil</th><th>Sifat</th></tr></thead>
@@ -890,7 +891,7 @@ L<sub>229</sub> R<sub>230</sub> F<sub>239</sub> O<sub>291</sub>   <i>(O: tak ada
 R<sub>230</sub> F<sub>239</sub> O<sub>291</sub> M<sub>ATL-299</sub>
 … dst. sampai B<sub>ASRP-428</sub> diambil</pre></div>
 </div>
-<div class="callout trap"><b>Dua hal yang sering salah.</b> (1) Goal dinyatakan ketemu saat node goal <b>diambil</b> dari agenda, bukan saat pertama kali ditambahkan — pada UCS, B<sub>ASF-450</sub> masuk agenda lebih dulu tetapi yang diambil lebih dulu adalah B<sub>ASRP-428</sub>. (2) Node yang sama boleh ada dua kali di agenda lewat jalur berbeda; salinan kedua dilewati saat diambil karena state-nya sudah diekspansi.</div>
+<div class="callout trap"><b>Dua hal yang sering salah.</b> (1) Goal dinyatakan ketemu saat node goal <b>diambil</b> dari agenda, bukan saat pertama kali ditambahkan. Pada UCS, B<sub>ASF-450</sub> masuk agenda lebih dulu tetapi yang diambil lebih dulu adalah B<sub>ASRP-428</sub>. (2) Node yang sama boleh ada dua kali di agenda lewat jalur berbeda; salinan kedua dilewati saat diambil karena state-nya sudah diekspansi.</div>
 </div></details>
 
 <details class="topic t1" id="s-astar" open>
@@ -906,20 +907,20 @@ R<sub>230</sub> F<sub>239</sub> O<sub>291</sub> M<sub>ATL-299</sub>
 <p class="small">Romania: A–S–R–P–B, biaya <b>418</b> (optimal).</p></div>
 </div>
 <h3>Jejak A* Romania di slide</h3>
-<p class="small muted">h = straight-line distance ke Bucharest: Arad 366, Sibiu 253, Timisoara 329, Zerind 374, Fagaras 176, Oradea 380, Rimnicu Vilcea 193, Craiova 160, Pitesti 100, Bucharest 0. <i>(Di slide tertulis Pitesti "10"; itu salah ketik — contoh A* di slide yang sama memakai 317 + 100 = 417.)</i></p>
+<p class="small muted">h = straight-line distance ke Bucharest: Arad 366, Sibiu 253, Timisoara 329, Zerind 374, Fagaras 176, Oradea 380, Rimnicu Vilcea 193, Craiova 160, Pitesti 100, Bucharest 0. <i>(Di slide tertulis Pitesti "10"; itu salah ketik; contoh A* di slide yang sama memakai 317 + 100 = 417.)</i></p>
 <div class="tw"><table class="trace">
 <thead><tr><th>Ekspansi</th><th>Anak yang dibangkitkan (f = g + h)</th><th>Dipilih berikutnya</th></tr></thead>
 <tbody>
 <tr><td>Arad</td><td>Sibiu 393 = 140+253 · Timisoara 447 = 118+329 · Zerind 449 = 75+374</td><td>Sibiu (393)</td></tr>
 <tr><td>Sibiu</td><td>Arad 646 = 280+366 · Fagaras 415 = 239+176 · Oradea 671 = 291+380 · R. Vilcea 413 = 220+193</td><td>R. Vilcea (413)</td></tr>
 <tr><td>R. Vilcea</td><td>Craiova 526 = 366+160 · Pitesti 417 = 317+100 · Sibiu 553 = 300+253</td><td>Fagaras (415)</td></tr>
-<tr><td>Fagaras</td><td>Sibiu 591 = 338+253 · <b>Bucharest 450</b> = 450+0</td><td>Pitesti (417) — <b>belum berhenti</b>, 417 &lt; 450</td></tr>
+<tr><td>Fagaras</td><td>Sibiu 591 = 338+253 · <b>Bucharest 450</b> = 450+0</td><td>Pitesti (417), <b>belum berhenti</b>, 417 &lt; 450</td></tr>
 <tr><td>Pitesti</td><td><b>Bucharest 418</b> = 418+0 · Craiova 615 = 455+160 · R. Vilcea 607 = 414+193</td><td>Bucharest (418) → goal</td></tr>
 </tbody></table></div>
 
 <h3>Admissible heuristic</h3>
 <div class="callout key"><b>h admissible</b> jika untuk setiap node n berlaku <b>h(n) ≤ h*(n)</b>, dengan h*(n) = biaya sebenarnya dari n ke goal. Artinya h <i>tidak pernah melebih-lebihkan</i> (optimistis). Teorema di slide: jika h admissible, A* dengan tree search <b>optimal</b>.</div>
-<p><b>Contoh tidak admissible di slide:</b> dari akar ada dua anak — X (biaya 2, h = 100) dan Y (biaya 73, h = 1); keduanya berjarak 1 dari goal. f(X) = 102, f(Y) = 74 → A* memilih Y dan menemukan jalur 74, padahal lewat X hanya 3. h(X) = 100 jauh di atas biaya sebenarnya (1), jadi jaminan optimal hilang.</p>
+<p><b>Contoh tidak admissible di slide:</b> dari akar ada dua anak: X (biaya 2, h = 100) dan Y (biaya 73, h = 1); keduanya berjarak 1 dari goal. f(X) = 102, f(Y) = 74 → A* memilih Y dan menemukan jalur 74, padahal lewat X hanya 3. h(X) = 100 jauh di atas biaya sebenarnya (1), jadi jaminan optimal hilang.</p>
 <p><b>Cara membuktikan admissible di soal:</b> hitung jarak terpendek sebenarnya h*(n) tiap node ke goal, lalu tunjukkan h(n) ≤ h*(n) satu per satu.</p>
 
 <h3>Format jawaban yang diminta dosen</h3>
@@ -935,7 +936,7 @@ R<sub>230</sub> F<sub>239</sub> O<sub>291</sub> M<sub>ATL-299</sub>
 <details class="topic t1" id="s-sim" open>
 <summary><h2>Simulator pencarian + soal nyata</h2><div class="meta"><span class="badge t1">★ Wajib</span><span class="src">Dosen Okt 2026</span><span class="src">HMIF</span><span class="src">Latihan slide</span></div></summary>
 <div class="body">
-<div class="widget" id="searchSim"><div class="wt">Simulator — BFS · DFS · UCS · Greedy · A*</div>
+<div class="widget" id="searchSim"><div class="wt">Simulator: BFS · DFS · UCS · Greedy · A*</div>
   <div class="ctl">
     <label>Graf <select id="ssGraph"></select></label>
     <label>Algoritma <select id="ssAlg"><option value="astar">A*</option><option value="greedy">Greedy best-first</option><option value="ucs">UCS</option><option value="bfs">BFS</option><option value="dfs">DFS</option></select></label>
@@ -958,9 +959,9 @@ R<sub>230</sub> F<sub>239</sub> O<sub>291</sub> M<sub>ATL-299</sub>
 <div class="tw"><table class="trace">
 <thead><tr><th>Langkah</th><th>Hitungan</th><th>Frontier (f)</th><th>Dipilih</th></tr></thead>
 <tbody>
-<tr><td>1. Mulai S</td><td>g=0, h=7, f=7. Ekspansi S: A g=2 h=6 f=8; B g=3 h=5 f=8</td><td>A 8, B 8</td><td><b>B</b> — f sama, h(B)=5 &lt; h(A)=6</td></tr>
-<tr><td>2. Ekspansi B</td><td>D: g=3+2=5, f=5+4=9; E: g=3+3=6, f=6+2=8</td><td>A 8, D 9, E 8</td><td><b>E</b> — f sama dengan A, h(E)=2 &lt; 6</td></tr>
-<tr><td>3. Ekspansi E</td><td>G: g=6+2=8, f=8+0=8; D lewat E: g=9 &gt; 5 → diabaikan</td><td>A 8, D 9, G 8</td><td><b>G</b> — h(G)=0; G adalah goal → berhenti</td></tr>
+<tr><td>1. Mulai S</td><td>g=0, h=7, f=7. Ekspansi S: A g=2 h=6 f=8; B g=3 h=5 f=8</td><td>A 8, B 8</td><td><b>B</b>, f sama, h(B)=5 &lt; h(A)=6</td></tr>
+<tr><td>2. Ekspansi B</td><td>D: g=3+2=5, f=5+4=9; E: g=3+3=6, f=6+2=8</td><td>A 8, D 9, E 8</td><td><b>E</b>, f sama dengan A, h(E)=2 &lt; 6</td></tr>
+<tr><td>3. Ekspansi E</td><td>G: g=6+2=8, f=8+0=8; D lewat E: g=9 &gt; 5 → diabaikan</td><td>A 8, D 9, G 8</td><td><b>G</b>, h(G)=0; G adalah goal → berhenti</td></tr>
 </tbody></table></div>
 <p><b>Urutan ekspansi:</b> S → B → E → G. <b>Jalur:</b> S → B → E → G. <b>Biaya:</b> 3 + 3 + 2 = <b>8</b>.</p>
 </div></details></div>
@@ -980,7 +981,7 @@ R<sub>230</sub> F<sub>239</sub> O<sub>291</sub> M<sub>ATL-299</sub>
 <tr><td>A*</td><td>S, A(f=3), B(f=4), C(6), D(6), lalu E(9)</td><td>S–B–E</td><td class="num">9</td><td>f(A)=1+2, f(B)=3+1, f(C)=4+2, f(D lewat B)=5+1</td></tr>
 </tbody></table></div>
 <div class="callout trap"><b>Beda konvensi DFS.</b> Kunci HMIF memasukkan A, B, C ke stack lalu mengambil yang <i>terakhir</i> masuk (C), sehingga urutannya S, C, B, E dengan jalur S–C–B–E. Slide dosen memasukkan anak ke <i>depan</i> agenda sehingga anak pertama diambil lebih dulu. Dengan aturan soal "prioritas tetangga sesuai abjad", hasilnya seperti tabel di atas. Di ujian, tuliskan konvensi yang dipakai.</div>
-<p class="small"><b>HMIF (b):</b> node yang diekspansi pada iterasi ke-1 dan ke-2 setelah S — BFS: A, B · UCS: A (g=1), B (g=3) · Greedy: B (h=1), E (h=0) · A*: A (f=3), B (f=4).</p>
+<p class="small"><b>HMIF (b):</b> node yang diekspansi pada iterasi ke-1 dan ke-2 setelah S. BFS: A, B · UCS: A (g=1), B (g=3) · Greedy: B (h=1), E (h=0) · A*: A (f=3), B (f=4).</p>
 </div></details></div>
 
 <div class="q"><div class="qh">Latihan HMIF Bagian I · A*</div>
@@ -1022,7 +1023,7 @@ R<sub>230</sub> F<sub>239</sub> O<sub>291</sub> M<sub>ATL-299</sub>
 <!-- ======================= 03 LOCAL SEARCH ======================= -->
 <section class="panel" id="tab-m3">
 <div class="intro">
-  <h2>Materi 03 — Beyond Classical Search: Local Search</h2>
+  <h2>Materi 03: Beyond Classical Search: Local Search</h2>
   <p class="lead">Untuk masalah yang jalurnya tidak penting (hanya konfigurasi akhir yang dicari), cukup simpan <b>satu state lengkap</b> lalu perbaiki sedikit demi sedikit dengan pindah ke tetangga. Tiga algoritma: hill climbing, simulated annealing, genetic algorithm.</p>
   <div class="toc"></div>
 </div>
@@ -1078,7 +1079,7 @@ R<sub>230</sub> F<sub>239</sub> O<sub>291</sub> M<sub>ATL-299</sub>
 <p>"Seperti mendaki Everest dalam kabut tebal sambil amnesia": mulai dari state acak, selalu pindah ke tetangga terbaik, berhenti di puncak.</p>
 <div class="flow"><span>State awal</span><i>→</i><span>Lihat <b>semua</b> suksesor,<br>ambil yang nilainya tertinggi</span><i>→</i><span>Lebih baik dari current?</span><i>→</i><span>Ya: pindah ke sana ↺</span><i>|</i><span>Tidak (≤): <b>berhenti</b>, kembalikan current</span></div>
 <div class="callout trap"><b>Kondisi berhenti memakai ≤.</b> Jika tetangga terbaik nilainya <i>sama</i> dengan current, steepest ascent tetap berhenti. Karena itu ia macet di local maximum, flat local maximum, <i>dan</i> shoulder.</div>
-<div class="widget" id="climb"><div class="wt">Pendaki landscape — bandingkan semua varian</div>
+<div class="widget" id="climb"><div class="wt">Pendaki landscape: bandingkan semua varian</div>
   <div class="ctl">
     <label>Algoritma <select id="clAlg"><option value="steep">Steepest ascent</option><option value="side">Sideways move (maks. 10 langkah menyamping)</option><option value="stoch">Stochastic HC (30 iterasi)</option><option value="rr">Random restart</option><option value="sa">Simulated annealing</option></select></label>
     <button class="btn pri" id="clRun">Jalankan ▶</button><button class="btn" id="clStep">1 langkah</button><button class="btn" id="clReset">Ulang</button>
@@ -1320,7 +1321,7 @@ Mutasi:   32748<b>5</b>52 → 32748<b>1</b>52      32<b>7</b>52124 → 32<b>2</b
 <!-- ======================= 04a ADVERSARIAL SEARCH ======================= -->
 <section class="panel" id="tab-m4a">
 <div class="intro">
-  <h2>Materi 04a — Adversarial Search</h2>
+  <h2>Materi 04a: Adversarial Search</h2>
   <p class="lead">Pencarian di lingkungan <b>multiagent kompetitif</b> (permainan). Solusinya bukan jalur, melainkan <b>strategi</b>: langkah terbaik dengan asumsi lawan juga bermain optimal. Dua hal yang harus lancar di kertas: menghitung nilai minimax dan melakukan alpha-beta pruning.</p>
   <div class="toc"></div>
 </div>
@@ -1330,14 +1331,14 @@ Mutasi:   32748<b>5</b>52 → 32748<b>1</b>52      32<b>7</b>52124 → 32<b>2</b
 <div class="body">
 <div class="grid2">
 <div class="box"><h4>Adversarial vs non-adversarial</h4>
-<ul><li><b>Non-adversarial:</b> mengoptimalkan solusi — jalur ke goal atau state solusi.</li>
+<ul><li><b>Non-adversarial:</b> mengoptimalkan solusi, yaitu jalur ke goal atau state solusi.</li>
 <li><b>Adversarial:</b> multiagent, lingkungan kompetitif; solusi berupa <i>strategi</i> (dan untuk game besar hanya pendekatan).</li>
 <li><b>Asumsi di kuliah:</b> deterministic, fully observable, turn-taking.</li></ul></div>
 <div class="box"><h4>Komponen game search problem</h4>
-<ul><li><b>Initial state</b></li><li><b>Player(s)</b> — giliran siapa di state s</li><li><b>Action(s)</b> — langkah legal</li><li><b>Result(s, a)</b> — model transisi</li><li><b>Terminal-test(s)</b> — permainan selesai?</li><li><b>Utility(s, p)</b> — nilai akhir bagi pemain p (tic-tac-toe: +1 menang, 0 seri, −1 kalah)</li></ul>
+<ul><li><b>Initial state</b></li><li><b>Player(s)</b>: giliran siapa di state s</li><li><b>Action(s)</b>: langkah legal</li><li><b>Result(s, a)</b>: model transisi</li><li><b>Terminal-test(s)</b>: permainan selesai?</li><li><b>Utility(s, p)</b>: nilai akhir bagi pemain p (tic-tac-toe: +1 menang, 0 seri, −1 kalah)</li></ul>
 <p class="small">Initial state + Action + Result mendefinisikan <b>game tree</b>: node = state permainan, edge = langkah.</p></div>
 </div>
-<p><b>Istilah ply:</b> satu ply = satu langkah oleh satu pemain. "3-ply game" dengan urutan A, B, A berarti pohon setinggi 3 tingkat aksi: MAX – MIN – MAX – daun.</p>
+<p><b>Istilah ply:</b> satu ply = satu langkah oleh satu pemain. "3-ply game" dengan urutan A, B, A berarti pohon setinggi 3 tingkat aksi: MAX → MIN → MAX → daun.</p>
 </div></details>
 
 <details class="topic t1" id="g-minimax" open>
@@ -1370,12 +1371,12 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <div class="box sky"><h4>β (beta)</h4>Nilai terbaik (terkecil) yang <b>sudah dijamin untuk MIN</b> di sepanjang jalur dari akar. Awal: +∞. Hanya diperbarui di node <b>MIN</b>: β = min(β, v).</div>
 </div>
 <div class="grid2">
-<div class="box"><h4><span class="tri up"></span>Di node MAX — telusuri anak satu per satu</h4>
+<div class="box"><h4><span class="tri up"></span>Di node MAX: telusuri anak satu per satu</h4>
 <div class="rulecard"><span class="k">1</span><span class="v">v = yang terbesar sejauh ini</span><span class="k">2</span><span class="v"><b>v ≥ β ?</b> → pangkas semua anak yang tersisa</span><span class="k">3</span><span class="v">kalau tidak: α = max(α, v), lanjut ke anak berikutnya</span></div></div>
-<div class="box"><h4><span class="tri dn"></span>Di node MIN — telusuri anak satu per satu</h4>
+<div class="box"><h4><span class="tri dn"></span>Di node MIN: telusuri anak satu per satu</h4>
 <div class="rulecard"><span class="k">1</span><span class="v">v = yang terkecil sejauh ini</span><span class="k">2</span><span class="v"><b>v ≤ α ?</b> → pangkas semua anak yang tersisa</span><span class="k">3</span><span class="v">kalau tidak: β = min(β, v), lanjut ke anak berikutnya</span></div></div>
 </div>
-<div class="callout key"><b>Aturan praktis.</b> α dan β <b>diturunkan</b> dari induk ke anak; yang <b>naik</b> ke induk hanya nilai v. Pangkas begitu <b>α ≥ β</b> di sebuah node. Intuisi: di node MIN, begitu ketemu nilai ≤ α, MAX di atasnya sudah punya pilihan yang setidaknya sama baiknya, jadi cabang ini tidak akan dipilih — sisanya tidak perlu dilihat.</div>
+<div class="callout key"><b>Aturan praktis.</b> α dan β <b>diturunkan</b> dari induk ke anak; yang <b>naik</b> ke induk hanya nilai v. Pangkas begitu <b>α ≥ β</b> di sebuah node. Intuisi: di node MIN, begitu ketemu nilai ≤ α, MAX di atasnya sudah punya pilihan yang setidaknya sama baiknya, jadi cabang ini tidak akan dipilih; sisanya tidak perlu dilihat.</div>
 <div class="callout trap"><b>Jebakan.</b> (1) Tanda <b>sama dengan ikut memangkas</b> (≥ dan ≤). (2) Urutan penelusuran menentukan apa yang terpangkas: default kiri → kanan; jika soal meminta kanan → kiri, hasil pemangkasan berbeda. (3) Yang dipangkas bisa satu daun atau satu subpohon utuh; tandai <b>cabangnya</b> dengan dua garis.</div>
 
 <h3>Contoh slide langkah demi langkah</h3>
@@ -1395,7 +1396,7 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <details class="topic t1" id="g-sim" open>
 <summary><h2>Simulator minimax &amp; alpha-beta + soal nyata</h2><div class="meta"><span class="badge t1">★ Wajib</span><span class="src">UTS 2024</span><span class="src">Kuis 1</span><span class="src">Dosen Okt 2026</span><span class="src">HMIF</span></div></summary>
 <div class="body">
-<div class="widget" id="abSim"><div class="wt">Simulator — minimax &amp; alpha-beta</div>
+<div class="widget" id="abSim"><div class="wt">Simulator: minimax &amp; alpha-beta</div>
   <div class="ctl">
     <label>Pohon <select id="abPreset"></select></label>
     <label>Akar <select id="abRoot"><option value="max">MAX</option><option value="min">MIN</option></select></label>
@@ -1418,7 +1419,7 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <p>Permainan bergiliran dua pemain: A bergerak pertama, lalu B, lalu A; selesai setelah langkah A. Tiap pemain punya dua aksi: X (cabang kiri) dan Y (cabang kanan). A memaksimalkan utility. Nilai terminal dari kiri ke kanan: {4, 3, 6, 2, 3, 2, 3, 1}.<br>(a) Gambar pohon lengkap beserta nilai tiap state. (b) Terapkan alpha-beta; tandai cabang yang dipotong dengan dua garis. (c) Aksi optimal A?</p>
 <details class="sol"><summary>Pembahasan</summary><div>
 <div class="callout mine"><b>Jawaban saya</b> (arsip UTS 2024 tidak menyertakan kunci); bisa diperiksa di simulator dengan preset "UTS 2024".</div>
-<p><b>(a)</b> Susunan: MAX (A) – MIN (B) – MAX (A) – daun.</p>
+<p><b>(a)</b> Susunan: MAX (A) → MIN (B) → MAX (A) → daun.</p>
 <ul>
 <li>MAX tingkat 3: max(4, 3) = <b>4</b>; max(6, 2) = <b>6</b>; max(3, 2) = <b>3</b>; max(3, 1) = <b>3</b></li>
 <li>MIN tingkat 2: min(4, 6) = <b>4</b>; min(3, 3) = <b>3</b></li>
@@ -1439,7 +1440,7 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <p>Permainan bergiliran: A bergerak pertama, lalu B; selesai setelah B. Tiga aksi: X (paling kiri), Y, Z (paling kanan). A memaksimalkan. Nilai terminal dari kiri ke kanan: {3, 7, 2, 19, 8, 2, 10, 5, 3}. (a) Gambar pohon lengkap dengan nilai tiap state. (b) Alpha-beta, dua garis pada cabang yang dipotong. (c) Aksi optimal A?</p>
 <details class="sol"><summary>Pembahasan</summary><div>
 <div class="callout mine"><b>Jawaban saya</b> (lembar kuis tidak memuat kuncinya); periksa di simulator dengan preset "Kuis 1 (2024)".</div>
-<p><b>(a)</b> MAX (A) – MIN (B) – daun. MIN kiri = min(3, 7, 2) = <b>2</b>; MIN tengah = min(19, 8, 2) = <b>2</b>; MIN kanan = min(10, 5, 3) = <b>3</b>; akar = max(2, 2, 3) = <b>3</b>.</p>
+<p><b>(a)</b> MAX (A) → MIN (B) → daun. MIN kiri = min(3, 7, 2) = <b>2</b>; MIN tengah = min(19, 8, 2) = <b>2</b>; MIN kanan = min(10, 5, 3) = <b>3</b>; akar = max(2, 2, 3) = <b>3</b>.</p>
 <p><b>(b)</b> MIN kiri = 2 → α = 2. MIN tengah melihat 19, 8 (keduanya &gt; 2), lalu 2 → baru di daun <i>terakhir</i> v ≤ α, sehingga tidak ada lagi yang bisa dipotong. MIN kanan melihat 10, 5, 3 (semuanya &gt; 2). <b>Tidak ada cabang yang dipangkas.</b></p>
 <p><b>(c)</b> Aksi optimal A = <b>Z</b> (nilai 3).</p>
 <div class="callout trap"><b>Jebakan soal ini.</b> Urutan daunnya membuat alpha-beta tidak memangkas apa pun. Tulis penelusurannya dan nyatakan "tidak ada pemangkasan"; jangan memaksakan dua garis.</div>
@@ -1492,7 +1493,7 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <summary><h2>Properti minimax, catur, minimax multiplayer</h2><div class="meta"><span class="badge t3">○ Belum pernah keluar</span></div></summary>
 <div class="body">
 <ul>
-<li><b>Properti minimax:</b> complete — ya (jika pohon terbatas); optimal — ya (melawan lawan optimal); time O(b<sup>m</sup>); space O(bm) karena penelusuran depth-first.</li>
+<li><b>Properti minimax:</b> complete: ya (jika pohon terbatas); optimal: ya (melawan lawan optimal); time O(b<sup>m</sup>); space O(bm) karena penelusuran depth-first.</li>
 <li><b>Catur:</b> b ≈ 35, m ≈ 100 (50 langkah per pemain) → jumlah state eksponensial terhadap kedalaman; solusi eksak mustahil. Itulah alasan pruning.</li>
 <li><b>Multiplayer (3 pemain A, B, C):</b> tiap node menyimpan vektor utilitas (u<sub>A</sub>, u<sub>B</sub>, u<sub>C</sub>); pemain yang bergiliran memilih anak yang memaksimalkan <i>komponennya sendiri</i>. Contoh slide: daun (1,2,6) (4,2,3) | (6,1,2) (7,4,1) | (5,1,1) (1,5,2) | (7,7,1) (5,4,5) → C memilih (1,2,6), (6,1,2), (1,5,2), (5,4,5) → B memilih (1,2,6) dan (1,5,2) → A memilih <b>(1,2,6)</b>.</li>
 </ul>
@@ -1501,7 +1502,7 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <!-- ======================= 04b CSP ======================= -->
 <section class="panel" id="tab-m4b">
 <div class="intro">
-  <h2>Materi 04b — Constraint Satisfaction Problem (CSP)</h2>
+  <h2>Materi 04b: Constraint Satisfaction Problem (CSP)</h2>
   <p class="lead">Pada search biasa, state adalah "kotak hitam". Pada CSP, state punya struktur: <b>variabel</b> yang diisi nilai dari <b>domain</b>, dan goal test berupa <b>constraint</b>. Struktur ini memungkinkan algoritma umum yang jauh lebih kuat: inferensi (memangkas domain) dan heuristik pemilihan variabel/nilai.</p>
   <div class="toc"></div>
 </div>
@@ -1519,7 +1520,7 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <ul>
 <li><b>Variabel:</b> WA, NT, Q, NSW, V, SA, T</li>
 <li><b>Domain:</b> D<sub>i</sub> = {red, green, blue}</li>
-<li><b>Constraint:</b> wilayah bertetangga berbeda warna — WA ≠ NT, WA ≠ SA, NT ≠ SA, NT ≠ Q, SA ≠ Q, SA ≠ NSW, SA ≠ V, Q ≠ NSW, NSW ≠ V. Bentuk eksplisit: (WA, NT) ∈ {(red,green), (red,blue), (green,red), (green,blue), (blue,red), (blue,green)}.</li>
+<li><b>Constraint:</b> wilayah bertetangga berbeda warna: WA ≠ NT, WA ≠ SA, NT ≠ SA, NT ≠ Q, SA ≠ Q, SA ≠ NSW, SA ≠ V, Q ≠ NSW, NSW ≠ V. Bentuk eksplisit: (WA, NT) ∈ {(red,green), (red,blue), (green,red), (green,blue), (blue,red), (blue,green)}.</li>
 <li><b>Salah satu solusi:</b> WA = red, NT = green, Q = red, NSW = green, V = red, SA = blue, T = green.</li>
 </ul>
 
@@ -1557,7 +1558,7 @@ B = min(3, 12, 8) = 3; C = min(2, 4, 6) = 2; D = min(14, 5, 2) = 2; A = max(3, 2
 <p><b>(6)</b> Jawaban mahasiswa: "variabel yang dipilih pertama kali adalah T<sub>E</sub> karena memiliki constraint terhadap 4 variabel lainnya" → <span class="bad">2,5/5</span>, dengan catatan dosen <b>"diisi nilai berapa"</b>. Variabelnya diterima, tetapi nilainya tidak disebut.</p>
 <div class="callout mine"><b>Jawaban saya untuk nilainya:</b> T<sub>E</sub> = <b>1</b>. E harus lebih awal dari <i>semua</i> job lain, jadi hanya nilai terkecil yang menyisakan pilihan untuk empat variabel lain (LCV); T<sub>E</sub> = 2, 3, atau 4 langsung menghapus nilai dari semua tetangganya. Solusi lengkapnya tunggal: T<sub>E</sub> = 1, T<sub>B</sub> = 2, T<sub>C</sub> = 3, T<sub>A</sub> = T<sub>D</sub> = 4.<br><span class="small">Catatan: derajat T<sub>B</sub> dan T<sub>D</sub> juga 4. T<sub>E</sub> tetap pilihan yang wajar karena constraint-nya paling ketat (setelah arc consistency domainnya paling cepat menyempit).</span></div>
 </div></details></div>
-<div class="callout key"><b>Pola memilih variabel.</b> Tanyakan "apa yang harus saya putuskan, dan berapa banyak keputusannya?" — tiap keputusan = satu variabel; pilihan untuk keputusan itu = domain; aturan dalam cerita = constraint. Tulis constraint dalam notasi formal (≠, ≤, ∈), bukan kalimat.</div>
+<div class="callout key"><b>Pola memilih variabel.</b> Tanyakan "apa yang harus saya putuskan, dan berapa banyak keputusannya?" Tiap keputusan = satu variabel; pilihan untuk keputusan itu = domain; aturan dalam cerita = constraint. Tulis constraint dalam notasi formal (≠, ≤, ∈), bukan kalimat.</div>
 <details class="sol"><summary>Latihan slide: Meeting Scheduling Problem</summary><div>
 <p class="small">m1 di L1 dihadiri A1, A3 · m2 di L2 dihadiri A2, A3, A4 · m3 di L3 dihadiri A1, A4 · m4 di L4 dihadiri A1, A2. Durasi tiap pertemuan 1 time slot. Jarak tempuh (time slot): L1–L2 = 1, L1–L3 = 1, L1–L4 = 2, L2–L3 = 3, L2–L4 = 2, L3–L4 = 2.</p>
 <div class="callout mine"><b>Jawaban saya</b> (slide tidak memberi kunci).</div>
@@ -1575,9 +1576,9 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="grid2" style="align-items:center">
 <div>
 <ul>
-<li><b>Unary:</b> melibatkan satu variabel — SA ≠ green; T2 ∈ {Lab A, Lab B}.</li>
-<li><b>Binary:</b> melibatkan dua variabel — SA ≠ WA; T1 ≠ T3.</li>
-<li><b>Higher-order:</b> tiga variabel atau lebih — constraint kolom pada cryptarithmetic; 6p1 + 5p2 + 10p3 + 5p4 ≤ 16.</li>
+<li><b>Unary:</b> melibatkan satu variabel, misalnya SA ≠ green; T2 ∈ {Lab A, Lab B}.</li>
+<li><b>Binary:</b> melibatkan dua variabel, misalnya SA ≠ WA; T1 ≠ T3.</li>
+<li><b>Higher-order:</b> tiga variabel atau lebih, misalnya constraint kolom pada cryptarithmetic; 6p1 + 5p2 + 10p3 + 5p4 ≤ 16.</li>
 <li><b>Preference (soft):</b> ada toleransi, tiap pilihan punya biaya → constraint optimization problem (COP), mis. linear programming.</li>
 </ul>
 <p><b>Binary CSP:</b> setiap constraint menghubungkan dua variabel. <b>Constraint graph:</b> node = variabel, arc = constraint. Untuk constraint n-ary dipakai <b>hypergraph</b> (kotak = hypernode).</p>
@@ -1600,7 +1601,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
   <text x="20" y="235" font-size="11" fill="#55657F">Derajat: SA 5 · NT, Q, NSW 3</text><text x="20" y="248" font-size="11" fill="#55657F">WA, V 2 · T 0 (terisolasi)</text>
 </svg></div>
 </div>
-<p class="small"><b>HMIF, jadwal tutorial:</b> constraint biner hanya T1–T3 dan T1–T4, sehingga graf-nya T3 — T1 — T4 dan T2 terisolasi. "T2 harus di Lab A atau Lab B" = unary; "T1 dan T3 tidak di ruangan sama" = binary.</p>
+<p class="small"><b>HMIF, jadwal tutorial:</b> constraint biner hanya T1–T3 dan T1–T4, sehingga graf-nya T3–T1–T4 dan T2 terisolasi. "T2 harus di Lab A atau Lab B" = unary; "T1 dan T3 tidak di ruangan sama" = binary.</p>
 </div></details>
 
 <details class="topic t1" id="c-konsistensi" open>
@@ -1612,7 +1613,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <tbody>
 <tr><td><b>Node consistency</b><br><span class="small muted">1-consistency</span></td><td>Semua nilai di domain variabel memenuhi constraint <b>unary</b>-nya.</td><td>SA ≠ green → domain SA = {red, blue}.</td></tr>
 <tr><td><b>Arc consistency</b><br><span class="small muted">2-consistency</span></td><td>Arc X → Y konsisten jika untuk <b>setiap</b> nilai x di D<sub>X</sub> ada <b>suatu</b> nilai y di D<sub>Y</sub> yang memenuhi constraint biner (X, Y). Nilai x yang tidak punya pasangan dihapus.</td><td>SA ≠ WA dengan domain penuh: tidak ada yang terhapus (tiap warna SA punya pasangan beda di WA).</td></tr>
-<tr><td><b>Path consistency</b><br><span class="small muted">3-consistency</span></td><td>{X<sub>i</sub>, X<sub>j</sub>} path-consistent terhadap X<sub>m</sub> jika untuk setiap assignment {X<sub>i</sub> = a, X<sub>j</sub> = b} yang konsisten, ada nilai untuk X<sub>m</sub> yang memenuhi constraint (X<sub>i</sub>, X<sub>m</sub>) dan (X<sub>m</sub>, X<sub>j</sub>). Pasangan (a, b) yang tidak punya "perantara" dihapus.</td><td>Peta dengan 2 warna: {WA, SA} terhadap NT — WA = red, SA = blue (atau sebaliknya) tidak menyisakan warna untuk NT → kedua pasangan dihapus → tidak ada solusi. Arc consistency saja tidak mendeteksi ini.</td></tr>
+<tr><td><b>Path consistency</b><br><span class="small muted">3-consistency</span></td><td>{X<sub>i</sub>, X<sub>j</sub>} path-consistent terhadap X<sub>m</sub> jika untuk setiap assignment {X<sub>i</sub> = a, X<sub>j</sub> = b} yang konsisten, ada nilai untuk X<sub>m</sub> yang memenuhi constraint (X<sub>i</sub>, X<sub>m</sub>) dan (X<sub>m</sub>, X<sub>j</sub>). Pasangan (a, b) yang tidak punya "perantara" dihapus.</td><td>Peta dengan 2 warna: {WA, SA} terhadap NT: WA = red, SA = blue (atau sebaliknya) tidak menyisakan warna untuk NT → kedua pasangan dihapus → tidak ada solusi. Arc consistency saja tidak mendeteksi ini.</td></tr>
 <tr><td><b>k-consistency</b></td><td>Untuk setiap k − 1 variabel dan assignment konsisten atasnya, selalu ada nilai konsisten untuk variabel ke-k.</td><td>1 = node, 2 = arc, 3 = path.</td></tr>
 </tbody></table></div>
 <p class="small muted">Arc consistency bisa langsung menyelesaikan masalah (tiap domain tersisa 1 nilai) atau membuktikan tidak ada solusi (ada domain kosong); di luar itu, tetap perlu search.</p>
@@ -1661,7 +1662,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="grid2" style="align-items:center">
 <div><ul>
 <li><b>State (simpul):</b> pengisian 0 sampai n variabel dengan nilai 1 atau 0 (partial assignment).</li>
-<li><b>Aksi (cabang):</b> hanya ada 2 cabang di tiap state — mengisi suatu variabel dengan 1 atau dengan 0.</li>
+<li><b>Aksi (cabang):</b> hanya ada 2 cabang di tiap state: mengisi suatu variabel dengan 1 atau dengan 0.</li>
 </ul></div>
 <div class="scroll"><svg viewBox="0 0 330 190" width="100%" style="max-width:330px" role="img" aria-label="Sebagian pohon backtracking">
   <g stroke="#315A96" stroke-width="2"><line x1="165" y1="26" x2="100" y2="88"/><line x1="100" y1="88" x2="55" y2="152"/></g>
@@ -1673,7 +1674,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
   <circle cx="150" cy="155" r="11" fill="#fff" stroke="#C5CFDD" stroke-width="2"/><text x="140" y="122" font-size="11" fill="#9AA8BD">p2 = 0</text>
 </svg></div>
 </div></div></details></div>
-<div class="widget" id="btTree"><div class="wt">Pohon backtracking kasus 4 proposal — lihat pohonnya tumbuh</div>
+<div class="widget" id="btTree"><div class="wt">Pohon backtracking kasus 4 proposal: lihat pohonnya tumbuh</div>
   <div class="ctl"><button class="btn" id="btReset">⏮ Ulang</button><button class="btn" id="btPrev">◀ Mundur</button><button class="btn pri" id="btNext">Langkah ▶</button><button class="btn" id="btFirst">Sampai solusi pertama</button><button class="btn" id="btAll">Seluruh pohon</button></div>
   <div class="scroll"><svg id="btSvg" viewBox="0 0 760 350" width="760" height="350"></svg></div>
   <div class="msg small" id="btMsg"></div>
@@ -1688,9 +1689,9 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="tw"><table>
 <thead><tr><th>Heuristik</th><th>Memilih</th><th>Aturan</th><th>Contoh peta Australia</th></tr></thead>
 <tbody>
-<tr><td><b>MRV</b> — minimum remaining values<br><span class="small muted">= most constrained variable = fail-first</span></td><td>variabel</td><td>Variabel dengan <b>nilai legal paling sedikit</b>. Jika ada variabel tanpa nilai legal, MRV memilihnya dan kegagalan langsung ketahuan.</td><td>Setelah WA = red, NT = green: SA = {blue}, Q = {blue, red} → pilih <b>SA</b>.</td></tr>
+<tr><td><b>MRV</b>: minimum remaining values<br><span class="small muted">= most constrained variable = fail-first</span></td><td>variabel</td><td>Variabel dengan <b>nilai legal paling sedikit</b>. Jika ada variabel tanpa nilai legal, MRV memilihnya dan kegagalan langsung ketahuan.</td><td>Setelah WA = red, NT = green: SA = {blue}, Q = {blue, red} → pilih <b>SA</b>.</td></tr>
 <tr><td><b>Degree heuristic</b><br><span class="small muted">= most constraining variable</span></td><td>variabel</td><td>Variabel dengan <b>constraint terbanyak terhadap variabel yang belum diisi</b>. Dipakai untuk variabel pertama dan sebagai <i>tie-breaker</i> MRV.</td><td>SA: 5; NT, Q, NSW: 3; WA, V: 2; T: 0 → pilih <b>SA</b> lebih dulu.</td></tr>
-<tr><td><b>LCV</b> — least constraining value</td><td>nilai</td><td>Nilai yang <b>menghapus paling sedikit</b> pilihan di variabel lain (menyisakan pilihan terbanyak).</td><td>WA = red, NT = green, mengisi Q: red menyisakan 1 nilai untuk SA; blue menyisakan 0 → pilih <b>red</b>.</td></tr>
+<tr><td><b>LCV</b>: least constraining value</td><td>nilai</td><td>Nilai yang <b>menghapus paling sedikit</b> pilihan di variabel lain (menyisakan pilihan terbanyak).</td><td>WA = red, NT = green, mengisi Q: red menyisakan 1 nilai untuk SA; blue menyisakan 0 → pilih <b>red</b>.</td></tr>
 </tbody></table></div>
 <div class="callout key"><b>Mengapa arahnya berlawanan?</b> Variabel dipilih yang <i>paling sulit</i> (gagal secepat mungkin, memangkas pohon), sedangkan nilai dipilih yang <i>paling longgar</i> (peluang sukses terbesar). Catatan slide: urutan nilai tidak relevan jika yang dicari <i>semua</i> solusi; gabungan heuristik ini membuat 1000-queens layak dikerjakan.</div>
 <div class="callout trap"><b>Format jawaban LCV.</b> Soal UTS meminta "analisis setiap kemungkinan nilai": untuk <i>tiap</i> nilai di domain variabel terpilih, tulis domain tersisa semua variabel tetangga dan jumlahnya, baru simpulkan nilai terpilih.</div>
@@ -1707,7 +1708,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="box sky"><h4>Forward checking (FC)</h4>
 <p>Catat nilai legal tersisa untuk variabel yang belum diisi. Setiap mengisi X = v, <b>hapus nilai yang bertentangan dari domain tetangga X yang belum diisi</b>. Hentikan cabang jika ada domain kosong.</p>
 <p class="small">Hanya memeriksa arc dari variabel yang <i>baru diisi</i> ke tetangganya.</p></div>
-<div class="box" style="background:var(--ytint);border-color:#E3E08A"><h4>MAC — maintaining arc consistency</h4>
+<div class="box" style="background:var(--ytint);border-color:#E3E08A"><h4>MAC: maintaining arc consistency</h4>
 <p>Setelah tiap assignment, jalankan propagasi arc consistency: jika domain X kehilangan nilai, <b>semua tetangga X diperiksa ulang</b>, berantai sampai stabil.</p>
 <p class="small">Mendeteksi kegagalan <b>lebih awal</b> daripada FC. Bisa dijalankan sebagai preprocessor atau setelah tiap assignment.</p></div>
 </div>
@@ -1720,10 +1721,10 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <tr><td>Q = green</td><td class="c"><span class="chip cR">R</span></td><td class="c"><span class="chip cB">B</span></td><td class="c"><span class="chip cG">G</span></td><td class="c"><span class="chip cR">R</span> <span class="chip cB">B</span></td><td class="c"><span class="chip cR">R</span> <span class="chip cG">G</span> <span class="chip cB">B</span></td><td class="c"><span class="chip cB">B</span></td><td class="c"><span class="chip cR">R</span> <span class="chip cG">G</span> <span class="chip cB">B</span></td></tr>
 <tr><td>V = blue</td><td class="c"><span class="chip cR">R</span></td><td class="c"><span class="chip cB">B</span></td><td class="c"><span class="chip cG">G</span></td><td class="c"><span class="chip cR">R</span></td><td class="c"><span class="chip cB">B</span></td><td class="c bad">kosong ✗</td><td class="c"><span class="chip cR">R</span> <span class="chip cG">G</span> <span class="chip cB">B</span></td></tr>
 </tbody></table></div>
-<p><b>Kelemahan FC:</b> setelah WA = red dan Q = green, NT dan SA sama-sama tinggal {blue} padahal keduanya bertetangga — sudah pasti gagal, tetapi FC baru sadar satu langkah kemudian. <b>MAC</b> langsung menemukannya: arc SA → NT (atau NT → SA) tidak konsisten → domain kosong → backtrack.</p>
+<p><b>Kelemahan FC:</b> setelah WA = red dan Q = green, NT dan SA sama-sama tinggal {blue} padahal keduanya bertetangga. Ini sudah pasti gagal, tetapi FC baru sadar satu langkah kemudian. <b>MAC</b> langsung menemukannya: arc SA → NT (atau NT → SA) tidak konsisten → domain kosong → backtrack.</p>
 <p class="small"><b>Contoh propagasi MAC di slide</b> (WA = R, Q = G; NT = {B}, NSW = {R, B}, V = {R, G, B}, SA = {B}): arc NSW → SA menghapus blue dari NSW; karena NSW berubah, arc V → NSW diperiksa ulang dan menghapus red dari V; arc SA → NT menghapus blue dari SA → kosong → gagal.</p>
 
-<div class="widget" id="cspMap"><div class="wt">Peta Australia interaktif — tanpa inferensi · forward checking · MAC</div>
+<div class="widget" id="cspMap"><div class="wt">Peta Australia interaktif: tanpa inferensi · forward checking · MAC</div>
   <div class="ctl">
     <label>Inferensi <select id="cmMode"><option value="fc">Forward checking</option><option value="mac">MAC</option><option value="none">Tanpa inferensi</option></select></label>
     <button class="btn" id="cmUndo">↶ Batalkan terakhir</button><button class="btn" id="cmReset">⏮ Kosongkan</button>
@@ -1765,16 +1766,16 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <li>4 huruf: book, buys, hold, lane, year</li>
 <li>6 huruf: ginger, search, symbol, syntax</li>
 </ul>
-<p class="small">(2) Variabel dan domain — 5 poin. (3) Constraint — 6 poin. (4) Backtracking: variabel pertama menurut degree heuristic dan nilainya menurut LCV, dengan analisis tiap nilai — 6 poin.</p>
+<p class="small">(2) Variabel dan domain: 5 poin. (3) Constraint: 6 poin. (4) Backtracking: variabel pertama menurut degree heuristic dan nilainya menurut LCV, dengan analisis tiap nilai: 6 poin.</p>
 </div></div>
 <div class="callout mine"><b>Jawaban saya</b> (arsip UTS 2024 tanpa kunci). Grid dibaca dari gambar soal; slot ditentukan dengan aturan penomoran di atas.</div>
-<div class="widget" id="cwW"><div class="wt">Isi teka-teki silangnya — domain tetangga menyusut otomatis (forward checking)</div>
+<div class="widget" id="cwW"><div class="wt">Isi teka-teki silangnya: domain tetangga menyusut otomatis (forward checking)</div>
   <div class="grid2" style="align-items:start">
     <div><svg id="cwSvg" viewBox="0 0 270 320" width="100%" style="max-width:250px"></svg><div class="ctl"><button class="btn" id="cwReset">⏮ Kosongkan</button></div></div>
     <div><div class="tw"><table id="cwTab"></table></div><div class="msg small" id="cwMsg"></div></div>
   </div>
 </div>
-<details class="sol" open><summary>No. 2 — variabel dan domain</summary><div>
+<details class="sol" open><summary>No. 2: variabel dan domain</summary><div>
 <p>Kotak 1 memulai kata mendatar <i>dan</i> menurun; kotak 2 hanya menurun (di kirinya ada kotak kosong); kotak 3 hanya mendatar (di atasnya ada kotak kosong); kotak 4 hanya mendatar.</p>
 <div class="tw"><table>
 <thead><tr><th>Variabel</th><th>Slot</th><th class="num">Panjang</th><th>Domain</th></tr></thead>
@@ -1787,7 +1788,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 </tbody></table></div>
 <p class="small muted">Kata direpresentasikan sebagai array of character, jadi X[i] = huruf ke-i dari kata X.</p>
 </div></details>
-<details class="sol" open><summary>No. 3 — constraint</summary><div>
+<details class="sol" open><summary>No. 3: constraint</summary><div>
 <ul>
 <li>1A[1] = 1D[1] <span class="muted small">(kotak bernomor 1)</span></li>
 <li>1A[3] = 2D[1] <span class="muted small">(kotak bernomor 2)</span></li>
@@ -1796,9 +1797,9 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <li>4A[1] = 2D[5] <span class="muted small">(kotak bernomor 4)</span></li>
 <li>Satu kata hanya dipakai sekali: 1A ≠ 4A dan 1D ≠ 3A (slot dengan domain yang sama).</li>
 </ul></div></details>
-<details class="sol" open><summary>No. 4 — degree heuristic + LCV</summary><div>
+<details class="sol" open><summary>No. 4: degree heuristic + LCV</summary><div>
 <p><b>Degree</b> (jumlah constraint persilangan dengan variabel lain yang belum diisi): 1A = 2 (1D, 2D) · 1D = 2 (1A, 3A) · <b>2D = 3</b> (1A, 3A, 4A) · 3A = 2 (1D, 2D) · 4A = 1 (2D). → Variabel pertama: <b>2D (2-menurun)</b>.</p>
-<p><b>LCV</b> — untuk tiap nilai 2D, hitung nilai yang tersisa di tetangganya. Syarat: 1A berakhiran huruf ke-1 2D; huruf ke-3 3A = huruf ke-3 2D; 4A berawalan huruf ke-5 2D.</p>
+<p><b>LCV</b>: untuk tiap nilai 2D, hitung nilai yang tersisa di tetangganya. Syarat: 1A berakhiran huruf ke-1 2D; huruf ke-3 3A = huruf ke-3 2D; 4A berawalan huruf ke-5 2D.</p>
 <div class="tw"><table class="trace">
 <thead><tr><th>2D =</th><th>1A (akhiran)</th><th>3A (huruf ke-3)</th><th>4A (awalan)</th><th class="num">Total tersisa</th></tr></thead>
 <tbody>
@@ -1819,7 +1820,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <ul>
 <li><b>Variabel diskret, domain terbatas:</b> n variabel dengan ukuran domain d → O(d<sup>n</sup>) complete assignment (mis. Boolean CSP/SAT). <b>Domain tak terbatas</b> (integer, string): butuh constraint language, mis. StartJob<sub>1</sub> + 5 ≤ StartJob<sub>3</sub>; bisa dibuat terbatas dengan membatasi domain {1, …, m}. <b>Variabel kontinu:</b> constraint linear terselesaikan dalam waktu polinomial dengan linear programming.</li>
 <li><b>Cryptarithmetic TWO + TWO = FOUR:</b> variabel F, T, U, W, R, O dan carry X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>; domain {0…9}; constraint Alldiff(F, T, U, W, R, O); O + O = R + 10·X<sub>1</sub>; X<sub>1</sub> + W + W = U + 10·X<sub>2</sub>; X<sub>2</sub> + T + T = O + 10·X<sub>3</sub>; X<sub>3</sub> = F; T ≠ 0; F ≠ 0.</li>
-<li><b>Special constraint (Alldiff):</b> deteksi gagal cepat — jika m variabel harus berbeda tetapi hanya tersedia n &lt; m nilai.</li>
+<li><b>Special constraint (Alldiff):</b> deteksi gagal cepat: jika m variabel harus berbeda tetapi hanya tersedia n &lt; m nilai.</li>
 <li><b>Local search untuk CSP (min-conflicts):</b> mulai dari complete assignment yang boleh melanggar constraint; pilih acak satu variabel yang berkonflik; beri nilai yang melanggar constraint paling sedikit (hill climbing dengan h = jumlah constraint terlanggar). 4-queens: h = 5 → 2 → 0. Dapat menyelesaikan n-queens hampir dalam waktu konstan untuk n sangat besar; cocok untuk penjadwalan online.</li>
 <li><b>CSP dunia nyata:</b> assignment (siapa mengajar kelas apa), timetabling, penjadwalan transportasi/pabrik, konfigurasi produk.</li>
 </ul>
@@ -1828,7 +1829,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <!-- ======================= 05 KBS ======================= -->
 <section class="panel" id="tab-m5">
 <div class="intro">
-  <h2>Materi 05 — Knowledge-Based System (KBS)</h2>
+  <h2>Materi 05: Knowledge-Based System (KBS)</h2>
   <p class="lead">Bab ini tidak punya hitungan; yang diuji adalah <b>uraian berbasis studi kasus</b>. Di UTS 2024 bab ini bernilai 40 dari 70 poin esai. Empat hal yang harus bisa ditulis untuk kasus apa pun: cara akuisisi pengetahuan, pilihan representasi, gambar arsitektur, dan urutan komponen yang bekerja.</p>
   <div class="toc"></div>
 </div>
@@ -1846,7 +1847,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="box"><h4>KBS (lebih luas)</h4>
 <p>Pengetahuannya bisa dari pakar <b>atau dari data</b> (learning component); penggunanya bisa manusia <b>atau subsistem lain</b> (embedded). Semua ES adalah KBS, tetapi tidak semua KBS adalah ES.</p></div>
 </div>
-<p class="small"><b>Uji cepat:</b> (1) dari mana pengetahuannya — pakar (ES) atau data/learning (KBS non-ES)? (2) siapa yang berinteraksi — pengguna yang butuh nasihat (ES, interactive) atau sistem lain (embedded)?</p>
+<p class="small"><b>Uji cepat:</b> (1) dari mana pengetahuannya: pakar (ES) atau data/learning (KBS non-ES)? (2) siapa yang berinteraksi: pengguna yang butuh nasihat (ES, interactive) atau sistem lain (embedded)?</p>
 
 <h3>KBS vs program konvensional</h3>
 <div class="tw"><table>
@@ -1868,9 +1869,9 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="box"><h4>Syarat representasi yang baik</h4>
 <ul><li>Tidak ada <b>kontradiksi</b></li><li>Tiap simbol <b>unik</b></li><li>Mampu menjelaskan objek, relasi, dan atribut</li><li>Efisien dimanipulasi oleh komputer</li></ul></div>
 <div class="box" style="background:var(--ytint);border-color:#E3E08A"><h4>Tiga kriteria memilih</h4>
-<ul><li><b>Cocok dengan domain masalah</b> — decision tree untuk klasifikasi; skeletal construction untuk konstruksi; rule untuk semua domain</li>
-<li><b>Cocok dengan tugas inferensi</b> — decision tree menyertakan proses wawancara; model probabilitas untuk keputusan dengan ketidakpastian</li>
-<li><b>Cocok dengan pengguna</b> (manusia atau mesin) — semantic network untuk manusia; rule untuk mesin</li></ul></div>
+<ul><li><b>Cocok dengan domain masalah</b>: decision tree untuk klasifikasi; skeletal construction untuk konstruksi; rule untuk semua domain</li>
+<li><b>Cocok dengan tugas inferensi</b>: decision tree menyertakan proses wawancara; model probabilitas untuk keputusan dengan ketidakpastian</li>
+<li><b>Cocok dengan pengguna</b> (manusia atau mesin): semantic network untuk manusia; rule untuk mesin</li></ul></div>
 </div>
 <h3>Enam teknik representasi</h3>
 <div class="tw"><table>
@@ -1881,7 +1882,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <tr><td><b>Semantic network</b> (ontologi)</td><td>Graf: node = konsep/objek, edge = relasi</td><td>Hubungan antar konsep; mudah dipahami manusia</td><td>Google Knowledge Graph; PayPal fraud detection; relasi penyakit–gen–obat</td></tr>
 <tr><td><b>Frames</b></td><td>Struktur <b>slot</b> (tempat informasi) dan <b>filler</b> (nilainya)</td><td>Objek berstruktur dengan atribut baku</td><td>Frame "hotel room": specialization of room, location hotel, contains (chair, phone, bed); chatbot; navigasi robot</td></tr>
 <tr><td><b>Case base</b> (case-based reasoning)</td><td>Kumpulan kasus lama beserta solusinya</td><td>Masalah baru yang mirip kasus lama</td><td>Radiologi berbasis kasus; help desk</td></tr>
-<tr><td><b>Bayes network</b></td><td>Model probabilistik</td><td>Penalaran dalam ketidakpastian — bukan hanya disjungsi (logika) tetapi juga <i>likelihood</i></td><td>Spam filter, kedokteran, klasifikasi dokumen</td></tr>
+<tr><td><b>Bayes network</b></td><td>Model probabilistik</td><td>Penalaran dalam ketidakpastian, bukan hanya disjungsi (logika) tetapi juga <i>likelihood</i></td><td>Spam filter, kedokteran, klasifikasi dokumen</td></tr>
 </tbody></table></div>
 <div class="callout trap"><b>Jebakan HMIF.</b> Semantic network adalah representasi <i>struktural/logis</i>, <b>bukan</b> statistik. Yang berbasis probabilitas adalah Bayes network. Decision tree juga boleh disebut bentuk representasi pengetahuan (untuk klasifikasi).</div>
 <p><b>Menjawab "pilih representasi yang tepat":</b> sebut tekniknya, lalu kaitkan dengan tiga kriteria (domain, tugas inferensi, pengguna), dan beri satu contoh pengetahuan kasus itu dalam bentuk tersebut.</p>
@@ -1931,8 +1932,8 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <details class="topic t1" id="k-arsitektur" open>
 <summary><h2>Arsitektur umum KBS dan variasinya</h2><div class="meta"><span class="badge t1">★ Wajib</span><span class="src">UTS 2024 · 20 poin</span><span class="src">HMIF</span></div></summary>
 <div class="body">
-<p>Gambar dari Puppe (1993). Ini gambar yang diminta ketika soal berkata "tentukan dan gambar arsitektur KBS yang sesuai" — latih sampai bisa menggambarnya tanpa melihat.</p>
-<div class="widget" id="kbsArch"><div class="wt">Arsitektur interaktif — pilih variasi, klik komponen, jalankan alur</div>
+<p>Gambar dari Puppe (1993). Ini gambar yang diminta ketika soal berkata "tentukan dan gambar arsitektur KBS yang sesuai", jadi latih sampai bisa menggambarnya tanpa melihat.</p>
+<div class="widget" id="kbsArch"><div class="wt">Arsitektur interaktif: pilih variasi, klik komponen, jalankan alur</div>
   <div class="ctl" id="kaCfg">
     <button class="btn pri" data-cfg="general">Umum (lengkap)</button>
     <button class="btn" data-cfg="ex1">Interactive, tanpa update</button>
@@ -1953,8 +1954,8 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <tr><td><b>Case-specific facts (CSF)</b></td><td>Data <b>sementara</b> milik satu kasus/sesi (gejala pasien ini, transkrip mahasiswa ini, bacaan sensor saat ini).</td><td>Wajib</td></tr>
 <tr><td><b>Intermediate results and problem solution</b></td><td>Hasil antara inferensi dan solusi akhir.</td><td>Wajib</td></tr>
 <tr><td><b>Interviewer component</b><br><span class="small muted">pada embedded: interface component</span></td><td>Antarmuka: menerima masukan (user atau subsistem lain), menuliskannya ke CSF, menampilkan/mengirim hasil.</td><td>Wajib</td></tr>
-<tr><td><b>Explanation component</b></td><td>Menjelaskan <i>mengapa</i>: menelusuri jejak inferensi untuk memberi justifikasi kepada user dan pakar.</td><td>Opsional — perlu jika pengguna butuh alasan</td></tr>
-<tr><td><b>Knowledge acquisition component</b><br><span class="small muted">pada learning: learning component</span></td><td>Pintu masuk pengetahuan baru dari pakar/KE ke DSKB tanpa mengubah kode. Pada KBS yang belajar, digantikan learning component yang mengisi "knowledge from learning" dari dataset.</td><td>Opsional — perlu jika pengetahuan diperbarui</td></tr>
+<tr><td><b>Explanation component</b></td><td>Menjelaskan <i>mengapa</i>: menelusuri jejak inferensi untuk memberi justifikasi kepada user dan pakar.</td><td>Opsional, perlu jika pengguna butuh alasan</td></tr>
+<tr><td><b>Knowledge acquisition component</b><br><span class="small muted">pada learning: learning component</span></td><td>Pintu masuk pengetahuan baru dari pakar/KE ke DSKB tanpa mengubah kode. Pada KBS yang belajar, digantikan learning component yang mengisi "knowledge from learning" dari dataset.</td><td>Opsional, perlu jika pengetahuan diperbarui</td></tr>
 </tbody></table></div>
 <h3>Interactive vs embedded</h3>
 <div class="grid2">
@@ -1982,7 +1983,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="callout mine"><b>Jawaban saya</b> (arsip tanpa kunci), disusun mengikuti pola pembahasan kasus PAC di bawah dan slide arsitektur.</div>
 <p><b>(a) Akuisisi pengetahuan.</b> Sumber pengetahuan adalah <b>pakar budidaya tomat/agronom</b>: rentang suhu, kelembapan, cahaya, dan CO₂ yang optimal; tanda-tanda tanaman stres; tindakan koreksinya. Dilakukan secara <b>indirect</b>: knowledge engineer melakukan <i>elicitation</i> (interview dan observasi cara pakar mengendalikan iklim) secara siklis, lalu <i>representation</i> ke bentuk formal. Tahapannya: identification (karakteristik masalah pengendalian iklim) → conceptualization (konsep: parameter lingkungan, kondisi stres, aksi) → formalization (struktur aturan) → implementation → testing (validasi oleh pakar). Dapat dilengkapi teknik otomatis (machine learning atas data sensor historis).</p>
 <p><b>(b) Representasi.</b> <b>Production rules (IF–THEN)</b>, karena: cocok dengan <i>domain</i> (pengetahuan pakar berbentuk kondisi → diagnosis → tindakan); cocok dengan <i>tugas inferensi</i> (data sensor mengalir terus → forward chaining yang data-driven); cocok dengan <i>pengguna</i>, yaitu mesin; serta modular sehingga aturan mudah ditambah/diubah. Contoh: <code>IF suhu &gt; 30 AND kelembapan &lt; 60 THEN stres_panas</code>; <code>IF stres_panas THEN nyalakan pendingin dan buka ventilasi</code>.</p>
-<p><b>(c) Arsitektur.</b> <b>Embedded KBS</b> — yang berinteraksi dengan KBS bukan manusia, melainkan subsistem sensor dan aktuator (pilih "Embedded" pada diagram di atas lalu sesuaikan labelnya):</p>
+<p><b>(c) Arsitektur.</b> <b>Embedded KBS</b>: yang berinteraksi dengan KBS bukan manusia, melainkan subsistem sensor dan aktuator (pilih "Embedded" pada diagram di atas lalu sesuaikan labelnya):</p>
 <ul>
 <li><b>Subsistem X:</b> sensor lingkungan + pengendali pemanas/pendingin/ventilasi.</li>
 <li><b>Interface component</b> (pengganti interviewer): menerima bacaan sensor, mengirim perintah.</li>
@@ -2014,7 +2015,7 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <li><b>Sumber pengetahuan adalah data, bukan pakar.</b> Petunjuknya "berdasarkan data, 1 dari 100 transaksi dilabeli penipuan" dan "sistem harus memperoleh pengetahuan yang cukup": pengetahuan dibentuk oleh <b>learning component</b> dari dataset transaksi berlabel (akuisisi otomatis dengan machine learning), bukan di-<i>elicit</i> dari pakar. Expert system mensyaratkan pengetahuan dari pakar manusia.</li>
 <li><b>Tidak ada pengguna non-pakar yang berkonsultasi.</b> Sistem menganalisis aliran transaksi dan memberi peringatan; ia tertanam (<b>embedded</b>) dalam sistem pemrosesan transaksi dan basis datanya.</li>
 <li><b>Tetap tergolong KBS</b> karena memisahkan pengetahuan (pola/aturan, mis. <code>IF var &gt; limit THEN fraud = 'yes'</code>) dari inference engine yang menerapkannya pada data transaksi. Slide sendiri memakai credit card fraud detection sebagai contoh KBS: data transaksi → preprocessing → engine (inference engine + knowledge base) → kategori fraud.</li>
-<li>Arsitektur yang sesuai: variasi <b>learning</b> — dataset → learning component → knowledge from learning. Karena penipuan hanya 1%, data harus cukup banyak agar pengetahuan yang terbentuk memadai.</li>
+<li>Arsitektur yang sesuai: variasi <b>learning</b>: dataset → learning component → knowledge from learning. Karena penipuan hanya 1%, data harus cukup banyak agar pengetahuan yang terbentuk memadai.</li>
 </ul>
 </div></details></div>
 
@@ -2023,19 +2024,19 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <details class="sol"><summary>Pembahasan HMIF</summary><div>
 <p><b>(a)</b> Arsitektur umum lengkap (interactive):</p>
 <ul>
-<li><b>Problem solving component</b> — wajib; mencocokkan transkrip dengan aturan kurikulum.</li>
-<li><b>DSKB</b> — wajib; "buku peraturan" permanen: <code>IF SKS_lulus &lt; 36 THEN ambil_TPB = true</code>, <code>pre-req(IF3171) = IF3170</code>, <code>tingkat_kesulitan(MA1101) = 'tinggi'</code>.</li>
-<li><b>CSF</b> — wajib; data sementara per mahasiswa per sesi: <code>status(IF2211) = 'lulus'</code>, <code>IPK = 3.51</code>.</li>
-<li><b>Interviewer component (UI)</b> — wajib.</li>
-<li><b>Explanation component</b> — opsional tetapi <b>dibutuhkan</b>: ada fitur "mengapa?".</li>
-<li><b>Knowledge acquisition component</b> — opsional tetapi <b>dibutuhkan</b>: staf akademik memperbarui aturan tiap tahun lewat antarmuka khusus.</li>
+<li><b>Problem solving component</b>: wajib; mencocokkan transkrip dengan aturan kurikulum.</li>
+<li><b>DSKB</b>: wajib; "buku peraturan" permanen: <code>IF SKS_lulus &lt; 36 THEN ambil_TPB = true</code>, <code>pre-req(IF3171) = IF3170</code>, <code>tingkat_kesulitan(MA1101) = 'tinggi'</code>.</li>
+<li><b>CSF</b>: wajib; data sementara per mahasiswa per sesi: <code>status(IF2211) = 'lulus'</code>, <code>IPK = 3.51</code>.</li>
+<li><b>Interviewer component (UI)</b>: wajib.</li>
+<li><b>Explanation component</b>: opsional tetapi <b>dibutuhkan</b>: ada fitur "mengapa?".</li>
+<li><b>Knowledge acquisition component</b>: opsional tetapi <b>dibutuhkan</b>: staf akademik memperbarui aturan tiap tahun lewat antarmuka khusus.</li>
 </ul>
 <p><b>(b)</b> (1) Mahasiswa memasukkan transkrip lewat interviewer component. (2) UI meneruskannya ke CSF. (3) Problem solving component aktif: mengambil fakta dari CSF, mencocokkan dengan aturan di DSKB, berulang sampai semua aturan relevan dieksekusi. (4) Rekomendasi dikirim ke interviewer component untuk ditampilkan. (5) Mahasiswa menekan "mengapa?" → explanation component menelusuri jejak aturan yang dipakai inference engine → penjelasan ditampilkan lewat UI.</p>
 </div></details></div>
 
 <h3>Pilihan ganda multi-jawaban (HMIF)</h3>
 <div class="mcq" data-opts="Benar|Salah" data-ans="Benar"><p>KBA secara eksplisit memisahkan knowledge base dari inference engine, sehingga pengetahuan bisa diperbarui tanpa mengubah logika inti.</p><p class="why" hidden>Ciri khas arsitektur KBS.</p></div>
-<div class="mcq" data-opts="Benar|Salah" data-ans="Salah"><p>KBA memiliki kemampuan belajar dari lingkungannya, sedangkan PSA tidak — itulah pembeda keduanya.</p><p class="why" hidden>Belajar bukan pembeda KBA dan PSA; ada KBA dengan basis pengetahuan statis. Learning agent adalah kategori tersendiri.</p></div>
+<div class="mcq" data-opts="Benar|Salah" data-ans="Salah"><p>KBA memiliki kemampuan belajar dari lingkungannya, sedangkan PSA tidak. Itulah pembeda keduanya.</p><p class="why" hidden>Belajar bukan pembeda KBA dan PSA; ada KBA dengan basis pengetahuan statis. Learning agent adalah kategori tersendiri.</p></div>
 <div class="mcq" data-opts="Benar|Salah" data-ans="Benar"><p>PSA mencari satu jalur dari initial state ke goal state, sementara KBA dapat memberi solusi tanpa goal state eksplisit, hanya dengan menalar fakta.</p><p class="why" hidden>PSA goal-driven dalam ruang pencarian; KBA menalar dari basis pengetahuannya.</p></div>
 <div class="mcq" data-opts="Explanation, interviewer, knowledge acquisition|DSKB dan problem solving component|Semua komponen" data-ans="Explanation, interviewer, knowledge acquisition"><p>Komponen mana yang berhadapan langsung dengan pengguna/pengembang (lapisan interaksi)?</p><p class="why" hidden>Tiga komponen di baris atas diagram. DSKB dan problem solving component bekerja di belakang.</p></div>
 <div class="mcq" data-opts="Benar|Salah" data-ans="Benar"><p>Sistem pakar diagnosis mobil dengan knowledge base statis tidak memerlukan knowledge acquisition component.</p><p class="why" hidden>Jika pengetahuan tidak pernah diubah, pintu masuk pengetahuan baru tidak diperlukan.</p></div>
@@ -2074,8 +2075,8 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <!-- ======================= 06 RBS ======================= -->
 <section class="panel" id="tab-m6">
 <div class="intro">
-  <h2>Materi 06 — Rule-Based System (RBS)</h2>
-  <p class="lead">RBS = KBS yang representasi pengetahuannya berupa <b>rule</b>. Dua cara menalar: <b>forward chaining</b> (dari fakta menuju kesimpulan) dan <b>backward chaining</b> (dari pertanyaan mundur ke fakta). Bab ini tidak ada di arsip UTS 2024, tetapi masuk cakupan tahun ini, berbentuk hitungan, dan punya latihan di slide — perlakukan sebagai penting.</p>
+  <h2>Materi 06: Rule-Based System (RBS)</h2>
+  <p class="lead">RBS = KBS yang representasi pengetahuannya berupa <b>rule</b>. Dua cara menalar: <b>forward chaining</b> (dari fakta menuju kesimpulan) dan <b>backward chaining</b> (dari pertanyaan mundur ke fakta). Bab ini tidak ada di arsip UTS 2024, tetapi masuk cakupan tahun ini, berbentuk hitungan, dan punya latihan di slide, jadi perlakukan sebagai penting.</p>
   <div class="toc"></div>
 </div>
 
@@ -2200,9 +2201,9 @@ m1–m2 (A3): |m1 − m2| ≥ 2 · m1–m3 (A1): |m1 − m3| ≥ 2 · m1–m4 (A
 <div class="body">
 <p>Mulai dari <b>pertanyaan (goal)</b>, cari rule yang RHS-nya menyimpulkan goal itu, lalu jadikan tiap kondisi di LHS-nya sebagai subgoal. Jika suatu hal tidak bisa disimpulkan rule mana pun, <b>tanyakan ke pengguna (request)</b>. Interpreter-nya terdiri dari dua prosedur yang saling memanggil (Puppe, 1993):</p>
 <div class="grid2">
-<div class="box sky"><h4>FindOut(goal) — "cari tahu nilai ini"</h4>
+<div class="box sky"><h4>FindOut(goal): "cari tahu nilai ini"</h4>
 <div class="rulecard"><span class="k">ada rule</span><span class="v">kumpulkan semua rule yang <b>THEN</b>-nya menyimpulkan goal → <b>Monitor</b> satu per satu, hapus yang sudah dicoba, berhenti begitu goal didapat</span><span class="k">tak ada</span><span class="v"><b>request</b>: tanyakan ke pengguna</span></div></div>
-<div class="box"><h4>Monitor(rule) — "coba rule ini"</h4>
+<div class="box"><h4>Monitor(rule): "coba rule ini"</h4>
 <div class="rulecard"><span class="k">cek</span><span class="v">periksa kondisi <b>IF</b> dari kiri ke kanan</span><span class="k">belum tahu</span><span class="v">→ <b>FindOut</b>(kondisi itu) dulu</span><span class="k">salah</span><span class="v">→ rule <b>not executable</b>, berhenti</span><span class="k">semua benar</span><span class="v">→ <b>execute</b>: tambahkan kesimpulan ke working memory</span></div></div>
 </div>
 <div class="callout key"><b>Cara menulis jejak.</b> Tulis berindentasi: <code>FindOut(x) {daftar rule}</code> → <code>Monitor(Ri) {kondisi}</code> → untuk tiap kondisi yang belum diketahui, <code>FindOut</code> lagi (atau <code>request</code> jika tidak ada rule yang menyimpulkannya) → <code>Execute(Ri) + fakta</code> atau <code>Ri not executable</code> → <code>Delete(Ri)</code>. FindOut berhenti begitu goal-nya mendapat nilai; rule yang tersisa tidak dicoba.</div>
@@ -2349,7 +2350,7 @@ stop</pre>
 </main>
 <footer>Disusun dari slide IF3070 Semester I 2026/2027 (Materi 01a–06) dan <i>wrap soal dai.pdf</i>. Kotak ungu "Jawaban saya" bukan kunci resmi. Jika ada perbedaan dengan penjelasan dosen di kelas, ikuti dosen.</footer>
 <script>
-/* ===== Logika murni (tanpa DOM) — dipakai widget & diuji di node ===== */
+/* ===== Logika murni (tanpa DOM), dipakai widget & diuji di node ===== */
 const INF = Infinity;
 const fmtInf = v => v === INF ? '+∞' : v === -INF ? '−∞' : String(v).replace('-', '−');
 
@@ -2422,7 +2423,7 @@ function runSearch(g, alg, opts = {}) {
     const cur = agenda.splice(idx, 1)[0];
     const st = { n: steps.length + 1, cur, added: [], note: '' };
     if (cur.node === g.goal) {
-      st.note = 'GOAL — berhenti'; st.goal = true; result = cur;
+      st.note = 'GOAL, berhenti'; st.goal = true; result = cur;
       st.agenda = agenda.slice(); steps.push(st); break;
     }
     if (expanded.includes(cur.node)) {
@@ -2830,7 +2831,7 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
       const msg = $('#ssMsg');
       if (!last) msg.innerHTML = 'Agenda awal: <b>' + g.start + '</b>. Tekan <b>Langkah ▶</b>.';
       else if (last.goal) msg.innerHTML = '<span class="good">Goal diambil dari agenda.</span> Jalur: <b>' + pathStr(last.cur.path) + '</b>, biaya <b>' + last.cur.g + '</b>.<br>Urutan ekspansi: ' + run.expanded.join(', ') + ' (lalu ' + g.goal + ' diambil).';
-      else msg.innerHTML = 'Langkah ' + last.n + ': ambil <b>' + pathStr(last.cur.path) + '</b>' + (val(last.cur) ? ' (' + val(last.cur) + ')' : '') + ' — ' + last.note + '.';
+      else msg.innerHTML = 'Langkah ' + last.n + ': ambil <b>' + pathStr(last.cur.path) + '</b>' + (val(last.cur) ? ' (' + val(last.cur) + ')' : '') + ': ' + last.note + '.';
       const tb = $('#ssTable');
       let h = '<thead><tr><th>#</th><th>Diambil</th><th>g</th><th>h</th><th>f</th><th>Keterangan</th><th>Agenda setelahnya</th></tr></thead><tbody>';
       steps.forEach(s => {
@@ -2864,7 +2865,7 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
         b.appendChild(btn);
       }
       const kind = bs.best < cur ? 'ada suksesor yang lebih baik (terbaik h = ' + (-bs.best) + ', ' + bs.list.length + ' pilihan)'
-        : cur === 0 ? '<span class="good">global maximum — solusi</span>'
+        : cur === 0 ? '<span class="good">global maximum, solusi</span>'
           : bs.best === cur ? '<span class="bad">suksesor terbaik bernilai sama (dataran/shoulder) → steepest ascent berhenti; sideways move masih bisa lanjut</span>'
             : '<span class="bad">semua suksesor lebih buruk → local maximum</span>';
       $('#qInfo').innerHTML = 'Pasangan saling menyerang: <b>' + cur + '</b> → <b>h = ' + (-cur) + '</b><br>Fitness GA = 28 − ' + cur + ' = <b>' + (28 - cur) + '</b> · string GA: <code>' + q.map(r => 8 - r).join('') + '</code><br>Status: ' + kind;
@@ -2872,7 +2873,7 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
     }
     function step() {
       const cur = attackingPairs(q), bs = bestSuccessors(q);
-      if (bs.best >= cur) { log.unshift('<b>Berhenti</b>: neighbor.value (' + (-bs.best) + ') ≤ current.value (' + (-cur) + ')' + (cur === 0 ? ' — solusi.' : '.')); return false; }
+      if (bs.best >= cur) { log.unshift('<b>Berhenti</b>: neighbor.value (' + (-bs.best) + ') ≤ current.value (' + (-cur) + ')' + (cur === 0 ? ', sudah solusi.' : '.')); return false; }
       const [r, c] = bs.list[Math.floor(Math.random() * bs.list.length)]; q[c] = r;
       log.unshift('Steepest ascent: ratu kolom ' + (c + 1) + ' → baris ' + (8 - r) + ' (h ' + (-cur) + ' → ' + (-bs.best) + ')'); return true;
     }
@@ -3061,7 +3062,7 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
         const ok = x => typeof x === 'number' ? isFinite(x) : (Array.isArray(x) && x.length > 0 && x.every(ok));
         if (!Array.isArray(t) || !ok(t)) throw new Error('bentuk');
         arr = t; names = null; compute();
-      } catch (e) { $('#abMsg').innerHTML = '<span class="bad">Format tidak dikenali.</span> Contoh: <code>[[3,12,8],[2,4,6],[14,5,2]]</code> — tiap kurung siku adalah satu node, angka adalah daun.'; }
+      } catch (e) { $('#abMsg').innerHTML = '<span class="bad">Format tidak dikenali.</span> Contoh: <code>[[3,12,8],[2,4,6],[14,5,2]]</code>: tiap kurung siku adalah satu node, angka adalah daun.'; }
     });
     $('#abReset').addEventListener('click', () => { k = 0; draw(); });
     $('#abPrev').addEventListener('click', () => { if (k > 0) k--; draw(); });
@@ -3147,7 +3148,7 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
       int: 'Antarmuka dengan pengguna: menanyakan/menerima data kasus, menuliskannya ke CSF, menampilkan hasil.',
       exp: 'Menjelaskan bagaimana dan mengapa suatu kesimpulan diperoleh, dengan menelusuri jejak inferensi.',
       ka: 'Pintu masuk pengetahuan dari pakar/KE ke knowledge base tanpa mengubah program.',
-      psc: 'Inference engine: menerapkan problem-solving method — mencocokkan CSF dengan DSKB dan menghasilkan kesimpulan.',
+      psc: 'Inference engine: menerapkan problem-solving method: mencocokkan CSF dengan DSKB dan menghasilkan kesimpulan.',
       csf: 'Fakta khusus satu kasus/sesi; sementara.', dskb: 'Pengetahuan domain; persisten dan dipakai untuk semua kasus.', im: 'Kesimpulan antara selama inferensi dan solusi akhirnya.'
     };
     const boxes = { int: [205, 85, 105, 62, '#F7C89B'], exp: [318, 85, 105, 62, '#F7C89B'], ka: [431, 85, 105, 62, '#F7C89B'], psc: [205, 205, 331, 46, C.yel], csf: [30, 85, 120, 250, '#DDE4EE'], dskb: [590, 85, 120, 250, '#DDE4EE'], im: [165, 312, 410, 46, '#DDE4EE'] };
@@ -3258,7 +3259,7 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
     function reset(p) { stop(); if (p !== undefined) pos = p; trail = [pos]; st = { n: 0, side: 0, T: 6, restarts: 0, done: false }; msg = 'Mulai di titik bernilai ' + h[pos] + '. Tekan <b>Jalankan</b>.'; draw(); }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
     const nbs = p => [p - 1, p + 1].filter(i => i >= 0 && i < N);
-    function finish(why) { st.done = true; stop(); msg = why + ' Berhenti di nilai <b>' + h[pos] + '</b> setelah ' + st.n + ' langkah — ' + (h[pos] === top ? '<span class="good">global maximum</span>.' : '<span class="bad">bukan global maximum (' + top + ')</span>.'); }
+    function finish(why) { st.done = true; stop(); msg = why + ' Berhenti di nilai <b>' + h[pos] + '</b> setelah ' + st.n + ' langkah, ' + (h[pos] === top ? '<span class="good">global maximum</span>.' : '<span class="bad">bukan global maximum (' + top + ')</span>.'); }
     function step() {
       if (st.done) return; const alg = $('#clAlg').value, nb = nbs(pos), cur = h[pos]; st.n++;
       const bestV = Math.max(...nb.map(i => h[i])), best = nb.filter(i => h[i] === bestV), pick = best[rnd(best.length)];
@@ -3365,8 +3366,8 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
         if (n.full && n.ok) svg.appendChild(S('text', { x, y: y + 26, 'text-anchor': 'middle', 'font-size': 9, fill: C.ink }, n.a.reduce((s, v, i) => s + v * rev[i], 0) + ' M')); });
       for (let d = 1; d <= 4; d++) svg.appendChild(S('text', { x: 4, y: 28 + d * 70 + 4, 'font-size': 10, 'font-weight': 700, fill: C.b2 }, 'p' + d));
       const st = '{' + (cur.a.length ? cur.a.map((v, i) => 'p' + (i + 1) + '=' + v).join(', ') : '') + '}';
-      let m = 'Langkah ' + k + '/' + steps.length + ' — state ' + st + ', biaya ' + cur.c + ': ' + (!cur.ok ? '<span class="bad">melanggar ≤ 16 → mundur, coba nilai lain</span>' : cur.full ? '<span class="good">assignment lengkap dan konsisten → solusi</span> (pendapatan ' + cur.a.reduce((s, v, i) => s + v * rev[i], 0) + ')' : 'konsisten → lanjut ke variabel berikutnya') + '.';
-      if (k === steps.length) { const sols = steps.filter(n => n.full && n.ok).map(n => ({ a: n.a, r: n.a.reduce((s, v, i) => s + v * rev[i], 0) })), best = sols.reduce((b, s) => s.r > b.r ? s : b); m += '<br>Seluruh pohon: ' + sols.length + ' assignment sah. Sebagai CSP, yang pertama ditemukan sudah cukup; untuk pendapatan <i>terbaik</i> jawabannya {' + best.a.join(', ') + '} = ' + best.r + ' — itulah alasan dosen lalu menanyakannya sebagai local search.'; }
+      let m = 'Langkah ' + k + '/' + steps.length + ': state ' + st + ', biaya ' + cur.c + ': ' + (!cur.ok ? '<span class="bad">melanggar ≤ 16 → mundur, coba nilai lain</span>' : cur.full ? '<span class="good">assignment lengkap dan konsisten → solusi</span> (pendapatan ' + cur.a.reduce((s, v, i) => s + v * rev[i], 0) + ')' : 'konsisten → lanjut ke variabel berikutnya') + '.';
+      if (k === steps.length) { const sols = steps.filter(n => n.full && n.ok).map(n => ({ a: n.a, r: n.a.reduce((s, v, i) => s + v * rev[i], 0) })), best = sols.reduce((b, s) => s.r > b.r ? s : b); m += '<br>Seluruh pohon: ' + sols.length + ' assignment sah. Sebagai CSP, yang pertama ditemukan sudah cukup; untuk pendapatan <i>terbaik</i> jawabannya {' + best.a.join(', ') + '} = ' + best.r + '. Itulah alasan dosen lalu menanyakannya sebagai local search.'; }
       $('#btMsg').innerHTML = m; $('#btPrev').disabled = k <= 1; $('#btNext').disabled = k >= steps.length;
     }
     $('#btReset').addEventListener('click', () => { k = 1; draw(); }); $('#btPrev').addEventListener('click', () => { if (k > 1) k--; draw(); }); $('#btNext').addEventListener('click', () => { if (k < steps.length) k++; draw(); });
@@ -3405,7 +3406,7 @@ if (typeof module !== 'undefined') module.exports = { GRAPHS, runSearch, buildTr
       const svg = $('#cwSvg'); svg.innerHTML = ''; const g = letters(asg);
       rows.forEach((row, r) => row.split('').forEach((ch, c) => { svg.appendChild(S('rect', { x: 10 + c * sz, y: 10 + r * sz, width: sz, height: sz, fill: ch === '#' ? '#B8C2D0' : '#fff', stroke: C.navy, 'stroke-width': 1.5 })); if (/\d/.test(ch)) svg.appendChild(S('text', { x: 15 + c * sz, y: 25 + r * sz, 'font-size': 12, 'font-weight': 700, fill: C.navy }, ch)); if (g[r + ',' + c]) svg.appendChild(S('text', { x: 10 + c * sz + sz / 2, y: 10 + r * sz + sz / 2 + 9, 'text-anchor': 'middle', 'font-size': 22, 'font-weight': 700, fill: C.b1 }, g[r + ',' + c].toUpperCase())); }));
       const un = order.filter(v => !asg[v]); let hb = '<thead><tr><th>Variabel</th><th>Isi</th><th>Domain tersisa</th></tr></thead><tbody>', dead = null;
-      order.forEach(v => { const d = dom(v, asg); if (!asg[v] && !d.length) dead = v; hb += '<tr><td><b>' + v + '</b><br><span class="small muted">' + names[v] + '</span></td><td><select data-v="' + v + '"><option value="">—</option>' + d.map(w => '<option' + (asg[v] === w ? ' selected' : '') + '>' + w + '</option>').join('') + '</select></td><td>' + (asg[v] ? '<span class="muted">diisi</span>' : d.length ? d.join(', ') + ' <span class="muted">(' + d.length + ')</span>' : '<span class="bad">kosong ✗</span>') + '</td></tr>'; });
+      order.forEach(v => { const d = dom(v, asg); if (!asg[v] && !d.length) dead = v; hb += '<tr><td><b>' + v + '</b><br><span class="small muted">' + names[v] + '</span></td><td><select data-v="' + v + '"><option value="">…</option>' + d.map(w => '<option' + (asg[v] === w ? ' selected' : '') + '>' + w + '</option>').join('') + '</select></td><td>' + (asg[v] ? '<span class="muted">diisi</span>' : d.length ? d.join(', ') + ' <span class="muted">(' + d.length + ')</span>' : '<span class="bad">kosong ✗</span>') + '</td></tr>'; });
       $('#cwTab').innerHTML = hb + '</tbody>';
       $$('select', $('#cwTab')).forEach(se => se.addEventListener('change', () => { if (se.value) asg[se.dataset.v] = se.value; else delete asg[se.dataset.v]; draw(); }));
       let m;
